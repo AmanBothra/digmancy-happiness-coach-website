@@ -1,0 +1,17 @@
+<svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 29C0 12.9837 12.9837 0 29 0C45.0163 0 58 12.9837 58 29C58 45.0163 45.0163 58 29 58C12.9837 58 0 45.0163 0 29Z" fill="#02131F"/>
+<g clip-path="url(#clip0_8394_47190)">
+<path d="M29 19.25C30.3807 19.25 31.5 18.1307 31.5 16.75C31.5 15.3693 30.3807 14.25 29 14.25C27.6193 14.25 26.5 15.3693 26.5 16.75C26.5 18.1307 27.6193 19.25 29 19.25Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31.5 26.75H26.5C25.1193 26.75 24 25.6307 24 24.25C24 22.8693 25.1193 21.75 26.5 21.75H31.5C32.8807 21.75 34 22.8693 34 24.25C34 25.6307 32.8807 26.75 31.5 26.75Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M38.75 36.25C40.1307 36.25 41.25 35.1307 41.25 33.75C41.25 32.3693 40.1307 31.25 38.75 31.25C37.3693 31.25 36.25 32.3693 36.25 33.75C36.25 35.1307 37.3693 36.25 38.75 36.25Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M41.25 43.75H36.25C34.8693 43.75 33.75 42.6307 33.75 41.25C33.75 39.8693 34.8693 38.75 36.25 38.75H41.25C42.6307 38.75 43.75 39.8693 43.75 41.25C43.75 42.6307 42.6307 43.75 41.25 43.75Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.25 36.25C20.6307 36.25 21.75 35.1307 21.75 33.75C21.75 32.3693 20.6307 31.25 19.25 31.25C17.8693 31.25 16.75 32.3693 16.75 33.75C16.75 35.1307 17.8693 36.25 19.25 36.25Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M21.75 43.75H16.75C15.3693 43.75 14.25 42.6307 14.25 41.25C14.25 39.8693 15.3693 38.75 16.75 38.75H21.75C23.1307 38.75 24.25 39.8693 24.25 41.25C24.25 42.6307 23.1307 43.75 21.75 43.75Z" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M29 31.25V33.75M26.5 33.75H31.5" stroke="white" stroke-width="2.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_8394_47190">
+<rect width="32" height="32" fill="white" transform="translate(13 13)"/>
+</clipPath>
+</defs>
+</svg>
