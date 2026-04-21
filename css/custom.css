@@ -86,14 +86,14 @@ Sidebar heading     :  20px/30px, 600, "Space Grotesk", sans-serif (Heading Font
 ================================== */
 
 :root {
-	--main-color: #1D9AED;
-	--primary-color: #02131F;
-	--secondary-color: #F0F3FF;
+	--main-color: #08ADED;
+	--primary-color: #26A3DD;
+	--secondary-color: #FFDE17;
 	--text-color: #3F4950;
 	--white-color: #FFFFFF;
-	--gradiant-color: linear-gradient(90deg, #1D9AED 0%, #1D1DED 100%);
+	--gradiant-color: linear-gradient(90deg, #26A3DD 0%, #08ADED 100%);
 	--error-color: rgb(230, 87, 87);
-	--accent-color: #1D1DED;
+	--accent-color: #FFDE17;
 	--default-font: "Plus Jakarta Sans", sans-serif;
 	--heading-font: "Space Grotesk", sans-serif;
 }
@@ -136,7 +136,7 @@ h3 {
 	font-weight: 600;
 	letter-spacing: 0px;
 	text-transform: none;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 h4 {
@@ -145,7 +145,7 @@ h4 {
 	font-weight: 400;
 	letter-spacing: 0px;
 	word-wrap: break-word;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 h5 {
@@ -163,7 +163,7 @@ h5 {
 }
 
 .sis-section-title h1 {
-    color: var(--primary-color);
+    color: var(--text-color);
     font-size: 62px;
     font-weight: 700;
     line-height: 72px;
@@ -203,7 +203,7 @@ h5 {
     white-space: normal;
     margin-bottom: 10px;
     display: inline-block;
-    color: var(--main-color);
+    color: var(--text-color);
 	padding: 8px 16px;
 	border-radius: 50px;
 	border: 1px solid var(--main-color);
@@ -228,7 +228,7 @@ h5 {
     margin-bottom: 20px;
     font-size: 48px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--text-color);
     letter-spacing: 0px;
     line-height: 58px;
     text-transform: none;
@@ -254,7 +254,7 @@ img {
 
 a {
 	text-decoration: none !important;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 a:hover {
@@ -563,7 +563,7 @@ body {
 }
 
 .sis-btn-default.btn-dark {
-	color: var(--main-color);
+	color: var(--text-color);
 	background: var(--white-color);
     border: 1px solid var(--main-color) !important;
 }
@@ -607,7 +607,7 @@ body {
 }
 
 .sisf-e-colored {
-	color: var(--main-color) !important;
+	color: var(--secondary-color) !important;
 }
 
 .section {
@@ -662,19 +662,19 @@ body {
 	font-size: 48px;
 	line-height: 58px;
 	font-weight: 700;
-	color: var(--primary-color);
+	color: inherit;
 }
 
 .sis-counter-content span {
 	font-weight: 500;
-	color: var(--primary-color);
+	color: inherit;
 	font-family: var(--default-font);
 	font-size: 16px;
 }
 
 .sisf-page-background {
 	background-color: transparent;
-    background-image: linear-gradient(180deg, var(--primary-color) 57%, #1D1DED 100%);
+    background-image: linear-gradient(180deg, var(--primary-color) 57%, var(--main-color) 100%);
 }
 
 .sis-page-background {
@@ -808,7 +808,7 @@ body {
 }
 
 .sis-header-top .sisf-e-title-text:hover {
-	color: var(--primary-color) !important;
+	color: var(--secondary-color) !important;
 	transition: 0.4s ease-in-out;
 }
 
@@ -838,7 +838,7 @@ body {
 }
 
 .social-icons-link ul li a {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -854,7 +854,7 @@ body {
 
 .sis-header-top .sisf-top-location a:hover,
 .sisf-top-opening-hours a:hover {
-	color: var(--primary-color);
+	color: var(--secondary-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -866,7 +866,7 @@ body {
 }
 
 .sisf-skin--dark .sis-main-menu ul li a {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-skin--dark .sis-main-menu ul ul li a {
@@ -886,6 +886,13 @@ body {
 .sisf-header-logo-link.navbar-brand img {
 	width: auto;
     height: auto;
+	max-height: 64px;
+	object-fit: contain;
+}
+
+.footer-logo img {
+	max-width: 220px;
+	height: auto;
 }
 
 .navbar-brand.mobile-block.sisf-header-logo-link {
@@ -933,7 +940,7 @@ body {
 }
 
 .sisf-skin--dark .sis-main-menu ul li a {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-skin--dark .sis-main-menu ul ul li a {
@@ -945,7 +952,7 @@ body {
 	font-weight: 400;
 	font-family: var(--default-font);
 	padding: 0px 15px !important;
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: all 0.3s ease-in-out;
 	text-transform: none;
 	line-height: 24px;
@@ -1079,7 +1086,7 @@ body {
 }
 
 .main-menu ul ul li a span {
-    color: var(--primary-color);
+    color: var(--text-color);
     transition: all 0.4s ease-in-out;
 }
 
@@ -1144,14 +1151,14 @@ body {
 .sis-main-menu ul ul li a:hover,
 .sis-main-menu ul ul li a:focus,
 .sis-main-menu ul ul li a.active {
-	color: var(--primary-color) !important;
+	color: var(--secondary-color) !important;
 	background-color: transparent;
 	padding-left: 15px !important;
 }
 
 .sis-main-menu ul ul li a:hover span,
 .sis-main-menu ul ul li a.active span {
-	color: var(--primary-color);
+	color: var(--secondary-color);
 }
 
 .sis-main-menu ul ul li a::before {
@@ -1163,7 +1170,7 @@ body {
 .sis-main-menu ul ul li a.active::before {
 	display: block !important;
 	transition: 0.3s ease-in-out;
-	color: var(--primary-color);
+	color: var(--secondary-color);
 }
 
 .sis-main-menu ul ul li .page-link:hover:before {
@@ -1231,7 +1238,7 @@ body {
 }
 
 .sis-main-menu ul ul li a.active .sis-menu-item-arrow {
-	color: var(--primary-color);
+	color: var(--secondary-color);
 }
 
 .header-btn {
@@ -1365,7 +1372,7 @@ body {
 }
 
 .sis-hero-right-image .sisf-hero-on-content .sis-user-name p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	font-size: 18px;
 	font-weight: 600;
 }
@@ -1375,7 +1382,7 @@ body {
 }
 
 .sisf-hero-on-content .sisf-m-text p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	margin-bottom: 0px;
 }
 
@@ -1402,7 +1409,7 @@ body {
 } 
 
 .sisf-sis-listing-items p {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-about-right-image .sis-e-icon-spin {
@@ -1421,7 +1428,7 @@ body {
 .sisf-about-bottom-counters {
 	padding-top: 30px;
 	margin-top: 45px;
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 }
 
 .sisf-about-bottom-counters .sis-counter-item {
@@ -1437,7 +1444,7 @@ body {
 
 .sis-philosophy-content-inner .sisf-e-inner {
 	padding: 50px 24px;
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 	overflow: hidden;
 }
 
@@ -1516,7 +1523,7 @@ body {
 	font-weight: 500;
 	line-height: 30px;
 	letter-spacing: 0px;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-sis-icon-with-text--hover .sisf-e-inner .sisf-e-content {
@@ -1528,7 +1535,7 @@ body {
 .sisf-sis-icon-with-text--hover .sisf-e-inner::before {
 	position: absolute;
     content: "";
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 	right: 0;
     bottom: 0;
     left: 0;
@@ -1575,7 +1582,7 @@ body {
 
 .sisf-sis-e-service-list.bg-white.page .sisf-e-content h2 a,
 .sisf-sis-e-service-list.bg-white.page .sisf-e-inner .sisf-e-content p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -1625,7 +1632,7 @@ body {
 }
 
 .sis-comman-bottom-line-text p {
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .sis-comman-bottom-line-text .sisf-sis-e-box a {
@@ -1691,7 +1698,7 @@ body {
 
 .sisf-what-we-do-content .sisf-e-inner .sisf-e-content span,
 .sisf-what-we-do-content .sisf-e-inner .sisf-e-content p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -1706,7 +1713,7 @@ body {
 }
 
 .sis-btn-default.sis-dark:hover {
-	color: var(--main-color) !important;
+	color: var(--white-color) !important;
 }
 
 .sis-what-we-do-image-bottom .sis-bg {
@@ -2022,7 +2029,7 @@ body {
 
 .sisf-sis-pricing-table .sisf-m-content .sisf-e-item {
 	padding: 20px 0px 0px 0px;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-sis-pricing-table .sisf-m-content .sisf-e-item i {
@@ -2031,7 +2038,7 @@ body {
 }
 
 .sis-pricing-subtitle p {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-sis-pricing-table .sisf-m-price {
@@ -2054,7 +2061,7 @@ body {
     font-weight: 700;
 	transition: 0.4s ease-in-out;
 	font-family: var(--heading-font);
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-sis-pricing-table .pricing-title.my-2 {
@@ -2062,7 +2069,7 @@ body {
 }
 
 .sisf-sis-pricing-table .sisf-m-price-period {
-	color: var(--primary-color);
+	color: var(--text-color);
 	font-weight: 500;
 }
 
@@ -2081,7 +2088,7 @@ body {
 }
 
 .sisf-pricing-content-bottom span {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sis-pricing-subtitle .sis-title.text-end {
@@ -2135,7 +2142,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	background: linear-gradient(205.25deg, #1D1DED -7.49%, #1D9AED 97.69%);
+	background: linear-gradient(205.25deg, var(--primary-color) -7.49%, var(--main-color) 97.69%);
 }
 
 .testimonial-right.page .sisf-e-inner .sisf-e-author span,
@@ -2155,7 +2162,7 @@ body {
 
 .testimonial-right.page .sisf-e-inner .star {
    font-size: 26px;
-   color: var(--main-color);
+   color: var(--secondary-color);
    transition: 0.4s ease-in-out;
 }
 
@@ -2169,7 +2176,7 @@ body {
 .testimonial-right.page .sisf-e-inner.bg-white .sisf-e-discription h3,
 .testimonial-right.page .sisf-e-inner.sis-comman-bg .sisf-e-author span,
 .testimonial-right.page .sisf-e-inner.sis-comman-bg .sisf-e-discription h3 {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -2269,7 +2276,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 	color: var(--white-color);
 	font-size: 14px;
 	transition: all 0.3s ease;
@@ -2278,7 +2285,7 @@ body {
 
 .sisf-faq-accordian .accordion-button:not(.collapsed)::before {
 	content: '\f068';
-	color: var(--primary-color);
+	color: var(--secondary-color);
 }
 
 .sisf-faq-accordian .accordion-button,
@@ -2299,18 +2306,18 @@ body {
 }
 
 .sisf-faq-accordian .accordion-button:not(.collapsed)::before {
-	color: var(--main-color) !important;
+	color: var(--secondary-color) !important;
 	transition: 0.4s ease-in-out;
 	background: var(--white-color);
 }
 
 .sisf-faq-accordian .accordion-button::before,
 .sisf-faq-accordian .accordion-button span {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-faq-accordian .accordion-item {
-  border-bottom: 1px solid #52525B !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 0px;
 }
 
@@ -2339,12 +2346,12 @@ body {
     font-weight: 600;
     letter-spacing: 0px;
 	font-family: var(--heading-font);
-    color: var(--primary-color);
+    color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
 .sisf-sis-faq-accordian .accordion-item:has(.accordion-button:not(.collapsed)) {
-    background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+    background: var(--gradiant-color);
 }
 
 .sisf-sis-faq-accordian .accordion-button {
@@ -2360,11 +2367,11 @@ body {
 }
 
 .sisf-sis-faq-accordian .accordion-item .sisf-e-content-inner p {
-	color: var(--primary-color);
+	color: var(--white-color);
 }
 
 .sisf-sis-faq-accordian .accordion-body {
-	color: var(--primary-color);
+	color: var(--white-color);
     padding: 0px 20px 20px 20px;
 }
 
@@ -2386,16 +2393,26 @@ body {
 	border: 1px solid var(--main-color);
 }
 
-.sisf-sis-faq-contents-bottom .sisf-sis-contact-information .sisf-contact-box .sis-title, 
+.sisf-sis-faq-contents-bottom .sisf-sis-contact-information .sisf-contact-box .sis-title,
 .sisf-sis-faq-contents-bottom .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box a {
-    color: var(--primary-color);
+    color: var(--text-color);
     transition: 0.4s ease-in-out;
     font-size: 16px;
 }
 
-.sisf-sis-faq-contents-bottom .sisf-sis-contact-information .sisf-contact-box:hover .sis-title, 
-.sisf-sis-faq-contents-bottom .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box:hover a,
-.sisf-page-footer-middle-area .sisf-sis-contact-information .sisf-contact-box:hover .sis-title, 
+.sisf-sis-faq-contents-bottom .sisf-sis-contact-information .sisf-contact-box:hover .sis-title,
+.sisf-sis-faq-contents-bottom .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box:hover a {
+	color: var(--secondary-color);
+}
+
+.sisf-page-footer-middle-area .sisf-sis-contact-information .sisf-contact-box .sis-title,
+.sisf-page-footer-middle-area .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box a {
+    color: var(--text-color);
+    transition: 0.4s ease-in-out;
+    font-size: 16px;
+}
+
+.sisf-page-footer-middle-area .sisf-sis-contact-information .sisf-contact-box:hover .sis-title,
 .sisf-page-footer-middle-area .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box:hover a {
 	color: var(--main-color);
 }
@@ -2418,13 +2435,13 @@ body {
 
 .sis-right-contact-image .sis-contact .sisf-icon a {
 	background-color: var(--white-color);
-	color: var(--main-color);
+	color: var(--text-color);
 }
 
 .sis-right-contact-image .sis-contact.sisf-sis-contact-information .sisf-contact-box:hover .sis-title, 
 .sis-right-contact-image .sis-contact.sisf-sis-contact-information .sisf-contact-box:hover a,
 .sis-right-contact-image .sis-contact.sisf-sis-contact-information .sisf-contact-box:hover .sisf-icon a {
-   color: var(--primary-color) !important;
+   color: var(--secondary-color) !important;
 }
 
 /* ====================================
@@ -2436,14 +2453,14 @@ body {
 
 .sisf-sis-contact-background-left {
 	padding: 24px;
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 }
 
 .form-section .form-control {
     font-size: 16px;
 	font-weight: 500;
     background-color: var(--white-color);
-    color: var(--primary-color);
+    color: var(--text-color);
     box-shadow: none;
     line-height: normal;
     margin-bottom: 30px;
@@ -2469,7 +2486,7 @@ body {
 	bottom: 20px;
 	left: 20px;
 	border-radius: 16px;
-	background: #D9D9D94D;
+	background: rgba(38, 163, 221, 0.3);
 	backdrop-filter: blur(64px)
 }
 
@@ -2512,7 +2529,7 @@ body {
 
 .sisf-sis-contact-information .sisf-contact-box:hover .sis-title, 
 .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box:hover a {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -2562,7 +2579,7 @@ body {
         17. Letest Blog Section Css
 ======================================= */
 .sis-letest-blog-item .sisf-e-content .sisf-e-title-link {
-	color: var(--primary-color);
+	color: var(--text-color);
 	position: relative;
 	font-size: 20px;
 	text-transform: none;
@@ -2683,7 +2700,7 @@ body {
 	padding: 2px 12px 4px 12px;
 	font-size: 16px;
 	line-height: 24px;
-	color: var(--main-color);
+	color: var(--text-color);
     font-weight: 500;
 	border-radius: 50px;
 }
@@ -2731,7 +2748,7 @@ body {
 }
 
 .sis-letest-blog-item .sisf-e-info-icon a:hover {
-    color: var(--main-color);
+    color: #000000;
 	transition: all .3s ease;
 	transform: rotate(0deg);
 	border: 1px solid var(--main-color);
@@ -2854,7 +2871,7 @@ body {
 	align-items: center;
 	top: 0;
 	left: 0;
-	background: #02131FB2;
+	background: rgba(38, 163, 221, 0.7);
 }
 
 .sisf-page-title .sisf-m-inner {
@@ -2912,7 +2929,7 @@ body {
 }
 
 .sisf-breadcrumbs-link:hover span {
-	color: var(--main-color) !important;
+	color: #000000 !important;
 	transition: 0.3s ease-in-out;
 }
 
@@ -3035,7 +3052,7 @@ body {
 
 .sisf-item-layout-info-from-bottom.page .sis-team-member-content a,
 .sisf-item-layout-info-from-bottom.page .sis-team-member-content p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -3050,7 +3067,7 @@ body {
 }
 
 .sisf-item-layout-info-from-bottom .sis-team-member-content h2 a {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -3064,7 +3081,7 @@ body {
 
 .sisf-item-layout-info-from-bottom.bottom .sis-team-member-content h3 a,
 .sisf-item-layout-info-from-bottom.bottom .sis-team-member-content p {
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -3092,9 +3109,9 @@ body {
 	transition: 0.3s ease-in-out;
 }
 
-.sisf-item-layout-info-from-bottom.page .sis-team-member-content a, 
+.sisf-item-layout-info-from-bottom.page .sis-team-member-content a,
 .sisf-item-layout-info-from-bottom.page .sis-team-member-content p {
-    color: var(--primary-color);
+    color: var(--text-color);
     transition: 0.4s ease-in-out;
 }
 
@@ -3127,7 +3144,7 @@ body {
 .sisf-item-layout-info-from-bottom .sis-e-icon-link a:hover {
 	transition: all 0.3s ease-in-out;
 	background-color: var(--white-color);
-    color: var(--main-color) !important;
+    color: #000000 !important;
 }
 
 .sisf-item-layout-info-from-bottom.sis-center .sis-team-member-content {
@@ -3187,7 +3204,7 @@ body {
 }
 
 .sisf-blog-standard-page .sisf-e-content .meta-date {
-    color: var(--primary-color);
+    color: var(--text-color);
     font-size: 16px;
     font-weight: 500;
     display: inline-block;
@@ -3280,7 +3297,7 @@ body {
     width: 100%;
     height: 100%;
     opacity: 1;
-	background: linear-gradient(360deg, #0A0F44 0%, rgba(10, 15, 68, 0) 100%);
+	background: linear-gradient(360deg, var(--main-color) 0%, rgba(8, 173, 237, 0) 100%);
     z-index: 1;
 	border-radius: 12px;
     transition: 0.6s ease-in-out;
@@ -3317,7 +3334,7 @@ body {
 .sisf-blog-single .sisf-e-bottom-holder .tag-links {
     font-size: 20px;
     font-weight: 500;
-    color: var(--primary-color);
+    color: var(--text-color);
     display: inline-block;
 }
 
@@ -3369,7 +3386,7 @@ body {
 .sisf-blog .reviews-title {
 	font-size: 20px;
 	font-weight: 600;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-blog .comment-text .meta .review-author {
@@ -3380,16 +3397,16 @@ body {
 	letter-spacing: 0px;
 	text-transform: none;
 	margin: -5px 0px 11px;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-blog .comment-text .meta .description p {
 	font-size: 16px;
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-blog .comment_container a {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .sisf-blog-single .sisf-author-info .sisf-m-inner {
@@ -3441,7 +3458,7 @@ body {
 	position: absolute;
 	top: -4px;
 	right: 24px;
-	color: var(--main-color);
+	color: #000000;
 	font-family: var(--default-font);
 	font-size: 15px;
 	font-style: normal;
@@ -3452,7 +3469,7 @@ body {
 }
 
 .sisf-page-comments .sisf-m-comments .sisf-comment-item .commentmetadata {
-	color: var(--main-color);
+	color: #000000;
 }
 
 .review_form_box .form_box-grid .form_box-item {
@@ -3463,7 +3480,7 @@ body {
 	font-size: 20px;
 	font-family: var(--heading-font);
 	font-weight: 600;
-	color: var(--primary-color);
+	color: #000000;
 	margin-bottom: 10px;
 }
 
@@ -3472,7 +3489,7 @@ body {
 }
 
 .sisf-blog-item .sisf-e-content .sisf-e-info-date {
-	color: var(--main-color);
+	color: #000000;
 	font-size: 16px;
 	font-weight: 500;
 	text-transform: none;
@@ -3491,14 +3508,14 @@ body {
 	font-size: 20px;
 	font-weight: 600;
 	text-transform: none;
-	color: var(--primary-color);
+	color: #000000;
 	line-height: 30px !important;
 	letter-spacing: 0px;
 	transition: 0.4s ease-in-out;
 }
 
 .sisf-blog-item .sisf-e-content .sisf-e-title a:hover {
-	color: var(--main-color);
+	color: #000000;
 	transition: 0.4s ease-in-out;
 }
 
@@ -3579,7 +3596,7 @@ body {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    color: var(--primary-color) !important;
+    color: #000000 !important;
     letter-spacing: 0.7px;
     border: 1px solid #0000001A;
     padding: 15px 20px;
@@ -3671,7 +3688,7 @@ ease-in-out;
 	outline: none;
 	box-shadow: none;
     margin: 0;
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sisf-search-form .sisf-search-form-inner input:focus {
@@ -3702,7 +3719,7 @@ ease-in-out;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    color: var(--primary-color);
+    color: #000000;
     line-height: 30px;
     letter-spacing: 0px;
     position: relative;
@@ -3719,7 +3736,7 @@ ease-in-out;
 }
 
 .sisf-page-sidebar .sis-blog-categories-list-item a:hover {
-	color: var(--main-color);
+	color: #000000;
 	transition: 0.4s ease-in-out;
 }
 
@@ -3755,7 +3772,7 @@ ease-in-out;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    color: var(--primary-color);
+    color: #000000;
     display: -webkit-box;
     max-width: 400px;
     -webkit-line-clamp: 2;
@@ -3773,7 +3790,7 @@ ease-in-out;
 }
 
 .sisf-page-sidebar a:hover {
-    color: var(--main-color);
+    color: #000000;
     transition: 0.4s ease-in-out;
 }
 
@@ -3801,7 +3818,7 @@ ease-in-out;
 
 .sisf-social-links-widget .sisf-social-list li a:hover {
 	background: var(--white-color);
-	color: var(--main-color);
+	color: #000000;
 	transition: 0.3s ease-in-out;
 }
 
@@ -3816,7 +3833,7 @@ ease-in-out;
 }
 
 .sisf-sis-page-list .sisf-sis-list-title {
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 	margin-bottom: 20px;
 	padding: 20px;
 }
@@ -3839,7 +3856,7 @@ ease-in-out;
 .sisf-sis-page-list .sisf-sis-list-item a {
 	font-size: 16px;
 	line-height: 24px;
-	color: var(--primary-color);
+	color: var(--text-color);
 	transition: 0.4s ease-in-out;
 	font-family: var(--default-font);
 }
@@ -3911,7 +3928,7 @@ ease-in-out;
 
 .sisf-sis-page-contact-bottom .sisf-sis-contact-information .sisf-contact-box:hover .sis-title,
 .sisf-sis-page-contact-bottom .sisf-sis-e-group .sisf-sis-contact-information .sisf-contact-box:hover a {
-   color: var(--main-color);
+   color: #000000;
 }
 
 .sisf-sis-icon-with-text--hover.sis-detail .sisf-e-inner {
@@ -3933,7 +3950,7 @@ ease-in-out;
 }
 
 .sisf-sis-icon-with-text--hover.sis-detail .sisf-e-inner:hover h2 {
-    color: var(--main-color);
+    color: #000000;
 	transition: all 0.4s ease-in-out;
 }
 
@@ -3993,12 +4010,12 @@ ease-in-out;
 }
 
 .sis-detail-page-contact-info-list .sisf-page-list-item p {
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sis-m-page-list-contents .sisf-m-text-title p,
 .sis-m-page-list-contents ul li {
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sis-e-content--inner .sis-e-bottom-counter {
@@ -4031,14 +4048,14 @@ ease-in-out;
 	line-height: 27px;
 	letter-spacing: 0;
 	margin-bottom: 20px;
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sis-skillbar .sis-skill-data .sis-skill-no {
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 27px;
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sis-skillbar .sis-skill-progress {
@@ -4140,7 +4157,7 @@ ease-in-out;
 }
 
 .sis-scroll-container.sis-landing {
-	background: linear-gradient(205.25deg, var(--accent-color) -7.49%, var(--main-color) 97.69%);
+	background: var(--gradiant-color);
 	padding: 24px 0;
 }
 
@@ -4183,7 +4200,7 @@ ease-in-out;
 .information-section .sisf-e-inner:hover .sisf-e-content p,
 .information-section .sisf-e-inner:hover .sisf-e-content h4  {
     transition: 0.4s ease-in-out;
-	color: var(--main-color);
+	color: #000000;
 }
 
 .landing-banner .section-title h2 {
@@ -4210,7 +4227,7 @@ ease-in-out;
 }
 
 .landing-page-counter span {
-	color: var(--primary-color);
+	color: #000000;
     font-size: 100px !important;
 	font-weight: 700;
     line-height: 1em;
@@ -4238,7 +4255,7 @@ ease-in-out;
 }
 
 .sisf-images--box a:hover {
-	color: var(--main-color);
+	color: #000000;
 	transition: 0.4s ease-in-out;
 }
 
@@ -4330,7 +4347,7 @@ ease-in-out;
 
 .sisf-devices-icon span {
 	font-size: 100px;
-	color: var(--primary-color);
+	color: #000000;
 }
 
 .sisf-steps-icon-with-text .sisf-steps-image img{
@@ -4398,8 +4415,8 @@ ease-in-out;
     overflow: hidden;
 }
 
-.sisf-page-footer-inner-area {
-	background-image: radial-gradient(at center center, var(--main-color) -80%, var(--primary-color) 64%);
+.sisf-page-footer-inner-area.sis-page-background {
+	background-color: var(--white-color) !important;
 }
 
 .sisf-page-footer-top-area-inner .sis-section-title h2 span::after {
@@ -4411,7 +4428,7 @@ ease-in-out;
 }
 
 .sisf-page-footer-top-area-inner.page.pb-4 {
-	border-bottom: 1px solid #FFFFFF1A;
+	border-bottom: 1px solid var(--primary-color);
 }
 
 .sis-e-footer-background {
@@ -4423,17 +4440,17 @@ ease-in-out;
 	position: relative;
 	z-index: 1;
 	padding: 70px 0 70px 0;
-	border-top: 1px solid #FFFFFF1A;
-	border-bottom: 1px solid #FFFFFF1A;
+	border-top: 1px solid rgba(38, 163, 221, 0.2);
+	border-bottom: 1px solid rgba(38, 163, 221, 0.2);
 }
 
 .sisf-page-footer-middle-area .sis-m-text p {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .subscribe-newsletter-form .form-group {
-	background-color: var(--primary-color);
-	border: 1px solid #FFFFFF1A;
+	background-color: var(--white-color);
+	border: 1px solid var(--primary-color);
 	border-radius: 50px;
 	padding: 4px 3px 3px 20px;
 	width: 70%;
@@ -4443,7 +4460,7 @@ ease-in-out;
     background: transparent;
     border: none;
     padding: 0px 0px 0 15px;
-    color: var(--white-color);
+    color: var(--text-color);
 	font-weight: 700;
     margin-bottom: 0;
 	box-shadow: none;
@@ -4451,18 +4468,18 @@ ease-in-out;
 }
 
 .subscribe-newsletter-form .form-group.bg-white.w-100 input {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .subscribe-newsletter-form .form-group.bg-white.w-100 input,
 .subscribe-newsletter-form .form-group.bg-white.w-100 input:focus,
 .subscribe-newsletter-form .form-group.bg-white.w-100 input::placeholder {
-	color: var(--primary-color);
+	color: var(--text-color);
 }
 
 .subscribe-newsletter-form input:focus,
 .subscribe-newsletter-form input::placeholder {
-	color: var(--white-color);
+	color: var(--text-color);
 	box-shadow: none;
 }
 
@@ -4486,7 +4503,7 @@ ease-in-out;
 .footer-links h3, .footer-contact h3 {
     margin-top: 0;
     margin-bottom: 25px;
-    color: var(--primary-color);
+    color: var(--main-color);
     font-size: 20px;
     font-style: normal;
     font-family: var(--default-font);
@@ -4513,7 +4530,7 @@ ease-in-out;
 
 .footer-links ul li a,
 .footer-links ul li::marker {
-    color: var(--primary-color);
+    color: var(--text-color);
     transition: all 0.4s ease-in-out;
 }
 
@@ -4522,13 +4539,13 @@ ease-in-out;
 }
 
 .footer-links.page ul li::marker {
-	color: var(--white-color);
+	color: var(--main-color);
 	font-size: 20px;
 	transition: 0.4s ease-in-out;
 }
 
 .footer-links.page ul li:hover::marker {
-	color: var(--main-color);
+	color: var(--secondary-color);
 	transition: 0.4s ease-in-out;
 }
 
@@ -4556,17 +4573,17 @@ ease-in-out;
 	color: var(--white-color);
 	border-radius: 50px;
 	background-color: var(--main-color);
-	border: 1px solid #0000001A;
+	border: 1px solid var(--main-color);
 }
 
 .footer-social-icons-link.page i {
-    border: 1px solid #FFFFFF1A;
+    border: 1px solid var(--main-color);
 	line-height: normal;
 }
 
 .sisf-page-footer-bottom-area .footer-copyright-text p,
 .sisf-page-footer-bottom-area .footer-privacy-policy a {
-	color: var(--primary-color);
+	color: var(--text-color);
 	font-weight: 500;
 }
 
@@ -4585,9 +4602,9 @@ ease-in-out;
     font-weight: 700;
     line-height: normal;
 	text-transform: none;
-	mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.12) -9.11%, rgba(19, 61, 60, 0) 126.82%);
-    -webkit-text-stroke: 1px var(--white-color);
-	box-shadow: 0px 2px 12px 0px #0635342E;
+	color: var(--main-color);
+    text-shadow: 2px 2px 8px rgba(8, 173, 237, 0.3);
+	opacity: 0.4;
 }
 
 .sisf-page-footer-bottom-area {
