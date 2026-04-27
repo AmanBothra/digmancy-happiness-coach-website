@@ -1,0 +1,110 @@
+/* Method — 4 pillars */
+.method {
+  background: var(--paper);
+  padding: 140px 40px;
+  border-top: 1px solid rgba(13, 41, 69, 0.12);
+}
+.method__head {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+.method__h { margin-top: 28px; }
+
+.method__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: rgba(13, 41, 69, 0.15);
+  padding: 1px;
+}
+.method__pillar {
+  background: var(--paper);
+  padding: 40px 32px 44px;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+}
+.method__num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 28px;
+  background: var(--sunshine);
+  padding: 8px 14px;
+  display: inline-block;
+  align-self: flex-start;
+  border: 1px solid rgba(13, 41, 69, 0.18);
+  letter-spacing: -0.01em;
+}
+.method__ptitle {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.method__pi {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--ocean);
+  font-weight: 400;
+}
+.method__ptext {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.method__footer {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(13, 41, 69, 0.12);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+.method__motto {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.method__motto-bold {
+  font-family: var(--display);
+  font-style: normal;
+  color: var(--navy);
+  font-weight: 400;
+}
+.method__sign {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-align: right;
+  line-height: 1.7;
+}
+
+@media (max-width: 1023px) {
+  .method { padding: 100px 32px; }
+  .method__head { grid-template-columns: 1fr; gap: 32px; margin-bottom: 60px; }
+  .method__grid { grid-template-columns: 1fr 1fr; }
+  .method__pillar { padding: 36px 28px; min-height: auto; }
+  .method__footer { grid-template-columns: 1fr; gap: 20px; }
+  .method__sign { text-align: left; }
+}
+@media (max-width: 639px) {
+  .method { padding: 80px 20px; }
+  .method__grid { grid-template-columns: 1fr; }
+  .method__pillar { padding: 28px 20px; }
+}

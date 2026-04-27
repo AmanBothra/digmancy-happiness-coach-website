@@ -1,0 +1,59 @@
+/* Top promo banner */
+.banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 120;
+  background: var(--navy);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px 24px;
+  font-family: var(--sans);
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap;
+  transition: transform 280ms cubic-bezier(0.2,0.8,0.2,1);
+}
+.banner.is-hidden { transform: translateY(-100%); }
+.banner__kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sunshine);
+}
+.banner__meta {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--sky-hi);
+}
+.banner__cta {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--sunshine);
+  border-bottom: 1px solid var(--sunshine);
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+.banner__close {
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--paper);
+  opacity: 0.6;
+  font-size: 18px;
+  line-height: 1;
+}
+.banner__close:hover { opacity: 1; }
+
+@media (max-width: 639px) {
+  .banner { font-size: 11px; padding: 10px 36px 10px 16px; gap: 8px; }
+  .banner__kicker { display: none; }
+}
