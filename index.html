@@ -13,6 +13,10 @@
     }}};
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/banner.css" />
   <link rel="stylesheet" href="css/nav.css" />
@@ -26,6 +30,9 @@
   <link rel="stylesheet" href="css/footer.css" />
   <link rel="stylesheet" href="css/modal.css" />
   <link rel="stylesheet" href="css/sections.css" />
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -102,7 +109,7 @@
   </section>
 
   <!-- VIDEO -->
-  <section class="video-sec">
+  <section class="video-sec reveal">
     <div class="video-sec__inner">
       <div class="eyebrow center">
         <span class="num">01.</span><span class="bar"></span>
@@ -123,7 +130,7 @@
   </section>
 
   <!-- NOT ABOUT FIXING YOU -->
-  <section class="rec divider-top" id="not-fix">
+  <section class="rec reveal divider-top" id="not-fix">
     <div class="container">
       <div class="rec__head">
         <div>
@@ -164,7 +171,7 @@
   </section>
 
   <!-- WHO -->
-  <section class="personas" id="who">
+  <section class="personas reveal" id="who">
     <div>
       <div class="personas__head">
         <div class="eyebrow center">
@@ -203,7 +210,7 @@
   </section>
 
   <!-- SECRETS -->
-  <section class="mc" id="secrets">
+  <section class="mc reveal" id="secrets">
     <div class="container">
       <div class="mc__head">
         <div class="eyebrow center">
@@ -350,7 +357,7 @@
   </section>
 
   <!-- IMAGINE -->
-  <section class="imagine">
+  <section class="imagine reveal">
     <div class="imagine__inner">
       <div class="eyebrow center">
         <span class="num">06.</span><span class="bar"></span>
@@ -376,7 +383,7 @@
   </section>
 
   <!-- COACH -->
-  <section class="about" id="coach">
+  <section class="about reveal" id="coach">
     <div class="container">
       <div class="about__grid">
         <div class="about__portrait">
@@ -436,7 +443,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="foot">
+  <footer class="foot reveal">
     <div class="foot__sun" aria-hidden="true"></div>
     <div class="foot__inner">
       <div class="foot__closer">
@@ -515,5 +522,6 @@
   <script src="js/nav.js"></script>
   <script src="js/faq.js"></script>
   <script src="js/modal.js"></script>
+  <script src="js/animations.js"></script>
 </body>
 </html>

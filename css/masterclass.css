@@ -9,7 +9,14 @@
   background: var(--paper);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(13, 41, 69, 0.15);
+  border: 1px solid rgba(13, 41, 69, 0.12);
+  box-shadow: 
+    0 20px 40px -10px rgba(13, 41, 69, 0.08),
+    0 40px 80px -20px rgba(13, 41, 69, 0.04);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mc__card:hover {
+  transform: translateY(-4px);
 }
 .mc__sun {
   position: absolute;

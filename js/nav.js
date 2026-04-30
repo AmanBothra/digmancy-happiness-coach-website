@@ -31,14 +31,16 @@
       e.preventDefault();
       const id = el.getAttribute('data-scroll');
       setOpen(false);
-      const target = document.getElementById(id);
-      if (id === 'top' || !target) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+      
+      const target = id === 'top' ? 0 : document.getElementById(id);
+      if (target === null && id !== 'top') return;
+
+      if (window.lenis) {
+        window.lenis.scrollTo(target, { offset: -80 });
+      } else {
+        const y = id === 'top' ? 0 : target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
-      const offset = 80;
-      const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
     });
   });
 })();
