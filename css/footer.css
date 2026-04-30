@@ -66,7 +66,7 @@
   align-items: center;
 }
 .foot__bigmark img {
-  height: clamp(120px, 22vw, 320px);
+  height: clamp(100px, 15vw, 220px);
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
@@ -75,8 +75,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr auto;
   gap: 40px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 60px;
+  border-top: 1px solid rgba(255,255,255,0.12);
   align-items: start;
 }
 .foot__col {
@@ -85,14 +85,30 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone);
-  opacity: 0.75;
-  line-height: 2;
+  line-height: 1.8;
 }
 .foot__col-h {
   color: var(--sunshine);
-  opacity: 1;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   display: block;
+}
+.foot__link {
+  display: block;
+  color: var(--bone);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: all 0.3s ease;
+  margin-bottom: 8px;
+}
+.foot__link:hover {
+  opacity: 1;
+  color: var(--sunshine);
+  transform: translateX(4px);
+}
+.foot__info {
+  display: block;
+  opacity: 0.6;
+  margin-bottom: 8px;
 }
 .foot__sign {
   font-family: var(--mono);
@@ -100,9 +116,18 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone);
-  opacity: 0.6;
   text-align: right;
   line-height: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.foot__motto {
+  margin-bottom: 40px;
+}
+.foot__copyright {
+  opacity: 0.5;
 }
 
 @media (max-width: 1023px) {

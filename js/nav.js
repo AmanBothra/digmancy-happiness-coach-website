@@ -16,6 +16,10 @@
     setOpen(!nav.classList.contains('menu-open'));
   });
 
+  // Explicit close button inside the overlay
+  const closeBtn = nav.querySelector('.nav__overlay-close');
+  if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+
   // Close on Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('menu-open')) setOpen(false);

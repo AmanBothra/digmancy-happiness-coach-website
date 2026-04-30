@@ -3,33 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Aastha Tatia — Happiness Coach for Leaders</title>
-  <meta name="description" content="A practice for Indian leaders who have achieved on paper, and still feel something quietly missing. The Authentic Leadership Masterclass — ₹99 per seat." />
+  <title>Aastha Tatia — Why Successful Leaders Feel Silenced</title>
+  <meta name="description" content="A deeply honest masterclass for leaders who are ready to stop performing strength — and start leading with truth, freedom, and inner clarity." />
 
-  <!-- Tailwind CDN (used as a utility complement to the custom CSS) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#F4ECD8',
-            paper: '#FAF7EE',
-            navy:  '#0D2945',
-            ocean: '#1B5680',
-            sky:   '#26A3DD',
-            sunshine: '#FFDE17',
-            ink:   '#1A2A3A',
-            ash:   '#6B7480',
-          },
-          fontFamily: {
-            display: ['ui-serif','Iowan Old Style','Apple Garamond','Baskerville','Times New Roman','serif'],
-            serif:   ['Iowan Old Style','Apple Garamond','Baskerville','Georgia','serif'],
-            mono:    ['ui-monospace','SF Mono','Menlo','Consolas','monospace'],
-          },
-        },
-      },
-    };
+    tailwind.config = { theme: { extend: {
+      colors: { cream:'#F4ECD8', paper:'#FAF7EE', navy:'#0D2945', ocean:'#1B5680', sky:'#26A3DD', sunshine:'#FFDE17', ink:'#1A2A3A', ash:'#6B7480' },
+    }}};
   </script>
 
   <link rel="stylesheet" href="css/base.css" />
@@ -44,218 +25,199 @@
   <link rel="stylesheet" href="css/faq.css" />
   <link rel="stylesheet" href="css/footer.css" />
   <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/sections.css" />
 </head>
 <body>
 
-  <!-- ============== BANNER ============== -->
+  <!-- BANNER -->
   <div class="banner" data-banner>
     <span class="banner__kicker">Next masterclass</span>
     <span class="banner__meta">Saturday, 03 May · 11:00 AM IST · ₹99 per seat</span>
-    <a href="#masterclass" class="banner__cta" data-modal-open>Reserve your seat →</a>
+    <a href="#secrets" class="banner__cta" data-modal-open>Save my seat →</a>
     <button class="banner__close" data-banner-close aria-label="Dismiss banner">×</button>
   </div>
 
-  <!-- ============== NAV ============== -->
+  <!-- NAV -->
   <nav class="nav with-banner">
     <a class="nav__logo" data-scroll="top" href="#top" aria-label="Home">
       <img src="assets/aastha-mark.png" alt="Aastha Tatia" />
     </a>
     <div class="nav__links">
-      <a class="nav__link" data-scroll="method" href="#method">The method</a>
-      <a class="nav__link" data-scroll="masterclass" href="#masterclass">Masterclass</a>
-      <a class="nav__link" data-scroll="about" href="#about">About</a>
+      <a class="nav__link" data-scroll="not-fix" href="#not-fix">The space</a>
+      <a class="nav__link" data-scroll="who" href="#who">Who it's for</a>
+      <a class="nav__link" data-scroll="secrets" href="#secrets">Secrets</a>
       <a class="nav__link" data-scroll="stories" href="#stories">Stories</a>
-      <button class="cta sm" data-modal-open>Reserve a seat</button>
+      <a class="nav__link" data-scroll="coach" href="#coach">Coach</a>
+      <button class="cta sm" data-modal-open>Save my seat</button>
     </div>
-    <button class="nav__burger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-
+    <button class="nav__burger" aria-label="Open menu"><span></span><span></span><span></span></button>
     <div class="nav__overlay">
+      <button class="nav__overlay-close" type="button" aria-label="Close menu"></button>
       <div class="nav__overlay-eyebrow">Menu</div>
-      <a class="nav__overlay-link" data-scroll="method" href="#method">The method</a>
-      <a class="nav__overlay-link" data-scroll="masterclass" href="#masterclass">Masterclass</a>
-      <a class="nav__overlay-link" data-scroll="about" href="#about">About</a>
+      <a class="nav__overlay-link" data-scroll="not-fix" href="#not-fix">The space</a>
+      <a class="nav__overlay-link" data-scroll="who" href="#who">Who it's for</a>
+      <a class="nav__overlay-link" data-scroll="secrets" href="#secrets">Secrets</a>
       <a class="nav__overlay-link" data-scroll="stories" href="#stories">Stories</a>
-      <div class="nav__overlay-cta">
-        <button class="cta" data-modal-open>Reserve a seat</button>
-      </div>
+      <a class="nav__overlay-link" data-scroll="coach" href="#coach">Coach</a>
+      <div class="nav__overlay-cta"><button class="cta" data-modal-open>Save my seat</button></div>
     </div>
   </nav>
 
-  <!-- ============== HERO ============== -->
+  <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero__sun" aria-hidden="true"></div>
     <div class="hero__yellow-block" aria-hidden="true"></div>
-    <div class="hero__line" aria-hidden="true"></div>
-    <div class="hero__cue" aria-hidden="true"></div>
 
     <div class="hero__inner">
       <div>
         <div class="eyebrow">
           <span class="bar"></span>
-          <span>A practice led by Aastha Tatia <span class="hide-mobile">· New Delhi</span></span>
+          <span>The Authentic Leadership Masterclass</span>
         </div>
         <h1 class="display xl hero__title">
-          You are not <span class="italic-accent">confused</span>.<br />
-          You are <span class="sun-hl">self-silencing</span>.
+          Why successful leaders feel <span class="italic-accent">silenced</span>
+          <span class="hero__sub-line">(and how to reclaim your voice)</span>
         </h1>
         <div class="hero__cta-row">
-          <button class="cta" data-modal-open>Hold my seat</button>
-          <div class="whisper">₹99 · 90 minutes · Saturday 3 May</div>
+          <button class="cta" data-modal-open>Save my seat</button>
+          <div class="whisper">₹99 · 90 minutes · Saturday, 03 May</div>
         </div>
       </div>
 
       <div>
         <p class="hero__lede">
-          <span class="drop-cap">A</span>astha is a practice for Indian leaders
-          who have achieved, on paper, the thing everyone told them to want —
-          and still close the laptop on a Tuesday evening with something
-          <span class="italic-accent">quietly missing</span>.
+          <span class="drop-cap">Y</span>ou've built success. So why does
+          leadership still feel <span class="italic-accent">heavy, lonely, and incomplete?</span>
+          A deeply honest masterclass for leaders who are ready to stop
+          performing strength — and start leading with truth, freedom, and
+          inner clarity.
         </p>
         <div class="hero__meta">
-          <div>
-            <div class="hero__num">03</div>
-            <div class="hero__metaLabel">Belief-shifting<br />secrets</div>
-          </div>
-          <div>
-            <div class="hero__num">3,400<sup>+</sup></div>
-            <div class="hero__metaLabel">Leaders in<br />the circle</div>
-          </div>
-          <div>
-            <div class="hero__num">₹99<sup>/seat</sup></div>
-            <div class="hero__metaLabel">To attend.<br />No upsell.</div>
-          </div>
+          <div><div class="hero__num">03</div><div class="hero__metaLabel">Belief-shifting<br />secrets</div></div>
+          <div><div class="hero__num">5,000<sup>+</sup></div><div class="hero__metaLabel">Lives touched<br />across programs</div></div>
+          <div><div class="hero__num">₹99<sup>/seat</sup></div><div class="hero__metaLabel">To attend.<br />No upsell.</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============== RECOGNISE ============== -->
-  <section class="rec divider-top">
+  <!-- VIDEO -->
+  <section class="video-sec">
+    <div class="video-sec__inner">
+      <div class="eyebrow center">
+        <span class="num">01.</span><span class="bar"></span>
+        <span>A short invitation, in Aastha's own voice</span>
+      </div>
+      <h2 class="video-sec__h">
+        Ready to reclaim your <span class="italic-accent">authentic</span> leadership?
+      </h2>
+      <div class="video-sec__frame">
+        <button class="video-sec__play" aria-label="Play video"></button>
+        <span class="video-sec__caption">Watch · 02:14</span>
+      </div>
+      <div class="hero__cta-row" style="justify-content:center;">
+        <button class="cta" data-modal-open>Reserve my seat</button>
+        <div class="whisper">90 minutes. Live. No replays.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOT ABOUT FIXING YOU -->
+  <section class="rec divider-top" id="not-fix">
     <div class="container">
       <div class="rec__head">
         <div>
           <div class="eyebrow">
-            <span class="num">01.</span>
-            <span class="bar"></span>
-            <span>If any of this is familiar</span>
+            <span class="num">02.</span><span class="bar"></span>
+            <span>Before we begin</span>
           </div>
           <h2 class="display l rec__h">
-            You might <span class="italic-accent">recognise</span> yourself<br />
-            in one of these rooms.
+            This masterclass is <span class="italic-accent">not</span><br />
+            about <span class="sun-hl">fixing you</span>.
           </h2>
         </div>
         <p class="lede rec__lede">
-          Not a checklist. Not a diagnosis. Just sentences we've heard, very
-          nearly word-for-word, from the leaders who end up in this work —
-          and which, when said out loud in a room of peers, are often the
-          first thing that moves.
+          You don't need to become someone else. You don't need more
+          strategies to "perform better." What you need… is space.
+          To be real. To be honest. To be heard — without losing respect.
+          This masterclass is that space.
         </p>
       </div>
 
       <div class="rec__cols">
         <div class="rec__col">
-          <div class="rec__col-label">The inside voice</div>
-          <h3 class="rec__col-title">What you say to yourself<br />on the drive home.</h3>
-          <div class="rec__line"><span class="rec__bullet">i.</span><span class="rec__quote">"I don't feel free to say what I really think."</span></div>
-          <div class="rec__line"><span class="rec__bullet">ii.</span><span class="rec__quote">"I'm successful — and something still feels empty."</span></div>
-          <div class="rec__line"><span class="rec__bullet">iii.</span><span class="rec__quote">"I can't be quite real with my own team."</span></div>
-          <div class="rec__line"><span class="rec__bullet">iv.</span><span class="rec__quote">"It's lonelier at the top than I expected."</span></div>
-          <div class="rec__line"><span class="rec__bullet">v.</span><span class="rec__quote">"I don't want to become hard, or cynical, to cope."</span></div>
+          <div class="rec__col-label">A space where</div>
+          <h3 class="rec__col-title">You don't have to<br />perform anything.</h3>
+          <div class="rec__line"><span class="rec__bullet">i.</span><span class="rec__quote">You don't have to perform strength.</span></div>
+          <div class="rec__line"><span class="rec__bullet">ii.</span><span class="rec__quote">You don't have to hide what you truly think.</span></div>
+          <div class="rec__line"><span class="rec__bullet">iii.</span><span class="rec__quote">You don't have to carry leadership alone.</span></div>
         </div>
         <div class="rec__col">
-          <div class="rec__col-label">The room you lead</div>
-          <h3 class="rec__col-title">What you notice<br />about the team around you.</h3>
-          <div class="rec__line"><span class="rec__bullet">i.</span><span class="rec__quote">"My team listens. They don't really own things."</span></div>
-          <div class="rec__line"><span class="rec__bullet">ii.</span><span class="rec__quote">"I avoid difficult conversations longer than I should."</span></div>
-          <div class="rec__line"><span class="rec__bullet">iii.</span><span class="rec__quote">"I'm tired of performing strength I don't always feel."</span></div>
-          <div class="rec__line"><span class="rec__bullet">iv.</span><span class="rec__quote">"I want my leadership to mean something beyond the number."</span></div>
-          <div class="rec__line"><span class="rec__bullet">v.</span><span class="rec__quote">"I'm afraid that if I open up, I'll lose the room."</span></div>
+          <div class="rec__col-label">A space for</div>
+          <h3 class="rec__col-title">Being real,<br />out loud, on purpose.</h3>
+          <div class="rec__line"><span class="rec__bullet">i.</span><span class="rec__quote">Saying the thing you've been holding back, with words.</span></div>
+          <div class="rec__line"><span class="rec__bullet">ii.</span><span class="rec__quote">Hearing it land, in a room of leaders who get it.</span></div>
+          <div class="rec__line"><span class="rec__bullet">iii.</span><span class="rec__quote">Walking out lighter, and still very much respected.</span></div>
         </div>
-      </div>
-
-      <div class="rec__foot">
-        <span class="rec__foot-strong">Sounds familiar?</span>
-        <span>You're in the right room.</span>
-        <a href="#masterclass" data-modal-open class="rec__foot-link">Reserve your seat →</a>
       </div>
     </div>
   </section>
 
-  <!-- ============== METHOD ============== -->
-  <section class="method" id="method">
-    <div class="container">
-      <div class="method__head">
-        <div>
-          <div class="eyebrow">
-            <span class="num">02.</span>
-            <span class="bar"></span>
-            <span>The method, in four movements</span>
-          </div>
-          <h2 class="display l method__h">
-            From <span class="italic-accent">fear</span> to freedom.<br />
-            Hierarchy to <span class="italic-accent">humanity</span>.
-          </h2>
+  <!-- WHO -->
+  <section class="personas" id="who">
+    <div>
+      <div class="personas__head">
+        <div class="eyebrow center">
+          <span class="num">03.</span><span class="bar"></span>
+          <span>Who this is for</span>
         </div>
-        <p class="lede">
-          The practice is not a framework you memorise. It is four small
-          movements, rehearsed together, until the leader who walks into
-          Wednesday's meeting is a different kind of listener than the one
-          who walked in on Monday.
-        </p>
+        <h2 class="personas__h">Who is this <span class="italic-accent">masterclass</span> for?</h2>
+        <p class="personas__lede">If any of these are quietly true for you, you're in the right room.</p>
       </div>
 
-      <div class="method__grid">
-        <div class="method__pillar">
-          <div class="method__num">i.</div>
-          <div class="method__ptitle">rehumanise <span class="method__pi">the room</span></div>
-          <p class="method__ptext">Before we fix, we describe. Name the ache — the exact Tuesday-evening feeling — precisely enough that the reader recognises themselves.</p>
+      <div class="personas__grid">
+        <div class="personas__col">
+          <div class="rec__col-label">The role you carry</div>
+          <div class="personas__line"><span class="personas__bullet">i.</span><span class="personas__text">You're a business leader, founder, or corporate leader.</span></div>
+          <div class="personas__line"><span class="personas__bullet">ii.</span><span class="personas__text">You're successful — but something feels internally off.</span></div>
+          <div class="personas__line"><span class="personas__bullet">iii.</span><span class="personas__text">You struggle to say what you really think in important moments.</span></div>
+          <div class="personas__line"><span class="personas__bullet">iv.</span><span class="personas__text">You avoid difficult conversations — even when you know they matter.</span></div>
+          <div class="personas__line"><span class="personas__bullet">v.</span><span class="personas__text">Your team listens, but doesn't fully take ownership.</span></div>
         </div>
-        <div class="method__pillar">
-          <div class="method__num">ii.</div>
-          <div class="method__ptitle">voice <span class="method__pi">before answer</span></div>
-          <p class="method__ptext">Silence is not a personality trait; it is a survival pattern. We practice putting words on what has been wordless.</p>
-        </div>
-        <div class="method__pillar">
-          <div class="method__num">iii.</div>
-          <div class="method__ptitle">presence <span class="method__pi">over pressure</span></div>
-          <p class="method__ptext">Power is not lost through truth. It is built through a kind of emotional authority most leadership books never teach.</p>
-        </div>
-        <div class="method__pillar">
-          <div class="method__num">iv.</div>
-          <div class="method__ptitle">circle <span class="method__pi">not stage</span></div>
-          <p class="method__ptext">Voice is reclaimed by practice, in safe rooms, with other leaders who are tired of performing strength they do not always feel.</p>
+        <div class="personas__col">
+          <div class="rec__col-label">What it costs you, quietly</div>
+          <div class="personas__line"><span class="personas__bullet">vi.</span><span class="personas__text">You feel lonely in your role and can't openly share it.</span></div>
+          <div class="personas__line"><span class="personas__bullet">vii.</span><span class="personas__text">You're tired of pretending everything is okay.</span></div>
+          <div class="personas__line"><span class="personas__bullet">viii.</span><span class="personas__text">You wonder if it is possible to be successful <em>and</em> happy.</span></div>
+          <div class="personas__line"><span class="personas__bullet">ix.</span><span class="personas__text">You want to feel free.</span></div>
+          <div class="personas__line"><span class="personas__bullet">x.</span><span class="personas__text">You want your leadership to feel meaningful — not just impressive.</span></div>
         </div>
       </div>
 
-      <div class="method__footer">
-        <p class="method__motto">
-          Her motto, and ours:
-          <span class="method__motto-bold">Happiness is a <span class="sun-hl">choice</span>.</span>
-        </p>
-        <div class="method__sign">A practice of the<br />Authentic Leadership Circle</div>
+      <div class="personas__foot">
+        <span class="personas__foot-strong">Sounds familiar?</span>
+        <span>This masterclass will be your turning point.</span>
+        <button class="cta" data-modal-open>Reserve your spot</button>
       </div>
     </div>
   </section>
 
-  <!-- ============== MASTERCLASS ============== -->
-  <section class="mc" id="masterclass">
+  <!-- SECRETS -->
+  <section class="mc" id="secrets">
     <div class="container">
       <div class="mc__head">
         <div class="eyebrow center">
-          <span class="num">03.</span>
-          <span class="bar"></span>
-          <span>The masterclass</span>
+          <span class="num">04.</span><span class="bar"></span>
+          <span>What you'll discover inside</span>
         </div>
         <h2 class="display l mc__h">
-          A ninety-minute conversation on <span class="italic-accent">reclaiming</span> your leadership voice.
+          Three <span class="italic-accent">secrets</span>.<br />
+          One ninety-minute room.
         </h2>
       </div>
 
       <div class="mc__card">
         <div class="mc__sun" aria-hidden="true"></div>
-
         <div class="mc__header">
           <div>
             <div class="mc__kicker">₹99 per seat · live · no replays</div>
@@ -271,62 +233,155 @@
         <div class="mc__chapters">
           <div class="mc__ch">
             <div class="mc__cnum">i.</div>
-            <div class="mc__ctime">20 min</div>
-            <div class="mc__cname">Naming the ache</div>
-            <p class="mc__ctext">The five most common flavours of the Tuesday-evening feeling — and why standard leadership advice does not land on any of them.</p>
+            <div class="mc__ctime">Secret 01</div>
+            <div class="mc__cname">Silence is not a personality trait — it is a survival pattern.</div>
+            <p class="mc__ctext">Why you've learned to hold back your voice — and how that pattern, once useful, is now limiting your leadership.</p>
           </div>
           <div class="mc__ch">
             <div class="mc__cnum">ii.</div>
-            <div class="mc__ctime">40 min</div>
-            <div class="mc__cname">Three belief-shifts</div>
-            <p class="mc__ctext">The three small hinges that move the most: silence, authority, and the very specific practice of reclaiming a voice.</p>
+            <div class="mc__ctime">Secret 02</div>
+            <div class="mc__cname">Power is not lost through truth — it is built through emotional authority.</div>
+            <p class="mc__ctext">How real influence doesn't come from control — but from presence, honesty, and emotional ownership.</p>
           </div>
           <div class="mc__ch">
             <div class="mc__cnum">iii.</div>
-            <div class="mc__ctime">30 min</div>
-            <div class="mc__cname">Questions, out loud</div>
-            <p class="mc__ctext">Thirty minutes of real conversation. You leave with something specific — and very small — to try on Wednesday morning.</p>
+            <div class="mc__ctime">Secret 03</div>
+            <div class="mc__cname">Voice is reclaimed through practice in safe spaces.</div>
+            <p class="mc__ctext">Why clarity doesn't come from overthinking — but from expressing, experiencing, and being seen in the right environment.</p>
           </div>
         </div>
 
         <div class="mc__cta-row">
           <div class="mc__meta">
             <span class="mc__price">₹99</span>
-            <span class="mc__price-tag">per seat — a small, deliberate commitment so the room stays small, and everyone shows up.</span>
+            <span class="mc__price-tag">per seat — small, deliberate, so the room stays small and everyone shows up.</span>
           </div>
-          <button class="cta" data-modal-open>Hold my seat</button>
+          <button class="cta" data-modal-open>Yes, I want these secrets</button>
         </div>
       </div>
 
-      <div class="mc__secrets">
-        <div class="mc__secret">
-          <div class="mc__sTag">Secret i.</div>
-          <p class="mc__sQ">Silence is not a personality trait.</p>
-          <p class="mc__sSub">It is a survival pattern — learned, rehearsed, and quietly expensive.</p>
+      <p class="mc__shaken">
+        With these three secrets, something inside you will be shaken.<br />
+        <span class="italic-accent">You will not walk away the same leader.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="test" id="stories">
+    <div class="container">
+      <div class="test__head">
+        <div class="eyebrow center on-dark">
+          <span class="num">05.</span><span class="bar"></span>
+          <span>From inside the circle</span>
         </div>
-        <div class="mc__secret">
-          <div class="mc__sTag">Secret ii.</div>
-          <p class="mc__sQ">Power is not lost through truth.</p>
-          <p class="mc__sSub">It is built through a different currency entirely: emotional authority.</p>
+        <h2 class="test__h">
+          What <span class="italic-accent">leaders</span> are <span class="sun-hl">saying</span>.
+        </h2>
+        <p class="test__sub">Names before numbers. Stories before slogans.</p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-card"><div class="video-card__thumb"><span class="video-card__play"></span></div><div class="video-card__name">Hasil Gora</div><div class="video-card__role">Leader · Video</div></div>
+        <div class="video-card"><div class="video-card__thumb"><span class="video-card__play"></span></div><div class="video-card__name">Mahesh Upasani</div><div class="video-card__role">Leader · Video</div></div>
+        <div class="video-card"><div class="video-card__thumb"><span class="video-card__play"></span></div><div class="video-card__name">Kaushik Pasi</div><div class="video-card__role">Leader · Video</div></div>
+        <div class="video-card"><div class="video-card__thumb"><span class="video-card__play"></span></div><div class="video-card__name">Kenneth</div><div class="video-card__role">Leader · Video</div></div>
+        <div class="video-card audio"><div class="video-card__thumb"><span class="video-card__play audio"></span></div><div class="video-card__name">Meraj Ali</div><div class="video-card__role">Leader · Audio</div></div>
+        <div class="video-card audio"><div class="video-card__thumb"><span class="video-card__play audio"></span></div><div class="video-card__name">Satish</div><div class="video-card__role">Leader · Audio</div></div>
+      </div>
+
+      <div class="test__grid" style="margin-top: 64px;">
+        <div class="test__card feature">
+          <div>
+            <div class="test__serial"><span>No. 001 / Written</span><span class="sep">— Leader</span></div>
+            <p class="test__quote">The positive energy and attitude I carry today make my personality stronger. I feel proud that I have a real, <em>honest</em> bond with my wife, my family, and my team.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Balaji</div><div class="test__role">Senior leader</div></div></div>
         </div>
-        <div class="mc__secret">
-          <div class="mc__sTag">Secret iii.</div>
-          <p class="mc__sQ">Voice is not found by thinking.</p>
-          <p class="mc__sSub">It is reclaimed through practice, in rooms that are safe enough to try.</p>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 002 / Written</span><span class="sep">— Leader</span></div>
+            <p class="test__quote">I realised that, in difficult moments, I was the one quietly taking the conversation in a <em>negative</em> direction — because of a pattern I had never noticed.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Deepanwita</div><div class="test__role">Corporate leader</div></div></div>
         </div>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 003 / Written</span><span class="sep">— Leader</span></div>
+            <p class="test__quote">One of the best investments I've made. Really glad I decided to learn from Aastha — my work relationships finally feel <em>honest</em>.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Dr. Usha</div><div class="test__role">Practitioner</div></div></div>
+        </div>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 004 / Written</span><span class="sep">— Founder</span></div>
+            <p class="test__quote">A pattern I had carried for years moved in a single, <em>quiet</em> conversation. I lead my team differently now.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Siddharth</div><div class="test__role">Founder</div></div></div>
+        </div>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 005 / Written</span><span class="sep">— Founder</span></div>
+            <p class="test__quote">I used to overthink every important conversation. Now I walk in with <em>presence</em>, and let the rest follow.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Nipun Daga</div><div class="test__role">Founder</div></div></div>
+        </div>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 006 / Written</span><span class="sep">— Officer</span></div>
+            <p class="test__quote">I expected leadership techniques. I left with something quieter — and far more <em>useful</em>.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">U.S. Navy Official</div><div class="test__role">Officer</div></div></div>
+        </div>
+        <div class="test__card">
+          <div>
+            <div class="test__serial"><span>No. 007 / Written</span><span class="sep">— Leader</span></div>
+            <p class="test__quote">For the first time, I felt I could be both a serious leader and a <em>real</em> human being in the same room.</p>
+          </div>
+          <div class="test__attr"><div><div class="test__name">Eleni Bolla</div><div class="test__role">International leader</div></div></div>
+        </div>
+      </div>
+
+      <div class="test__closer">
+        <p class="test__closer-text">Finally, someone who understood what I was actually experiencing.</p>
+        <button class="cta" data-modal-open>I'm ready to be next</button>
       </div>
     </div>
   </section>
 
-  <!-- ============== ABOUT ============== -->
-  <section class="about" id="about">
+  <!-- IMAGINE -->
+  <section class="imagine">
+    <div class="imagine__inner">
+      <div class="eyebrow center">
+        <span class="num">06.</span><span class="bar"></span>
+        <span>Still wondering if this is for you?</span>
+      </div>
+      <h2 class="imagine__h">Imagine leading <span class="italic-accent">like this</span>.</h2>
+
+      <div class="imagine__list">
+        <div class="imagine__line"><span class="imagine__num">i.</span><span class="imagine__text">Saying what needs to be said — without fear.</span></div>
+        <div class="imagine__line"><span class="imagine__num">ii.</span><span class="imagine__text">Being respected not for your position, but for your <em>presence</em>.</span></div>
+        <div class="imagine__line"><span class="imagine__num">iii.</span><span class="imagine__text">Having a team that doesn't just listen, but <em>owns</em>.</span></div>
+        <div class="imagine__line"><span class="imagine__num">iv.</span><span class="imagine__text">Feeling aligned, not conflicted, within yourself.</span></div>
+      </div>
+
+      <p class="imagine__closer">
+        This is not a distant ideal. It begins with awareness, and the right space.<br />
+        <span class="italic-accent">If something in you resonated, don't ignore it.</span>
+      </p>
+      <div class="hero__cta-row" style="justify-content:center;">
+        <button class="cta" data-modal-open>Reserve my spot</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COACH -->
+  <section class="about" id="coach">
     <div class="container">
       <div class="about__grid">
         <div class="about__portrait">
           <div class="about__sunBlob" aria-hidden="true"></div>
-          <div class="about__portrait-inner">
-            <div class="about__silhouette" aria-hidden="true"></div>
-          </div>
+          <img src="assets/leader.jpg" alt="Aastha Tatia" class="about__image" />
           <div class="about__badge">
             Aastha Tatia
             <span class="about__badge-italic">Happiness Coach for Leaders</span>
@@ -335,51 +390,44 @@
 
         <div>
           <div class="eyebrow">
-            <span class="num">04.</span>
-            <span class="bar"></span>
-            <span>The practice, and the person behind it</span>
+            <span class="num">07.</span><span class="bar"></span>
+            <span>Meet your coach</span>
           </div>
           <h2 class="about__h">
             Meet <span class="italic-accent">Aastha</span><br />Tatia.
           </h2>
           <p class="about__lede">
             <span class="drop-cap">A</span>astha is a
-            <span class="italic-accent">Happiness Coach for Leaders</span> — a
-            quiet, specific voice of authenticity and consciousness in the
-            Indian leadership space.
+            <span class="italic-accent">Happiness Coach for Leaders</span>.
           </p>
           <p class="about__body">
-            Her work, in her own words, begins with a simple conviction:
-            every human being deserves to own their voice, and to express
-            who they truly are — unapologetically, uninhibitedly, and
-            responsibly. Happiness, she teaches, is not something we chase.
-            It is something we uncover when we finally stop performing.
+            For the longest time, she didn't even realise she was living
+            someone else's version of life. She did engineering. She did her
+            MBA. She built a corporate career across cities like Dubai and
+            Mumbai. It all looked… successful. But inside, she was messed
+            up, lonely, running away.
           </p>
           <p class="about__body">
-            She founded the <span class="italic-accent">Authentic Leadership Circle</span>
-            to help leaders lead boldly, speak freely, and live in alignment
-            — the leaders who have achieved a great deal on paper, and still
-            crave something deeper. The practice is small, intimate, and
-            deliberately unhurried.
+            She went from living a suffocated life — suppressing her own
+            voice in the rooms that mattered — to stepping into her power
+            and creating a flourishing personal and professional life.
           </p>
 
-          <div class="about__credit">
-            <div>
-              <div class="about__cnum">3,400<sup>+</sup></div>
-              <div class="about__clabel">Leaders in<br />the circle</div>
-            </div>
-            <div>
-              <div class="about__cnum">11<sup>yrs</sup></div>
-              <div class="about__clabel">Coaching senior<br />Indian leaders</div>
-            </div>
-            <div>
-              <div class="about__cnum">01</div>
-              <div class="about__clabel">Motto —<br />happiness is a choice</div>
-            </div>
+          <div class="coach__list">
+            <div class="coach__line"><span class="coach__bullet">i.</span><span>Founder of the Authentic Leadership Circle</span></div>
+            <div class="coach__line"><span class="coach__bullet">ii.</span><span>10 years of corporate experience</span></div>
+            <div class="coach__line"><span class="coach__bullet">iii.</span><span>8+ years of coaching experience</span></div>
+            <div class="coach__line"><span class="coach__bullet">iv.</span><span>5,000+ lives touched through different programs</span></div>
+            <div class="coach__line"><span class="coach__bullet">v.</span><span>Amazon #1 Bestseller author of <em>Survive or Thrive</em></span></div>
           </div>
 
+          <p class="about__body" style="margin-top: 32px;">
+            Aastha's vision: a world where every human being owns their voice
+            and expresses who they truly are — <em>unapologetically, uninhibitedly, and responsibly.</em>
+          </p>
+
           <div class="about__cta-row">
-            <button class="cta" data-modal-open>Begin with Aastha</button>
+            <button class="cta" data-modal-open>Learn from Aastha — register now</button>
             <div class="whisper">A ninety-minute room. Then decide.</div>
           </div>
         </div>
@@ -387,147 +435,7 @@
     </div>
   </section>
 
-  <!-- ============== TESTIMONIALS ============== -->
-  <section class="test" id="stories">
-    <div class="container">
-      <div class="test__head">
-        <div class="eyebrow center on-dark">
-          <span class="num">05.</span>
-          <span class="bar"></span>
-          <span>From inside the circle</span>
-        </div>
-        <h2 class="test__h">
-          Names before <span class="italic-accent">numbers</span>.
-          <span class="sun-hl">Stories</span> before slogans.
-        </h2>
-        <p class="test__sub">Our references stack metrics. Aastha's leaders lead with the human, and let the metric sit quietly in the corner.</p>
-      </div>
-
-      <div class="test__grid">
-        <div class="test__card feature">
-          <div>
-            <div class="test__serial"><span>No. 001 / Chennai</span><span class="sep">— 2024</span></div>
-            <p class="test__quote">The positive energy and attitude I carry today make my personality stronger. I feel proud that I have a real, <em>honest</em> bond with my wife, my family, and my team.</p>
-          </div>
-          <div class="test__attr">
-            <div>
-              <div class="test__name">Meraj Ali</div>
-              <div class="test__role">Engineering leader, Amazon</div>
-            </div>
-            <div class="test__metric">14<span class="suffix">months</span></div>
-          </div>
-        </div>
-
-        <div class="test__card">
-          <div>
-            <div class="test__serial"><span>No. 002 / Bangalore</span><span class="sep">— 2024</span></div>
-            <p class="test__quote">I realised that when things went wrong, I was the one quietly taking the conversation in a <em>negative</em> direction — because of a pattern I had never noticed.</p>
-          </div>
-          <div class="test__attr">
-            <div>
-              <div class="test__name">Siddharth Jain</div>
-              <div class="test__role">Founder</div>
-            </div>
-            <div class="test__metric">06<span class="suffix">months</span></div>
-          </div>
-        </div>
-
-        <div class="test__card">
-          <div>
-            <div class="test__serial"><span>No. 003 / Delhi</span><span class="sep">— 2024</span></div>
-            <p class="test__quote">One of the best investments I've made. Really glad I decided to learn from Aastha — my work relationships finally feel <em>honest</em>.</p>
-          </div>
-          <div class="test__attr">
-            <div>
-              <div class="test__name">Darshana Deka</div>
-              <div class="test__role">Corporate executive</div>
-            </div>
-            <div class="test__metric">09<span class="suffix">months</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="test__closer">
-        <p class="test__closer-text">Finally, someone who understood what I was actually experiencing.</p>
-        <button class="cta" data-modal-open>Reserve your seat</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== FAQ ============== -->
-  <section class="faq">
-    <div class="faq__container">
-      <div class="faq__head">
-        <div>
-          <div class="eyebrow">
-            <span class="num">06.</span>
-            <span class="bar"></span>
-            <span>Before you decide</span>
-          </div>
-          <h2 class="display l faq__h">
-            A few <span class="italic-accent">quiet</span><br />questions.
-          </h2>
-        </div>
-        <p class="faq__sub">
-          The ones we're asked, most weeks, by the leaders who eventually come into
-          the room. Nothing pressed, nothing hidden.
-        </p>
-      </div>
-
-      <div class="faq__list">
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">i.</div>
-            <h4 class="faq__q">Why should I attend this masterclass?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">Because something specific, not vague, is probably asking for your attention. The ninety minutes are built to name that specific thing — and to offer one small practice you can try on Wednesday morning.</p></div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">ii.</div>
-            <h4 class="faq__q">What will I actually leave with?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">A language for the Tuesday-evening feeling. Three belief-shifts. And a practice — twelve minutes a day, three parts — that you can run for a week and see whether anything in the room around you begins to change.</p></div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">iii.</div>
-            <h4 class="faq__q">What makes this different from every other webinar?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">Aastha does not broadcast. The room is small. Cameras are on. Thirty minutes are reserved for your questions, answered by name. And nothing is being sold at the end — you decide if you want to keep walking with us.</p></div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">iv.</div>
-            <h4 class="faq__q">Is this for senior leaders only?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">It is designed for people who lead — whether you lead ten thousand, ten, or just the room you walked into this morning. If the sentences on this page sounded like you, you are in the right room.</p></div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">v.</div>
-            <h4 class="faq__q">How do I reserve my place?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">The button, anywhere on this page, takes you to a simple form. We write once to confirm, once before the class, and not at all afterwards unless you ask.</p></div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__head-row" type="button">
-            <div class="faq__num">vi.</div>
-            <h4 class="faq__q">What if I cannot make it live?</h4>
-            <div class="faq__toggle">+</div>
-          </button>
-          <div class="faq__body"><p class="faq__a">Come live if you can; it is a different experience. If you cannot, every registered participant receives a private recording — we would just rather you came to the room.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== FOOTER ============== -->
+  <!-- FOOTER -->
   <footer class="foot">
     <div class="foot__sun" aria-hidden="true"></div>
     <div class="foot__inner">
@@ -538,7 +446,7 @@
           Then decide anything.
         </h2>
         <div class="foot__cta-row">
-          <button class="cta" data-modal-open>Hold my seat</button>
+          <button class="cta" data-modal-open>Save my seat</button>
           <div class="foot__whisper">₹99 per seat · Saturday, 03 May · 11:00 AM IST</div>
         </div>
       </div>
@@ -550,35 +458,38 @@
       <div class="foot__meta">
         <div class="foot__col">
           <span class="foot__col-h">The practice</span>
-          Authentic Leadership Circle<br />
-          The masterclass<br />
-          The writing<br />
-          Private coaching
+          <a href="#" class="foot__link">Authentic Leadership Circle</a>
+          <a href="#top" class="foot__link">The masterclass</a>
+          <a href="#" class="foot__link">Private coaching</a>
+          <a href="#" class="foot__link">The book — Survive or Thrive</a>
         </div>
         <div class="foot__col">
           <span class="foot__col-h">Write</span>
-          hello@aasthatatia.com<br />
-          By letter only.<br />
-          We reply within a week.
+          <a href="mailto:hello@aasthatatia.com" class="foot__link">hello@aasthatatia.com</a>
+          <span class="foot__info">By letter only.</span>
+          <span class="foot__info">We reply within a week.</span>
         </div>
         <div class="foot__col">
           <span class="foot__col-h">Based</span>
-          New Delhi<br />
-          Bangalore<br />
-          Mostly, online
+          <span class="foot__info">New Delhi · Mumbai</span>
+          <span class="foot__info">Mostly, online</span>
         </div>
         <div class="foot__sign">
-          Happy Leaders<br />
-          create Happy<br />
-          Organisations.<br />
-          <br />
-          Est. 2021
+          <div class="foot__motto">
+            Happy Leaders<br />
+            create Happy<br />
+            Organisations.
+          </div>
+          <div class="foot__copyright">
+            © 2024 Aastha Tatia<br />
+            Est. 2021
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- ============== MODAL ============== -->
+  <!-- MODAL -->
   <div class="modal" data-modal aria-hidden="true">
     <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button class="modal__close" data-modal-close aria-label="Close">×</button>
@@ -586,30 +497,20 @@
       <h3 class="modal__h" id="modal-title">A ninety-minute room.</h3>
       <p class="modal__sub">Saturday, 03 May · 11:00 AM IST</p>
       <form>
-        <div class="modal__field">
-          <label for="m-name">Your name</label>
-          <input id="m-name" name="name" type="text" required />
-        </div>
-        <div class="modal__field">
-          <label for="m-email">Email</label>
-          <input id="m-email" name="email" type="email" required />
-        </div>
-        <div class="modal__field">
-          <label for="m-role">Role / Company (optional)</label>
-          <input id="m-role" name="role" type="text" />
-        </div>
-        <button type="submit" class="cta modal__submit">Hold my seat</button>
+        <div class="modal__field"><label for="m-name">Your name</label><input id="m-name" name="name" type="text" required /></div>
+        <div class="modal__field"><label for="m-email">Email</label><input id="m-email" name="email" type="email" required /></div>
+        <div class="modal__field"><label for="m-role">Role / Company (optional)</label><input id="m-role" name="role" type="text" /></div>
+        <button type="submit" class="cta modal__submit">Save my seat</button>
         <p class="modal__note">We write once to confirm, and once before the class. Nothing else.</p>
       </form>
     </div>
   </div>
 
-  <!-- ============== TOAST ============== -->
+  <!-- TOAST -->
   <div class="toast" data-toast role="status" aria-live="polite">
     <span data-toast-msg>Seat reserved.</span>
   </div>
 
-  <!-- ============== SCRIPTS ============== -->
   <script src="js/banner.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/faq.js"></script>

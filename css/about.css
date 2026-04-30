@@ -17,19 +17,11 @@
   border: 1px solid rgba(13, 41, 69, 0.15);
   overflow: hidden;
 }
-.about__portrait-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: linear-gradient(180deg, var(--cream-3) 0%, var(--cream-2) 60%);
-}
-.about__silhouette {
-  width: 78%;
-  aspect-ratio: 3 / 4;
-  background: linear-gradient(180deg, var(--ocean) 0%, var(--navy) 100%);
-  clip-path: path('M 150 0 C 100 0 80 40 80 90 C 80 130 100 160 130 170 C 90 175 40 210 20 280 C 10 320 0 400 0 480 L 300 480 L 300 400 C 300 330 280 270 250 230 C 230 200 200 180 170 170 C 200 160 220 130 220 90 C 220 40 200 0 150 0 Z');
+.about__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .about__sunBlob {
   position: absolute;

@@ -45,6 +45,10 @@
   align-items: center;
   gap: 5px;
   border: 1px solid var(--navy);
+  background: var(--cream);
+  position: relative;
+  z-index: 101;
+  cursor: pointer;
 }
 .nav__burger span {
   width: 18px; height: 1.5px;
@@ -69,6 +73,32 @@
   padding: 88px 28px 32px;
   gap: 4px;
 }
+.nav__overlay-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--navy);
+  background: var(--cream);
+  cursor: pointer;
+  z-index: 102;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav__overlay-close::before,
+.nav__overlay-close::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 1.5px;
+  background: var(--navy);
+}
+.nav__overlay-close::before { transform: rotate(45deg); }
+.nav__overlay-close::after  { transform: rotate(-45deg); }
+.nav__overlay-close:hover { background: var(--sunshine); }
 .nav.menu-open .nav__overlay {
   opacity: 1;
   pointer-events: auto;

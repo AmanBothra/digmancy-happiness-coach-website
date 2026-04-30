@@ -55,6 +55,28 @@
 }
 .hero__title {
   margin-top: 40px;
+  text-wrap: balance;
+}
+.hero__sub-line {
+  display: block;
+  margin-top: 20px;
+  font-size: 0.5em;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ocean);
+  letter-spacing: -0.01em;
+  position: relative;
+}
+.hero__sub-line::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--ocean);
+  vertical-align: middle;
+  margin-right: 14px;
+  opacity: 0.5;
 }
 .hero__lede {
   font-family: var(--serif);
