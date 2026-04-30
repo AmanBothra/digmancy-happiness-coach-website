@@ -78,7 +78,7 @@
   position: absolute;
   bottom: 20px; right: 24px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--paper);
@@ -92,7 +92,7 @@
   .video-sec { padding: 80px 20px; }
   .video-sec__play { width: 72px; height: 72px; }
   .video-sec__play::before { border-width: 14px 0 14px 22px; }
-  .video-sec__caption { bottom: 12px; right: 14px; font-size: 10px; }
+  .video-sec__caption { bottom: 12px; right: 14px; font-size: 12px; }
 }
 
 
@@ -302,7 +302,7 @@
 }
 .video-card__role {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--sky);

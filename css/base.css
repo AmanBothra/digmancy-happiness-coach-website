@@ -27,11 +27,17 @@
   --bg:        var(--cream);
   --fg:        var(--ink);
 
-  /* Type — Premium Stacks */
-  --display: 'Playfair Display', ui-serif, "Iowan Old Style", "Apple Garamond", serif;
-  --serif:   'Playfair Display', Georgia, serif;
-  --sans:    'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mono:    ui-monospace, "SF Mono", Menlo, Monaco, monospace;
+  /* Type — Single family system */
+  --font-primary: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --display: var(--font-primary);
+  --serif:   var(--font-primary);
+  --sans:    var(--font-primary);
+  --mono:    var(--font-primary);
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 }
 
 /* Scroll Animations */
@@ -69,6 +75,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--sans);
+  font-weight: var(--fw-regular);
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
@@ -85,7 +92,7 @@ a { color: inherit; text-decoration: none; }
 .italic-accent {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--fw-medium);
   color: var(--ocean);
 }
 .italic-sky { color: var(--sky-hi); }
@@ -120,7 +127,8 @@ a { color: inherit; text-decoration: none; }
 /* Eyebrow */
 .eyebrow {
   font-family: var(--mono);
-  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ocean);
@@ -131,6 +139,7 @@ a { color: inherit; text-decoration: none; }
 .eyebrow .num {
   font-family: var(--serif);
   font-style: italic;
+  font-weight: var(--fw-medium);
   font-size: 14px;
   letter-spacing: 0;
   color: var(--ocean);
@@ -153,7 +162,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--navy);
   color: var(--paper);
   font-family: var(--sans);
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   font-size: 14px;
   letter-spacing: 0.04em;
   padding: 16px 28px;
@@ -195,19 +204,19 @@ a { color: inherit; text-decoration: none; }
 /* Display headings */
 .display {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   letter-spacing: -0.025em;
   color: var(--navy);
   line-height: 1;
 }
-.display.xl { font-size: clamp(56px, 7.6vw, 112px); line-height: 0.94; letter-spacing: -0.035em; }
-.display.l  { font-size: clamp(40px, 5vw, 68px); }
-.display.m  { font-size: clamp(36px, 4.5vw, 56px); line-height: 1.02; letter-spacing: -0.02em; }
+.display.xl { font-size: clamp(42px, 6vw, 76px); line-height: 0.98; letter-spacing: -0.028em; }
+.display.l  { font-size: clamp(32px, 4.8vw, 58px); }
+.display.m  { font-size: clamp(30px, 4.2vw, 48px); line-height: 1.06; letter-spacing: -0.018em; }
 
 /* Serif lede */
 .lede {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.55;
   color: var(--ink-soft);
   text-wrap: pretty;
@@ -218,7 +227,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--display);
   font-size: 1.5em;
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--fw-medium);
   color: var(--ocean);
   line-height: 0;
   margin-right: 4px;
@@ -227,7 +236,8 @@ a { color: inherit; text-decoration: none; }
 /* Mono label */
 .mono-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-weight: var(--fw-semibold);
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ash);
@@ -238,6 +248,7 @@ a { color: inherit; text-decoration: none; }
 .whisper {
   font-family: var(--serif);
   font-style: italic;
+  font-weight: var(--fw-medium);
   font-size: 14px;
   color: var(--ash);
 }

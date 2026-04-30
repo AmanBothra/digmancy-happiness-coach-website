@@ -37,7 +37,7 @@
 .modal__close:hover { color: var(--navy); }
 .modal__eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ocean);
@@ -63,7 +63,7 @@
 .modal__field label {
   display: block;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ash);

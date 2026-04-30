@@ -27,7 +27,7 @@
 }
 .nav__link {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--navy);
@@ -105,7 +105,7 @@
 }
 .nav__overlay-eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ocean);

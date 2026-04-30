@@ -40,7 +40,7 @@
   border: 1px solid var(--navy);
   padding: 14px 18px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--navy);
@@ -117,7 +117,7 @@
 }
 .about__clabel {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ash);

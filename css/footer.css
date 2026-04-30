@@ -25,7 +25,7 @@
 .foot__closer { max-width: 820px; margin-bottom: 100px; }
 .foot__eyebrow {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--sunshine);
@@ -81,7 +81,7 @@
 }
 .foot__col {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone);
@@ -112,7 +112,7 @@
 }
 .foot__sign {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--bone);

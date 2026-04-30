@@ -19,7 +19,7 @@
 .banner.is-hidden { transform: translateY(-100%); }
 .banner__kicker {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--sunshine);
@@ -54,6 +54,6 @@
 .banner__close:hover { opacity: 1; }
 
 @media (max-width: 639px) {
-  .banner { font-size: 11px; padding: 10px 36px 10px 16px; gap: 8px; }
+  .banner { font-size: 12px; padding: 10px 36px 10px 16px; gap: 8px; }
   .banner__kicker { display: none; }
 }
