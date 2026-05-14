@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AASTHA Design System - Premium Leadership Brand */
+
+@layer base {
+  :root {
+    --background: 36 30% 98%;            /* warm ivory */
+    --foreground: 213 45% 12%;
+
+    --surface: 36 25% 96%;               /* soft cream */
+    --surface-foreground: 213 45% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 75% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 75% 14%;
+
+    /* Brand blues - from logo gradient */
+    --primary: 213 75% 14%;          /* Deep navy #0A2540 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 209 79% 50%;     /* Sky blue #1E88E5 */
+
+    --secondary: 214 32% 95%;
+    --secondary-foreground: 213 75% 14%;
+
+    --muted: 214 30% 96%;
+    --muted-foreground: 215 20% 40%;
+
+    --accent: 209 79% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* CTA - signature yellow #FFDE17 */
+    --cta: 53 100% 54%;              /* #FFDE17 */
+    --cta-foreground: 213 75% 14%;
+    --cta-glow: 53 100% 65%;
+    --cta-soft: 53 100% 92%;         /* pale yellow tint */
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 209 79% 50%;
+
+    --radius: 0.875rem;
+
+    /* Gradients */
+    --gradient-brand: linear-gradient(135deg, hsl(209 79% 50%), hsl(213 75% 14%));
+    --gradient-brand-soft: linear-gradient(135deg, hsl(209 79% 96%), hsl(214 32% 97%));
+    --gradient-cta: linear-gradient(135deg, hsl(53 100% 60%), hsl(48 100% 50%));
+    --gradient-sun: linear-gradient(135deg, hsl(53 100% 92%) 0%, hsl(53 100% 75%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(213 75% 14%) 0%, hsl(213 70% 22%) 50%, hsl(209 79% 35%) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(209 79% 50%), hsl(213 75% 18%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 24px -8px hsl(213 75% 14% / 0.08);
+    --shadow-elegant: 0 20px 50px -20px hsl(213 75% 14% / 0.18);
+    --shadow-cta: 0 12px 28px -8px hsl(53 100% 54% / 0.55);
+    --shadow-glow: 0 0 60px hsl(209 79% 50% / 0.35);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    @apply font-medium tracking-tight;
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer utilities {
+  .font-serif-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .font-sans-body { font-family: 'Inter', system-ui, sans-serif; }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-brand {
+    background: var(--gradient-brand);
+  }
+
+  .bg-gradient-brand-soft {
+    background: var(--gradient-brand-soft);
+  }
+
+  .bg-gradient-cta {
+    background: var(--gradient-cta);
+  }
+
+  .bg-gradient-sun {
+    background: var(--gradient-sun);
+  }
+
+  .text-highlight-yellow {
+    background-image: linear-gradient(transparent 60%, hsl(var(--cta) / 0.55) 60%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 0.15em;
+  }
+
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-elegant { box-shadow: var(--shadow-elegant); }
+  .shadow-cta { box-shadow: var(--shadow-cta); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  .transition-smooth { transition: var(--transition-smooth); }
+  .transition-bounce { transition: var(--transition-bounce); }
+
+  .animate-fade-up {
+    animation: fadeUp 0.7s ease-out both;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2.4s ease-in-out infinite;
+  }
+
+  .emphasize-name {
+    position: relative;
+    display: inline-block;
+    opacity: 0;
+  }
+  .emphasize-name::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, hsl(var(--cta)), hsl(var(--primary-glow)));
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .emphasize-name.in-view {
+    animation: nameFadeIn 0.7s ease-out forwards;
+  }
+  .emphasize-name.in-view::after {
+    animation: underlineDraw 0.9s ease-out 0.4s forwards;
+  }
+}
+
+@keyframes nameFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes underlineDraw {
+  to { transform: scaleX(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(53 100% 54% / 0.6); }
+  50% { box-shadow: 0 0 0 18px hsl(53 100% 54% / 0); }
+}
