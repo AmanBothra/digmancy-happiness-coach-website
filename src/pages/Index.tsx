@@ -156,7 +156,7 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground">
+    <main className="min-h-screen bg-background font-sans text-foreground overflow-x-hidden">
       {/* ───── Sticky Top Bar ───── */}
       <div className="sticky top-0 z-50 bg-primary text-primary-foreground border-b-2 border-cta">
         <div className="container flex flex-col sm:flex-row items-center justify-between gap-2 py-2.5 text-[13px]">
@@ -203,10 +203,12 @@ const Index = () => {
               </span>
 
               <h1 className="mt-6 font-serif text-[40px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] text-primary">
-                Why Successful Leaders Feel{" "}
-                <em className="italic font-bold text-highlight-yellow">Silenced</em>
-                <span className="block text-2xl lg:text-4xl mt-3 font-bold sm:text-5xl text-primary">
-                  (And How to Reclaim Your<em className="italic font-bold text-highlight-yellow ml-2">Voice</em>)
+                <em className="italic font-bold text-highlight-yellow">Successful</em>
+                <span> on the outside. </span>
+                <em className="italic font-bold text-highlight-yellow">Suffocated</em>
+                <span> on the inside.</span>
+                <span className="block text-xl sm:text-2xl lg:text-3xl mt-6 font-semibold tracking-tight text-primary/90 leading-snug">
+                  How leaders can stop <em className="italic text-highlight-yellow font-bold">suppressing</em> themselves and start leading <em className="italic text-highlight-yellow font-bold">freely</em>
                 </span>
               </h1>
 
@@ -291,7 +293,7 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="relative mt-14 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
+          <div id="register" className="relative mt-14 mx-auto w-full max-w-4xl">
             {/* Video */}
             <div className="relative group">
               <div
@@ -340,9 +342,13 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Registration form */}
-            <div id="register">
-              <RegistrationForm variant="panel" ctaLabel="Reserve My Seat" />
+            <div className="mt-10 flex flex-col items-center gap-3">
+              <Button variant="cta" size="xl" onClick={scrollToRegister} className="shadow-cta">
+                Reserve My Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
+              </Button>
+              <p className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
+                Limited Seats · Live Masterclass
+              </p>
             </div>
           </div>
         </div>
@@ -357,7 +363,7 @@ const Index = () => {
             <HandHeart className="h-3.5 w-3.5 text-cta" />
             A different kind of room
           </span>
-          <h2 className="mt-4 font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight whitespace-nowrap">
+          <h2 className="mt-4 font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight lg:whitespace-nowrap">
             This masterclass is <em className="italic">not</em> about fixing you.
           </h2>
 
@@ -651,7 +657,7 @@ const Index = () => {
         <div aria-hidden className="absolute -bottom-24 -right-24 w-[420px] h-[420px] rounded-full bg-cta/20 blur-3xl" />
         <div className="container max-w-4xl">
           <div className="text-center">
-            <h2 className="font-serif text-[22px] sm:text-[28px] lg:text-5xl font-bold text-primary leading-tight whitespace-nowrap">
+            <h2 className="font-serif text-[22px] sm:text-[28px] lg:text-5xl font-bold text-primary leading-tight lg:whitespace-nowrap">
               Still Wondering If this Masterclass is for You?
             </h2>
           </div>
@@ -709,7 +715,7 @@ const Index = () => {
             </div>
 
             <div>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight whitespace-nowrap">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight lg:whitespace-nowrap">
                 Meet your Coach <em ref={nameRef} className="emphasize-name italic font-bold text-highlight-yellow">Aastha Tatia</em>
               </h2>
 
@@ -824,15 +830,15 @@ const Index = () => {
                     {b.tag}
                   </span>
                 </div>
-                <div className="p-8">
-                  <div className="flex items-center justify-end">
-                    <span className="text-xs font-medium text-muted-foreground line-through">
+                <div className="p-6 sm:p-8 text-left">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-primary leading-snug lg:whitespace-nowrap">
+                      {b.title}
+                    </h3>
+                    <span className="shrink-0 text-xs font-medium text-muted-foreground line-through pt-1">
                       {b.value}
                     </span>
                   </div>
-                  <h3 className="mt-2 font-serif text-2xl font-bold text-primary leading-snug whitespace-nowrap">
-                    {b.title}
-                  </h3>
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{b.copy}</p>
                   <p className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-cta-foreground bg-cta px-3 py-1 rounded-full">
                     <Sparkles className="h-3.5 w-3.5" />
