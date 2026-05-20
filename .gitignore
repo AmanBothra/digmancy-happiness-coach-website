@@ -3,3 +3,7 @@ dist
 dist/
 .next/
 out/
+.env
+.env*.local
+data/*.sqlite
+data/*.sqlite-*

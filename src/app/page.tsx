@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -47,10 +49,10 @@ import heroPortrait from "@/assets/aastha-hero.jpg";
 import videoPreview from "@/assets/video-preview-new.jpg";
 
 import Countdown from "@/components/aastha/Countdown";
-import RegistrationForm from "@/components/aastha/RegistrationForm";
 import SectionDivider from "@/components/aastha/SectionDivider";
 import bonusProductive from "@/assets/bonus-productive-day.jpg";
 import bonusJournal from "@/assets/bonus-happiness-journal.jpg";
+import { REGISTRATION_URL } from "@/lib/registration";
 
 const Index = () => {
   const autoplayPlugin = useRef(Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }));
@@ -70,8 +72,8 @@ const Index = () => {
     month: "long",
   });
 
-  const scrollToRegister = () => {
-    document.getElementById("register")?.scrollIntoView({ behavior: "smooth" });
+  const openRegistration = () => {
+    window.location.href = REGISTRATION_URL;
   };
 
   const [videoPlaying, setVideoPlaying] = useState(false);
@@ -167,7 +169,7 @@ const Index = () => {
             <span className="text-primary-foreground/80">{dateLabel} · 11:00 AM IST</span>
           </p>
           <button
-            onClick={scrollToRegister}
+            onClick={openRegistration}
             className="inline-flex items-center gap-2 rounded-full bg-cta text-cta-foreground hover:bg-cta-glow transition-smooth tracking-wide px-4 py-1.5 font-semibold shadow-cta"
           >
             Save my seat →
@@ -191,7 +193,7 @@ const Index = () => {
         <div className="container py-8 lg:py-12">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-12">
-            <img src={logo} alt="AASTHA" className="h-12 w-12 object-contain" />
+            <img src={logo.src} alt="AASTHA" className="h-12 w-12 object-contain" />
           </div>
 
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-start">
@@ -259,7 +261,7 @@ const Index = () => {
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button variant="cta" size="xl" onClick={scrollToRegister}>
+                <Button variant="cta" size="xl" onClick={openRegistration}>
                   Save My Seat — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
                 </Button>
               </div>
@@ -273,7 +275,7 @@ const Index = () => {
                   className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-primary-glow/20 via-cta/10 to-primary-glow/20 blur-2xl opacity-70"
                 />
                 <img
-                  src={heroPortrait}
+                  src={heroPortrait.src}
                   alt="Aastha Tatia"
                   className="relative rounded-2xl shadow-elegant w-full object-cover object-top aspect-[4/5] border border-white/40"
                 />
@@ -311,7 +313,7 @@ const Index = () => {
                 {!videoPlaying ? (
                   <>
                     <img
-                      src={videoPreview}
+                      src={videoPreview.src}
                       alt="Aastha Tatia invitation"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-smooth duration-700"
                       style={{ objectPosition: "center 20%" }}
@@ -343,7 +345,7 @@ const Index = () => {
             </div>
 
             <div className="mt-10 flex flex-col items-center gap-3">
-              <Button variant="cta" size="xl" onClick={scrollToRegister} className="shadow-cta">
+              <Button variant="cta" size="xl" onClick={openRegistration} className="shadow-cta">
                 Reserve My Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
               </Button>
               <p className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
@@ -432,7 +434,7 @@ const Index = () => {
           <div className="mt-14 text-center">
             <p className="font-serif text-2xl italic text-primary">Sounds familiar?</p>
             <p className="mt-2 text-muted-foreground">This masterclass will be your turning point.</p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
               Reserve Your Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
             </Button>
           </div>
@@ -513,7 +515,7 @@ const Index = () => {
               <br />
               You will not walk away the same leader."
             </p>
-            <Button variant="cta" size="xl" className="mt-8" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" className="mt-8" onClick={openRegistration}>
               Yes, I want these secrets <ArrowRight />
             </Button>
           </div>
@@ -644,7 +646,7 @@ const Index = () => {
           </Carousel>
 
           <div className="mt-12 text-center">
-            <Button variant="cta" size="xl" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" onClick={openRegistration}>
               I'm ready to be next <ArrowRight />
             </Button>
           </div>
@@ -689,7 +691,7 @@ const Index = () => {
             <p className="font-serif text-xl italic text-primary pt-2 mt-6">
               If something in you resonated, don't ignore it.
             </p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
               Reserve My Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
             </Button>
           </div>
@@ -705,7 +707,7 @@ const Index = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-brand opacity-[0.07] rounded-3xl blur-2xl" aria-hidden />
               <img
-                src={portrait}
+                src={portrait.src}
                 alt="Aastha Tatia, Happiness Coach for Leaders"
                 width={896}
                 height={1152}
@@ -767,7 +769,7 @@ const Index = () => {
                 </blockquote>
               </figure>
 
-              <Button variant="cta" size="xl" className="mt-8" onClick={scrollToRegister}>
+              <Button variant="cta" size="xl" className="mt-8" onClick={openRegistration}>
                 Learn from Aastha, Register Now <ArrowRight />
               </Button>
             </div>
@@ -802,14 +804,14 @@ const Index = () => {
                 title: "8 Ways to Have a Super Productive Day",
                 value: "₹4,999",
                 copy: "Move beyond the uncertainty between planning and doing — and turn your day into a productive, fulfilling one.",
-                image: bonusProductive,
+                image: bonusProductive.src,
               },
               {
                 tag: "Bonus 02",
                 title: "Start Your Journey with the Happiness Journal",
                 value: "₹4,999",
                 copy: "A simple, straightforward tool to help you experience a real shift wherever you're stuck right now.",
-                image: bonusJournal,
+                image: bonusJournal.src,
               },
             ].map((b) => (
               <div
@@ -850,7 +852,7 @@ const Index = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <Button variant="cta" size="xl" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" onClick={openRegistration}>
               Unlock My Bonuses <ArrowRight />
             </Button>
           </div>
@@ -920,7 +922,7 @@ const Index = () => {
             <p className="font-serif text-xl italic text-primary">
               Still have doubts? Join in to get the answers.
             </p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
               Register Now <ArrowRight />
             </Button>
           </div>
@@ -952,7 +954,7 @@ const Index = () => {
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <Countdown target={webinarDate} variant="dark" />
-            <Button variant="cta" size="xl" onClick={scrollToRegister}>
+            <Button variant="cta" size="xl" onClick={openRegistration}>
               Don't miss out — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
             </Button>
             <p className="flex items-center gap-2 text-xs text-white/50">
@@ -967,7 +969,7 @@ const Index = () => {
       <footer className="py-10 border-t border-border bg-background">
         <div className="container flex flex-col items-center gap-6 text-sm text-muted-foreground sm:flex-row sm:justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="AASTHA" className="h-9 w-9 object-contain" />
+            <img src={logo.src} alt="AASTHA" className="h-9 w-9 object-contain" />
           </div>
           <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             <a href="/privacy-policy" className="hover:text-primary transition-smooth">

@@ -1,8 +1,10 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
 import { ArrowRight, Mail, Phone, Send, ShieldCheck, User } from "lucide-react";
+import { REGISTRATION_URL } from "@/lib/registration";
 
 interface RegistrationFormProps {
   variant?: "hero" | "panel";
@@ -18,22 +20,8 @@ const RegistrationForm = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone) {
-      toast({
-        title: "Please fill in every field",
-        description: "We need all details to confirm your seat.",
-      });
-      return;
-    }
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast({
-        title: "Your seat is reserved 🎉",
-        description: "Check your inbox for the live webinar link.",
-      });
-      setForm({ name: "", email: "", phone: "" });
-    }, 900);
+    window.location.href = REGISTRATION_URL;
   };
 
   const isHero = variant === "hero";

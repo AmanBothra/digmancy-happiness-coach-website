@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/aastha-logo.png";
 
@@ -7,11 +7,11 @@ const RefundPolicy = () => {
     <main className="min-h-screen bg-background font-sans text-foreground">
       <header className="border-b border-border bg-background">
         <div className="container flex items-center justify-between py-4">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="AASTHA" className="h-10 w-10 object-contain" />
+          <Link href="/" className="flex items-center gap-3">
+            <img src={logo.src} alt="AASTHA" className="h-10 w-10 object-contain" />
           </Link>
           <Link
-            to="/"
+            href="/"
             className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary-glow transition-smooth"
           >
             <ArrowLeft className="h-4 w-4" /> Back to home
