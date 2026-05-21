@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Award,
@@ -53,24 +53,23 @@ import SectionDivider from "@/components/aastha/SectionDivider";
 import bonusProductive from "@/assets/bonus-productive-day.jpg";
 import bonusJournal from "@/assets/bonus-happiness-journal.jpg";
 import { REGISTRATION_URL } from "@/lib/registration";
+import {
+  formatWebinarDateLabel,
+  getCurrentYearInIst,
+  getNextSaturdayWebinarDate,
+} from "@/lib/webinar-date";
 
 const Index = () => {
   const autoplayPlugin = useRef(Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }));
-  // Webinar date: next Saturday at 11:00 AM IST
-  const webinarDate = useMemo(() => {
-    const d = new Date();
-    const day = d.getDay();
-    const diff = (6 - day + 7) % 7 || 7;
-    d.setDate(d.getDate() + diff);
-    d.setHours(11, 0, 0, 0);
-    return d;
+  const [webinarDate, setWebinarDate] = useState<Date | null>(null);
+  const [footerYear, setFooterYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setWebinarDate(getNextSaturdayWebinarDate());
+    setFooterYear(getCurrentYearInIst());
   }, []);
 
-  const dateLabel = webinarDate.toLocaleDateString("en-IN", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
+  const dateLabel = webinarDate ? formatWebinarDateLabel(webinarDate) : "Next Saturday";
 
   const openRegistration = () => {
     window.location.href = REGISTRATION_URL;
@@ -992,7 +991,7 @@ const Index = () => {
             </a>
           </nav>
           <p className="text-xs text-center">
-            © {new Date().getFullYear()} Aastha Tatia · Authentic Leadership Circle
+            © {footerYear ? `${footerYear} ` : ""}Aastha Tatia · Authentic Leadership Circle
           </p>
         </div>
       </footer>

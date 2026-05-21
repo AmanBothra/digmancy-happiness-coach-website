@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface CountdownProps {
-  target: Date;
+  target: Date | null;
   variant?: "light" | "dark" | "hero" | "ring";
 }
 
@@ -36,24 +36,28 @@ const FlipNumber = ({ value, dark }: { value: string; dark: boolean }) => {
 };
 
 const Countdown = ({ target, variant = "dark" }: CountdownProps) => {
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
+    const updateNow = () => setNow(Date.now());
+
+    updateNow();
+    const id = setInterval(updateNow, 1000);
+
     return () => clearInterval(id);
   }, []);
 
-  const diff = Math.max(0, target.getTime() - now);
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  const diff = target === null || now === null ? null : Math.max(0, target.getTime() - now);
+  const days = diff === null ? 0 : Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = diff === null ? 0 : Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = diff === null ? 0 : Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = diff === null ? 0 : Math.floor((diff / 1000) % 60);
 
   const items = [
-    { label: "Days", value: pad(days) },
-    { label: "Hours", value: pad(hours) },
-    { label: "Minutes", value: pad(minutes) },
-    { label: "Seconds", value: pad(seconds) },
+    { label: "Days", value: diff === null ? "--" : pad(days) },
+    { label: "Hours", value: diff === null ? "--" : pad(hours) },
+    { label: "Minutes", value: diff === null ? "--" : pad(minutes) },
+    { label: "Seconds", value: diff === null ? "--" : pad(seconds) },
   ];
 
   /* ───────── HERO variant — large, prominent, subtle pulse ───────── */
@@ -99,13 +103,13 @@ const Countdown = ({ target, variant = "dark" }: CountdownProps) => {
   /* ───────── RING variant — circular progress ring per unit ───────── */
   if (variant === "ring") {
     const totals = [
-      { ...items[0], pct: Math.min(1, days / 30) },
-      { ...items[1], pct: hours / 24 },
-      { ...items[2], pct: minutes / 60 },
-      { ...items[3], pct: seconds / 60 },
+      { ...items[0], pct: diff === null ? 0 : Math.min(1, days / 30) },
+      { ...items[1], pct: diff === null ? 0 : hours / 24 },
+      { ...items[2], pct: diff === null ? 0 : minutes / 60 },
+      { ...items[3], pct: diff === null ? 0 : seconds / 60 },
     ];
-    const totalSecs = days * 86400 + hours * 3600 + minutes * 60 + seconds;
-    const urgent = totalSecs > 0 && totalSecs < 3600 * 24;
+    const totalSecs = diff === null ? null : days * 86400 + hours * 3600 + minutes * 60 + seconds;
+    const urgent = totalSecs !== null && totalSecs > 0 && totalSecs < 3600 * 24;
 
     return (
       <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
@@ -115,7 +119,7 @@ const Countdown = ({ target, variant = "dark" }: CountdownProps) => {
             Time remaining
           </span>
           <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground tabular-nums">
-            Live in {days > 0 ? `${days}d ${hours}h` : `${hours}h ${minutes}m`}
+            {diff === null ? "Live soon" : `Live in ${days > 0 ? `${days}d ${hours}h` : `${hours}h ${minutes}m`}`}
           </span>
         </div>
 
