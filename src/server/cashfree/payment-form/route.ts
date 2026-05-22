@@ -6,9 +6,6 @@ import {
   handleCashfreePaymentFormWebhook,
 } from "@/lib/server/payment-form-webhook";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 export async function POST(request: Request) {
   const rawBody = await request.text();
   const timestamp = request.headers.get("x-webhook-timestamp");
