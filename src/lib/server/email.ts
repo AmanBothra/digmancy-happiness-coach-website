@@ -12,6 +12,13 @@ type SendMailResult = {
   messageId?: string;
 };
 
+const DEFAULT_SMTP_HOST = "smtpout.secureserver.net";
+const DEFAULT_SMTP_PORT = 465;
+const DEFAULT_SMTP_SECURE = true;
+const DEFAULT_SMTP_USER = "connect@authenticleadershipcircle.com";
+const DEFAULT_SMTP_FROM_EMAIL = "connect@authenticleadershipcircle.com";
+const DEFAULT_SMTP_FROM_NAME = "Authentic Leadership Circle";
+
 export type SeminarEmailInput = {
   to: string;
   customerName?: string | null;
@@ -73,17 +80,17 @@ async function sendMail({
   html: string;
 }) {
   const transporter = nodemailer.createTransport({
-    host: requiredEnv("SMTP_HOST"),
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: parseBoolean(process.env.SMTP_SECURE),
+    host: process.env.SMTP_HOST || DEFAULT_SMTP_HOST,
+    port: Number(process.env.SMTP_PORT || DEFAULT_SMTP_PORT),
+    secure: process.env.SMTP_SECURE ? parseBoolean(process.env.SMTP_SECURE) : DEFAULT_SMTP_SECURE,
     auth: {
-      user: requiredEnv("SMTP_USER"),
+      user: process.env.SMTP_USER || DEFAULT_SMTP_USER,
       pass: requiredEnv("SMTP_PASS"),
     },
   });
 
-  const fromName = process.env.SMTP_FROM_NAME || "Authentic Leadership Circle";
-  const fromEmail = requiredEnv("SMTP_FROM_EMAIL");
+  const fromName = process.env.SMTP_FROM_NAME || DEFAULT_SMTP_FROM_NAME;
+  const fromEmail = process.env.SMTP_FROM_EMAIL || DEFAULT_SMTP_FROM_EMAIL;
   const result = await transporter.sendMail({
     from: `"${fromName.replace(/"/g, "'")}" <${fromEmail}>`,
     to,

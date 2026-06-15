@@ -16,31 +16,27 @@ npm test
 
 ## Environment
 
-Copy `.env.example` to `.env.local` for local development.
+Copy `.env.example` to `.env.local` for local development. Production defaults
+are hardcoded for this cPanel layout:
 
-- `SUPABASE_URL` and `SUPABASE_SECRET_KEY`: server-only Supabase database access.
-- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: public
-  Supabase project metadata if a future browser client needs it.
-- `REGISTRATION_AMOUNT`: registration price used for Cashfree order creation.
-  Defaults to `99`.
-- `CASHFREE_CLIENT_ID` and `CASHFREE_CLIENT_SECRET`: Cashfree PG credentials for
-  creating orders. `CASHFREE_PG_SECRET_KEY` is still supported for webhook
-  signature verification/backward compatibility.
-- `CASHFREE_API_VERSION`: Cashfree PG API version header. Defaults to
-  `2025-01-01`.
-- `APP_ENV`: set to `development` or `production` to choose which public base
-  URL is sent to Cashfree.
-- `APP_BASE_URL_DEVELOPMENT`: public ngrok URL used for Cashfree return and
-  webhook URLs when `APP_ENV=development`.
-- `APP_BASE_URL_PRODUCTION`: production site URL used when `APP_ENV=production`.
-  Defaults to `https://authenticleadershipcircle.com`.
-- `APP_BASE_URL`: fallback when `APP_ENV` is not `development` or `production`.
-- `SMTP_*`: email sender settings.
-- `WHATSAPP_API_URL`, `WHATSAPP_API_KEY`, and `WHATSAPP_INSTANCE_ID`: WhatsApp
-  provider endpoint, JWT bearer token, and instance id. The sender posts
-  `{ "to": "...", "message": "..." }` with `Authorization: Bearer <token>`.
-- `WEBINAR_*`: date/time/joining-link values used in reminder messages.
+- Frontend: `https://authenticleadershipcircle.com`
+- Backend/API: `https://authenticleadershipcircle.com/digmancy-backend`
+- Supabase URL: `https://hhzpeldnktcqcvwyhdjw.supabase.co`
+- SMTP host/sender: GoDaddy `connect@authenticleadershipcircle.com`
+- WhatsApp endpoint/instance: current website provider endpoint
+
+The env file should mostly contain secrets and business values:
+
+- `WEBINAR_*`: date/time/joining-link values used on the site and in reminders.
+- `REGISTRATION_AMOUNT` and `REGISTRATION_COMPARE_AT_AMOUNT`: payment price
+  labels and Cashfree order amount.
+- `SUPABASE_SECRET_KEY`: server-only Supabase database access.
+- `CASHFREE_CLIENT_ID`, `CASHFREE_CLIENT_SECRET`, and `CASHFREE_PG_SECRET_KEY`:
+  Cashfree order creation and webhook verification secrets.
+- `SMTP_PASS`: email password.
+- `WHATSAPP_API_KEY`: WhatsApp provider bearer token.
 - `CRON_SECRET`: required in production for `/api/notifications/process-reminders`.
+- `APP_BASE_URL_DEVELOPMENT`: optional ngrok URL for local Cashfree testing.
 
 ## Supabase Setup
 

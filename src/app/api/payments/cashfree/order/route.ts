@@ -5,7 +5,7 @@ import {
   getCashfreeMode,
 } from "@/lib/server/cashfree-order";
 import { createRegistrationDatabase } from "@/lib/server/registration-db";
-import { getAppBaseUrl } from "@/lib/server/url";
+import { getBackendBaseUrl, getFrontendBaseUrl } from "@/lib/server/url";
 import { getWebinarDetails } from "@/lib/server/webinar";
 import { normalizeIndianMobile } from "@/lib/server/phone";
 import { getRegistrationPrice } from "@/lib/registration-price";
@@ -31,7 +31,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const appBaseUrl = getAppBaseUrl(request);
+  const frontendBaseUrl = getFrontendBaseUrl(request);
+  const backendBaseUrl = getBackendBaseUrl(request);
   const orderId = createLocalOrderId();
   const webinar = getWebinarDetails();
   const db = createRegistrationDatabase();
@@ -46,8 +47,8 @@ export async function POST(request: Request) {
       customerName: validation.value.name,
       customerEmail: validation.value.email,
       customerPhone: validation.value.mobile,
-      returnUrl: `${appBaseUrl}/payment-status?order_id=${encodeURIComponent(orderId)}`,
-      notifyUrl: `${appBaseUrl}/api/webhooks/cashfree/payments`,
+      returnUrl: `${frontendBaseUrl}/payment-status?order_id=${encodeURIComponent(orderId)}`,
+      notifyUrl: `${backendBaseUrl}/api/webhooks/cashfree/payments`,
     });
 
     if (!cashfreeOrder.payment_session_id) {

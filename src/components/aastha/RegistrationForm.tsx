@@ -28,7 +28,7 @@ const RegistrationForm = ({
     setSubmitting(true);
 
     try {
-      const response = await fetch("/api/payments/cashfree/order", {
+      const response = await fetch(`${getApiBasePath()}/api/payments/cashfree/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,4 +212,17 @@ function loadScript(src: string) {
     script.onerror = () => reject(new Error("Cashfree checkout script failed to load."));
     document.head.appendChild(script);
   });
+}
+
+function getApiBasePath() {
+  const configured = process.env.NEXT_PUBLIC_API_BASE_PATH?.trim().replace(/\/$/, "");
+  if (configured) {
+    return configured;
+  }
+
+  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+    return "";
+  }
+
+  return "/digmancy-backend";
 }

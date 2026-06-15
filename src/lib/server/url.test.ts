@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { getAppBaseUrl } from "./url";
+import { getAppBaseUrl, getBackendBaseUrl, getFrontendBaseUrl } from "./url";
 
 const ORIGINAL_ENV = process.env;
 
@@ -70,6 +70,26 @@ describe("getAppBaseUrl", () => {
 
     expect(getAppBaseUrl(new Request("http://localhost:3000/api/payments/cashfree/order"))).toBe(
       "https://node-env-dev.example.test",
+    );
+  });
+
+  it("supports split frontend and backend production URLs", () => {
+    process.env = {
+      ...ORIGINAL_ENV,
+      APP_ENV: "production",
+      NODE_ENV: "development",
+      APP_FRONTEND_BASE_URL_PRODUCTION: "https://authenticleadershipcircle.com/",
+      APP_BACKEND_BASE_URL_PRODUCTION: "https://authenticleadershipcircle.com/digmancy-backend/",
+      APP_BASE_URL_PRODUCTION: "https://legacy.example.test",
+    };
+
+    const request = new Request(
+      "https://authenticleadershipcircle.com/digmancy-backend/api/payments/cashfree/order",
+    );
+
+    expect(getFrontendBaseUrl(request)).toBe("https://authenticleadershipcircle.com");
+    expect(getBackendBaseUrl(request)).toBe(
+      "https://authenticleadershipcircle.com/digmancy-backend",
     );
   });
 });

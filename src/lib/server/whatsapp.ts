@@ -1,6 +1,12 @@
 import { optionalEnv } from "./env";
 import { normalizeIndianMobile } from "./phone";
 
+const DEFAULT_WHATSAPP_API_URL =
+  "http://209.182.233.106:7545/api/admin/whatsapp/send-message";
+const DEFAULT_WHATSAPP_INSTANCE_ID = "website";
+const DEFAULT_WHATSAPP_AUTH_HEADER = "Authorization";
+const DEFAULT_WHATSAPP_AUTH_SCHEME = "Bearer";
+
 export type WhatsAppMessageInput = {
   to: string;
   message: string;
@@ -24,8 +30,8 @@ export async function sendWhatsappMessage({
   }
 
   const apiUrl = buildWhatsappApiUrl(
-    optionalEnv("WHATSAPP_API_URL"),
-    optionalEnv("WHATSAPP_INSTANCE_ID"),
+    optionalEnv("WHATSAPP_API_URL") || DEFAULT_WHATSAPP_API_URL,
+    optionalEnv("WHATSAPP_INSTANCE_ID") || DEFAULT_WHATSAPP_INSTANCE_ID,
   );
   const apiKey = optionalEnv("WHATSAPP_API_KEY");
 
@@ -36,8 +42,8 @@ export async function sendWhatsappMessage({
     };
   }
 
-  const authHeader = process.env.WHATSAPP_API_AUTH_HEADER || "Authorization";
-  const authScheme = process.env.WHATSAPP_API_AUTH_SCHEME || "Bearer";
+  const authHeader = process.env.WHATSAPP_API_AUTH_HEADER || DEFAULT_WHATSAPP_AUTH_HEADER;
+  const authScheme = process.env.WHATSAPP_API_AUTH_SCHEME || DEFAULT_WHATSAPP_AUTH_SCHEME;
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     [authHeader]: authScheme ? `${authScheme} ${apiKey}` : apiKey,
