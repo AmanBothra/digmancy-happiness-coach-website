@@ -7,12 +7,15 @@ export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   const configuredSecret = process.env.CRON_SECRET;
-  if (configuredSecret) {
-    const auth = request.headers.get("authorization");
-    const directSecret = request.headers.get("x-cron-secret");
-    if (auth !== `Bearer ${configuredSecret}` && directSecret !== configuredSecret) {
-      return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
-    }
+  if (!configuredSecret && isProductionRuntime()) {
+    return NextResponse.json(
+      { ok: false, error: "cron_secret_not_configured" },
+      { status: 500 },
+    );
+  }
+
+  if (configuredSecret && !hasValidCronSecret(request, configuredSecret)) {
+    return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
   }
 
   const db = createRegistrationDatabase();
@@ -29,4 +32,14 @@ export async function POST(request: Request) {
     sent: results.filter((result) => result.sent).length,
     failed: results.filter((result) => result.error).length,
   });
+}
+
+function hasValidCronSecret(request: Request, configuredSecret: string) {
+  const auth = request.headers.get("authorization");
+  const directSecret = request.headers.get("x-cron-secret");
+  return auth === `Bearer ${configuredSecret}` || directSecret === configuredSecret;
+}
+
+function isProductionRuntime() {
+  return process.env.APP_ENV === "production" || process.env.NODE_ENV === "production";
 }

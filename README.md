@@ -40,7 +40,7 @@ Copy `.env.example` to `.env.local` for local development.
   provider endpoint, JWT bearer token, and instance id. The sender posts
   `{ "to": "...", "message": "..." }` with `Authorization: Bearer <token>`.
 - `WEBINAR_*`: date/time/joining-link values used in reminder messages.
-- `CRON_SECRET`: optional bearer token for `/api/notifications/process-reminders`.
+- `CRON_SECRET`: required in production for `/api/notifications/process-reminders`.
 
 ## Supabase Setup
 
@@ -67,12 +67,27 @@ before recording payment status or sending notifications.
 
 ## Reminder Automation
 
-Call this route from a cron job every few minutes:
+Paid Cashfree webhooks queue reminder rows in Supabase. The cron job only sends
+rows whose `scheduled_for` time is due, so it is safe to run every few minutes.
 
-```text
-POST <APP_BASE_URL>/api/notifications/process-reminders
-Authorization: Bearer <CRON_SECRET>
+Call this route from cPanel cron every 5 minutes:
+
+```bash
+*/5 * * * * /usr/bin/curl -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>" >/dev/null 2>&1
 ```
 
-It sends due Friday/Saturday/Sunday reminders through email and WhatsApp when
-the provider credentials are configured.
+For `WEBINAR_START_AT_ISO=2026-06-28T05:30:00.000Z`, the app queues email and
+WhatsApp reminders for:
+
+- 2026-06-26 11:00 AM IST: two days before
+- 2026-06-27 10:00 AM IST: one day before
+- 2026-06-28 10:00 AM IST: one hour before
+
+Manual test:
+
+```bash
+curl -i -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>"
+```
+
+It sends due reminders through email and WhatsApp when Supabase tables and
+provider credentials are configured.
