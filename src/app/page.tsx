@@ -49,30 +49,36 @@ import heroPortrait from "@/assets/aastha-hero.jpg";
 import videoPreview from "@/assets/video-preview-new.jpg";
 
 import Countdown from "@/components/aastha/Countdown";
+import RegistrationForm from "@/components/aastha/RegistrationForm";
 import SectionDivider from "@/components/aastha/SectionDivider";
 import bonusProductive from "@/assets/bonus-productive-day.jpg";
 import bonusJournal from "@/assets/bonus-happiness-journal.jpg";
-import { REGISTRATION_URL } from "@/lib/registration";
 import {
-  formatWebinarDateLabel,
   getCurrentYearInIst,
-  getNextSaturdayWebinarDate,
+  getWebinarDateDetails,
+  type WebinarDateDetails,
 } from "@/lib/webinar-date";
+import {
+  getRegistrationCompareAtPriceLabel,
+  getRegistrationPriceLabel,
+} from "@/lib/registration-price";
 
 const Index = () => {
   const autoplayPlugin = useRef(Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }));
-  const [webinarDate, setWebinarDate] = useState<Date | null>(null);
-  const [footerYear, setFooterYear] = useState<number | null>(null);
+  const [webinarDetails] = useState<WebinarDateDetails>(() => getWebinarDateDetails());
+  const [footerYear] = useState(() => getCurrentYearInIst());
 
-  useEffect(() => {
-    setWebinarDate(getNextSaturdayWebinarDate());
-    setFooterYear(getCurrentYearInIst());
-  }, []);
-
-  const dateLabel = webinarDate ? formatWebinarDateLabel(webinarDate) : "Next Saturday";
+  const webinarDate = webinarDetails.startAt;
+  const dateLabel = webinarDetails.dateLabel;
+  const timeLabel = webinarDetails.timeLabel;
+  const registrationPrice = getRegistrationPriceLabel();
+  const compareAtPrice = getRegistrationCompareAtPriceLabel();
 
   const openRegistration = () => {
-    window.location.href = REGISTRATION_URL;
+    document.getElementById("register")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   const [videoPlaying, setVideoPlaying] = useState(false);
@@ -165,7 +171,7 @@ const Index = () => {
             <span className="h-1.5 w-1.5 rounded-full bg-cta animate-pulse-soft" />
             <span className="tracking-wide">Live Masterclass</span>
             <span className="text-primary-foreground/40">·</span>
-            <span className="text-primary-foreground/80">{dateLabel} · 11:00 AM IST</span>
+            <span className="text-primary-foreground/80">{dateLabel} · {timeLabel}</span>
           </p>
           <button
             onClick={openRegistration}
@@ -241,7 +247,7 @@ const Index = () => {
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Clock className="h-4 w-4 text-primary-glow" />
-                  11:00 AM IST · 90 mins
+                  {timeLabel} · 2 hours
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Video className="h-4 w-4 text-primary-glow" />
@@ -261,7 +267,8 @@ const Index = () => {
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Button variant="cta" size="xl" onClick={openRegistration}>
-                  Save My Seat — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
+                  Save My Seat — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
+                  {registrationPrice} Only <ArrowRight />
                 </Button>
               </div>
             </div>
@@ -344,9 +351,7 @@ const Index = () => {
             </div>
 
             <div className="mt-10 flex flex-col items-center gap-3">
-              <Button variant="cta" size="xl" onClick={openRegistration} className="shadow-cta">
-                Reserve My Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
-              </Button>
+              <RegistrationForm variant="panel" ctaLabel={`Reserve My Spot — Pay ${registrationPrice}`} />
               <p className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
                 Limited Seats · Live Masterclass
               </p>
@@ -434,7 +439,8 @@ const Index = () => {
             <p className="font-serif text-2xl italic text-primary">Sounds familiar?</p>
             <p className="mt-2 text-muted-foreground">This masterclass will be your turning point.</p>
             <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
-              Reserve Your Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
+              Reserve Your Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
+              {registrationPrice} Only <ArrowRight />
             </Button>
           </div>
         </div>
@@ -691,7 +697,8 @@ const Index = () => {
               If something in you resonated, don't ignore it.
             </p>
             <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
-              Reserve My Spot — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
+              Reserve My Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
+              {registrationPrice} Only <ArrowRight />
             </Button>
           </div>
         </div>
@@ -954,7 +961,8 @@ const Index = () => {
           <div className="mt-12 flex flex-col items-center gap-6">
             <Countdown target={webinarDate} variant="dark" />
             <Button variant="cta" size="xl" onClick={openRegistration}>
-              Don't miss out — <s className="opacity-60 mr-1 font-normal">₹999</s> ₹99 Only <ArrowRight />
+              Don't miss out — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
+              {registrationPrice} Only <ArrowRight />
             </Button>
             <p className="flex items-center gap-2 text-xs text-white/50">
               <ShieldCheck className="h-3.5 w-3.5" />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface CountdownProps {
   target: Date | null;
@@ -36,7 +36,7 @@ const FlipNumber = ({ value, dark }: { value: string; dark: boolean }) => {
 };
 
 const Countdown = ({ target, variant = "dark" }: CountdownProps) => {
-  const [now, setNow] = useState<number | null>(null);
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     const updateNow = () => setNow(Date.now());
@@ -47,7 +47,7 @@ const Countdown = ({ target, variant = "dark" }: CountdownProps) => {
     return () => clearInterval(id);
   }, []);
 
-  const diff = target === null || now === null ? null : Math.max(0, target.getTime() - now);
+  const diff = target === null ? null : Math.max(0, target.getTime() - now);
   const days = diff === null ? 0 : Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = diff === null ? 0 : Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = diff === null ? 0 : Math.floor((diff / (1000 * 60)) % 60);
