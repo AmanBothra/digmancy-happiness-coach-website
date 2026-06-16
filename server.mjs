@@ -22,13 +22,5 @@ app
   });
 
 function getPort() {
-  if (process.env.PORT) {
-    return Number(process.env.PORT);
-  }
-
-  if (dev) {
-    return 3000;
-  }
-
-  throw new Error("PORT environment variable is required in production");
+  return Number(process.env.PORT || 3000);
 }
