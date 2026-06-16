@@ -73,6 +73,22 @@ describe("getAppBaseUrl", () => {
     );
   });
 
+  it("defaults production frontend and backend URLs to the website root", () => {
+    process.env = {
+      ...ORIGINAL_ENV,
+      APP_ENV: "production",
+      NODE_ENV: "development",
+      APP_FRONTEND_BASE_URL_PRODUCTION: "",
+      APP_BACKEND_BASE_URL_PRODUCTION: "",
+      APP_BASE_URL_PRODUCTION: "",
+    };
+
+    const request = new Request("https://authenticleadershipcircle.com/api/payments/cashfree/order");
+
+    expect(getFrontendBaseUrl(request)).toBe("https://authenticleadershipcircle.com");
+    expect(getBackendBaseUrl(request)).toBe("https://authenticleadershipcircle.com");
+  });
+
   it("supports split frontend and backend production URLs", () => {
     process.env = {
       ...ORIGINAL_ENV,

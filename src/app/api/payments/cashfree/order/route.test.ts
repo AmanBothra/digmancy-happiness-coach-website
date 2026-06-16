@@ -26,8 +26,7 @@ describe("POST /api/payments/cashfree/order", () => {
     vi.clearAllMocks();
     process.env.APP_ENV = "production";
     process.env.APP_FRONTEND_BASE_URL_PRODUCTION = "https://authenticleadershipcircle.com";
-    process.env.APP_BACKEND_BASE_URL_PRODUCTION =
-      "https://authenticleadershipcircle.com/digmancy-backend";
+    process.env.APP_BACKEND_BASE_URL_PRODUCTION = "https://authenticleadershipcircle.com";
     process.env.REGISTRATION_AMOUNT = "149";
     process.env.WEBINAR_START_AT_ISO = "2026-06-28T05:30:00.000Z";
     process.env.WEBINAR_DISPLAY_DATE = "Sunday 28 June";
@@ -80,8 +79,7 @@ describe("POST /api/payments/cashfree/order", () => {
         customerPhone: "919999999999",
         returnUrl:
           "https://authenticleadershipcircle.com/payment-status?order_id=alc_test_atomic_1",
-        notifyUrl:
-          "https://authenticleadershipcircle.com/digmancy-backend/api/webhooks/cashfree/payments",
+        notifyUrl: "https://authenticleadershipcircle.com/api/webhooks/cashfree/payments",
       }),
     );
     expect(mocks.recordInitiatedCashfreeOrder).toHaveBeenCalledWith(

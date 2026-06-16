@@ -1,5 +1,5 @@
 const PRODUCTION_BASE_URL = "https://authenticleadershipcircle.com";
-const PRODUCTION_BACKEND_BASE_URL = "https://authenticleadershipcircle.com/digmancy-backend";
+const PRODUCTION_BACKEND_BASE_URL = PRODUCTION_BASE_URL;
 
 export function getAppBaseUrl(request: Request) {
   return getFrontendBaseUrl(request);

@@ -216,13 +216,13 @@ function loadScript(src: string) {
 
 function getApiBasePath() {
   const configured = process.env.NEXT_PUBLIC_API_BASE_PATH?.trim().replace(/\/$/, "");
-  if (configured) {
+  if (configured && configured !== "/") {
     return configured;
   }
 
-  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+  if (typeof window !== "undefined") {
     return "";
   }
 
-  return "/digmancy-backend";
+  return "";
 }
