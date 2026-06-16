@@ -1,18 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { CheckCircle2, Clock, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const dynamic = "force-dynamic";
+export default function PaymentStatusPage() {
+  const [orderId, setOrderId] = useState<string | null>(null);
 
-type PaymentStatusPageProps = {
-  searchParams: Promise<{
-    order_id?: string;
-  }>;
-};
-
-export default async function PaymentStatusPage({ searchParams }: PaymentStatusPageProps) {
-  const params = await searchParams;
-  const orderId = params.order_id;
+  useEffect(() => {
+    setOrderId(new URLSearchParams(window.location.search).get("order_id"));
+  }, []);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
