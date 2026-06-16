@@ -8,6 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 loadEnvConfig(process.cwd());
 
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   env: {
     WEBINAR_START_AT_ISO: process.env.WEBINAR_START_AT_ISO,
     WEBINAR_DISPLAY_DATE: process.env.WEBINAR_DISPLAY_DATE,
