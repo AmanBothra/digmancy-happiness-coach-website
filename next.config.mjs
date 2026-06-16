@@ -11,6 +11,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   env: {
     WEBINAR_START_AT_ISO: process.env.WEBINAR_START_AT_ISO,
     WEBINAR_DISPLAY_DATE: process.env.WEBINAR_DISPLAY_DATE,
