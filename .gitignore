@@ -4,6 +4,7 @@ dist/
 .next/
 out/
 .env
+.env.local
 .env*.local
 data/*.sqlite
 data/*.sqlite-*

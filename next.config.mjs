@@ -1,9 +1,8 @@
-import type { NextConfig } from "next";
 import { loadEnvConfig } from "@next/env";
 
 loadEnvConfig(process.cwd());
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   env: {
     WEBINAR_START_AT_ISO: process.env.WEBINAR_START_AT_ISO,
     WEBINAR_DISPLAY_DATE: process.env.WEBINAR_DISPLAY_DATE,

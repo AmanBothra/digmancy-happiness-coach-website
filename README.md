@@ -67,7 +67,7 @@ In cPanel, create a Node.js app:
 Then install and build on the server:
 
 ```bash
-npm ci
+npm ci --include=dev
 npm run build
 ```
 
