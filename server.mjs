@@ -7,13 +7,19 @@ const port = getPort();
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-await app.prepare();
-
-createServer((req, res) => {
-  handle(req, res);
-}).listen(port, () => {
-  console.log(`Ready on port ${port}`);
-});
+app
+  .prepare()
+  .then(() => {
+    createServer((req, res) => {
+      handle(req, res);
+    }).listen(port, () => {
+      console.log(`Ready on port ${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
 
 function getPort() {
   if (process.env.PORT) {
