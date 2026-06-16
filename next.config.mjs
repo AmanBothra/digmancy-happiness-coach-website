@@ -8,6 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 loadEnvConfig(process.cwd());
 
 const nextConfig = {
+  experimental: {
+    cpus: 1,
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
