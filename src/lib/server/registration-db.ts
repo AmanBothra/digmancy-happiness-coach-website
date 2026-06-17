@@ -18,6 +18,8 @@ export type SeminarRegistration = {
   name: string;
   email: string;
   mobile: string;
+  city: string | null;
+  profession: string | null;
   amount: number;
   currency: string;
   status: RegistrationStatus;
@@ -55,6 +57,8 @@ export type CreatePendingRegistrationInput = {
   name: string;
   email: string;
   mobile: string;
+  city: string;
+  profession: string;
   amount: number;
   currency: string;
   webinarStartAt: Date;
@@ -146,6 +150,8 @@ export function createRegistrationDatabase(
           name: input.name,
           email: input.email,
           mobile: normalizeRegistrationMobile(input.mobile),
+          city: input.city,
+          profession: input.profession,
           amount: input.amount,
           currency: input.currency,
           status: "pending_payment",
@@ -174,6 +180,8 @@ export function createRegistrationDatabase(
           name: input.name,
           email: input.email,
           mobile: normalizeRegistrationMobile(input.mobile),
+          city: input.city,
+          profession: input.profession,
           amount: input.amount,
           currency: input.currency,
           status: "pending_payment",

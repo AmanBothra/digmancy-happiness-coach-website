@@ -40,6 +40,8 @@ describe("Cashfree order configuration", () => {
       customerName: "Aman",
       customerEmail: "aman@example.com",
       customerPhone: "9999999999",
+      city: "Kolkata",
+      profession: "Founder",
       returnUrl: "https://example.com/payment-status",
       notifyUrl: "https://example.com/api/webhooks/cashfree/payments",
     });
@@ -50,6 +52,13 @@ describe("Cashfree order configuration", () => {
         headers: expect.objectContaining({
           "x-api-version": "2025-01-01",
         }),
+        body: expect.stringContaining('"city":"Kolkata"'),
+      }),
+    );
+    expect(fetch).toHaveBeenCalledWith(
+      "https://sandbox.cashfree.com/pg/orders",
+      expect.objectContaining({
+        body: expect.stringContaining('"profession":"Founder"'),
       }),
     );
   });

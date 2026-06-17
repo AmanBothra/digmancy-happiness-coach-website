@@ -7,7 +7,16 @@ import {
   getRegistrationCompareAtPriceLabel,
   getRegistrationPriceLabel,
 } from "@/lib/registration-price";
-import { AlertCircle, ArrowRight, Mail, Phone, ShieldCheck, User } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  BriefcaseBusiness,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  User,
+} from "lucide-react";
 
 interface RegistrationFormProps {
   variant?: "hero" | "panel";
@@ -20,7 +29,13 @@ const RegistrationForm = ({
 }: RegistrationFormProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    city: "",
+    profession: "",
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,6 +52,8 @@ const RegistrationForm = ({
           name: form.name,
           email: form.email,
           mobile: form.phone,
+          city: form.city,
+          profession: form.profession,
         }),
       });
       const payload = (await response.json()) as CashfreeOrderResponse;
@@ -129,6 +146,30 @@ const RegistrationForm = ({
             autoComplete="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            className="h-12 pl-10 rounded-xl bg-surface border-border focus-visible:border-cta focus-visible:ring-2 focus-visible:ring-cta/40 focus-visible:ring-offset-0 transition-smooth"
+          />
+        </div>
+        <div className="relative">
+          <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-cta pointer-events-none" />
+          <Input
+            placeholder="City"
+            required
+            name="city"
+            autoComplete="address-level2"
+            value={form.city}
+            onChange={(e) => setForm({ ...form, city: e.target.value })}
+            className="h-12 pl-10 rounded-xl bg-surface border-border focus-visible:border-cta focus-visible:ring-2 focus-visible:ring-cta/40 focus-visible:ring-offset-0 transition-smooth"
+          />
+        </div>
+        <div className="relative">
+          <BriefcaseBusiness className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-cta pointer-events-none" />
+          <Input
+            placeholder="Profession"
+            required
+            name="profession"
+            autoComplete="organization-title"
+            value={form.profession}
+            onChange={(e) => setForm({ ...form, profession: e.target.value })}
             className="h-12 pl-10 rounded-xl bg-surface border-border focus-visible:border-cta focus-visible:ring-2 focus-visible:ring-cta/40 focus-visible:ring-offset-0 transition-smooth"
           />
         </div>

@@ -58,6 +58,8 @@ describe("POST /api/payments/cashfree/order", () => {
         name: "Aman Bothra",
         email: "aman@example.com",
         mobile: "9999999999",
+        city: "Kolkata",
+        profession: "Founder",
       }),
     });
 
@@ -77,6 +79,8 @@ describe("POST /api/payments/cashfree/order", () => {
         amount: 149,
         customerEmail: "aman@example.com",
         customerPhone: "919999999999",
+        city: "Kolkata",
+        profession: "Founder",
         returnUrl:
           "https://authenticleadershipcircle.com/payment-status?order_id=alc_test_atomic_1",
         notifyUrl: "https://authenticleadershipcircle.com/api/webhooks/cashfree/payments",
@@ -88,6 +92,8 @@ describe("POST /api/payments/cashfree/order", () => {
         name: "Aman Bothra",
         email: "aman@example.com",
         mobile: "919999999999",
+        city: "Kolkata",
+        profession: "Founder",
         amount: 149,
         paymentSessionId: "payment_session_atomic_1",
         cfOrderId: "cf_order_atomic_1",
@@ -109,6 +115,8 @@ describe("POST /api/payments/cashfree/order", () => {
         name: "Aman Bothra",
         email: "aman@example.com",
         mobile: "9999999999",
+        city: "Kolkata",
+        profession: "Founder",
       }),
     });
 
@@ -121,6 +129,32 @@ describe("POST /api/payments/cashfree/order", () => {
       error: "cashfree_order_failed",
       message: "cashfree unavailable",
     });
+    expect(mocks.recordInitiatedCashfreeOrder).not.toHaveBeenCalled();
+  });
+
+  it("rejects missing city and profession before creating a Cashfree order", async () => {
+    const request = new Request("https://authenticleadershipcircle.com/api/payments/cashfree/order", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "Aman Bothra",
+        email: "aman@example.com",
+        mobile: "9999999999",
+      }),
+    });
+
+    const response = await POST(request);
+    const body = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(body).toEqual({
+      ok: false,
+      error: "invalid_registration",
+      fields: {
+        city: "City is required",
+        profession: "Profession is required",
+      },
+    });
+    expect(mocks.createCashfreeOrder).not.toHaveBeenCalled();
     expect(mocks.recordInitiatedCashfreeOrder).not.toHaveBeenCalled();
   });
 });

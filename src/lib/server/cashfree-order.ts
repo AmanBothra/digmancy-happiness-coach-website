@@ -12,6 +12,8 @@ export type CreateCashfreeOrderInput = {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
+  city: string;
+  profession: string;
   returnUrl: string;
   notifyUrl?: string;
 };
@@ -54,6 +56,8 @@ export async function createCashfreeOrder(input: CreateCashfreeOrderInput) {
       order_tags: {
         source: "digmancy_website",
         product: "seminar_registration",
+        city: input.city,
+        profession: input.profession,
       },
     }),
   });

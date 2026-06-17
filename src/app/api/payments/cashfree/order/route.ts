@@ -47,6 +47,8 @@ export async function POST(request: Request) {
       customerName: validation.value.name,
       customerEmail: validation.value.email,
       customerPhone: validation.value.mobile,
+      city: validation.value.city,
+      profession: validation.value.profession,
       returnUrl: `${frontendBaseUrl}/payment-status?order_id=${encodeURIComponent(orderId)}`,
       notifyUrl: `${backendBaseUrl}/api/webhooks/cashfree/payments`,
     });
@@ -67,6 +69,8 @@ export async function POST(request: Request) {
       name: validation.value.name,
       email: validation.value.email,
       mobile: validation.value.mobile,
+      city: validation.value.city,
+      profession: validation.value.profession,
       amount,
       currency: REGISTRATION_CURRENCY,
       webinarStartAt: webinar.startAt,
@@ -97,6 +101,8 @@ type RegistrationInput = {
   name: string;
   email: string;
   mobile: string;
+  city: string;
+  profession: string;
 };
 
 type ValidationResult =
@@ -111,6 +117,8 @@ function validateRegistrationInput(value: unknown): ValidationResult {
         name: "Name is required",
         email: "Email is required",
         mobile: "Mobile number is required",
+        city: "City is required",
+        profession: "Profession is required",
       },
     };
   }
@@ -119,6 +127,8 @@ function validateRegistrationInput(value: unknown): ValidationResult {
   const name = normalizeText(record.name);
   const email = normalizeText(record.email).toLowerCase();
   const mobile = normalizePhone(record.mobile);
+  const city = normalizeText(record.city);
+  const profession = normalizeText(record.profession);
   const fields: Partial<Record<keyof RegistrationInput, string>> = {};
 
   if (!name) {
@@ -130,12 +140,18 @@ function validateRegistrationInput(value: unknown): ValidationResult {
   if (!mobile) {
     fields.mobile = "Enter a valid WhatsApp number";
   }
+  if (!city) {
+    fields.city = "City is required";
+  }
+  if (!profession) {
+    fields.profession = "Profession is required";
+  }
 
   if (Object.keys(fields).length) {
     return { ok: false, fields };
   }
 
-  return { ok: true, value: { name, email, mobile } };
+  return { ok: true, value: { name, email, mobile, city, profession } };
 }
 
 function normalizeText(value: unknown) {
