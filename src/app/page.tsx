@@ -67,6 +67,8 @@ const Index = () => {
   const autoplayPlugin = useRef(Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }));
   const [webinarDetails] = useState<WebinarDateDetails>(() => getWebinarDateDetails());
   const [footerYear] = useState(() => getCurrentYearInIst());
+  const responsiveCtaClass =
+    "w-full max-w-full whitespace-normal h-auto min-h-14 px-5 py-4 text-center leading-snug sm:w-auto sm:whitespace-nowrap sm:px-8";
 
   const webinarDate = webinarDetails.startAt;
   const dateLabel = webinarDetails.dateLabel;
@@ -198,32 +200,32 @@ const Index = () => {
         <div className="container py-8 lg:py-12">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-12">
-            <img src={logo.src} alt="AASTHA" className="h-12 w-12 object-contain" />
+            <img src={logo.src} alt="AASTHA" className="h-16 w-auto sm:h-20 object-contain" />
           </div>
 
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-start">
             {/* LEFT */}
-            <div className="animate-fade-up">
+            <div className="min-w-0 animate-fade-up">
               <span className="inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.25em] text-primary">
                 <span className="h-1.5 w-8 bg-cta rounded-full" />
                 A Live Masterclass
               </span>
 
-              <h1 className="mt-6 font-serif text-[40px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] text-primary">
+              <h1 className="mt-6 max-w-full break-words font-serif text-[35px] min-[360px]:text-[40px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] text-primary">
                 <em className="italic font-bold text-highlight-yellow">Successful</em>
                 <span> on the outside. </span>
                 <em className="italic font-bold text-highlight-yellow">Suffocated</em>
                 <span> on the inside.</span>
-                <span className="block text-xl sm:text-2xl lg:text-3xl mt-6 font-semibold tracking-tight text-primary/90 leading-snug">
+                <span className="block text-lg min-[360px]:text-xl sm:text-2xl lg:text-3xl mt-6 font-semibold tracking-tight text-primary/90 leading-snug">
                   How leaders can stop <em className="italic text-highlight-yellow font-bold">suppressing</em> themselves and start leading <em className="italic text-highlight-yellow font-bold">freely</em>
                 </span>
               </h1>
 
               {/* Yellow trust badge */}
-              <div className="mt-7 inline-flex flex-wrap items-center gap-x-3 gap-y-2 rounded-full bg-cta/95 text-primary px-5 py-2.5 shadow-cta border border-cta-glow/60">
+              <div className="mt-7 inline-flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 rounded-2xl min-[360px]:rounded-full bg-cta/95 text-primary px-5 py-2.5 shadow-cta border border-cta-glow/60">
                 <ShieldCheck className="h-4 w-4" />
                 <span className="text-[12px] sm:text-[13px] font-semibold tracking-wide uppercase">Limited Seats</span>
-                <span className="text-primary/40">|</span>
+                <span className="hidden min-[360px]:inline text-primary/40">|</span>
                 <span className="text-[12px] sm:text-[13px] font-semibold tracking-wide uppercase">Pure Value</span>
               </div>
 
@@ -247,7 +249,7 @@ const Index = () => {
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Clock className="h-4 w-4 text-primary-glow" />
-                  {timeLabel} · 2 hours
+                  {timeLabel} · 120 minutes
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Video className="h-4 w-4 text-primary-glow" />
@@ -266,7 +268,7 @@ const Index = () => {
               </div>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                <Button variant="cta" size="xl" onClick={openRegistration}>
+                <Button variant="cta" size="xl" className={responsiveCtaClass} onClick={openRegistration}>
                   Save My Seat — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
                   {registrationPrice} Only <ArrowRight />
                 </Button>
@@ -369,7 +371,7 @@ const Index = () => {
             <HandHeart className="h-3.5 w-3.5 text-cta" />
             A different kind of room
           </span>
-          <h2 className="mt-4 font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight lg:whitespace-nowrap">
+          <h2 className="mt-4 font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">
             This masterclass is <em className="italic">not</em> about fixing you.
           </h2>
 
@@ -438,7 +440,7 @@ const Index = () => {
           <div className="mt-14 text-center">
             <p className="font-serif text-2xl italic text-primary">Sounds familiar?</p>
             <p className="mt-2 text-muted-foreground">This masterclass will be your turning point.</p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
+            <Button variant="cta" size="xl" className={`mt-6 ${responsiveCtaClass}`} onClick={openRegistration}>
               Reserve Your Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
               {registrationPrice} Only <ArrowRight />
             </Button>
@@ -696,7 +698,7 @@ const Index = () => {
             <p className="font-serif text-xl italic text-primary pt-2 mt-6">
               If something in you resonated, don't ignore it.
             </p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
+            <Button variant="cta" size="xl" className={`mt-6 ${responsiveCtaClass}`} onClick={openRegistration}>
               Reserve My Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
               {registrationPrice} Only <ArrowRight />
             </Button>
@@ -723,7 +725,7 @@ const Index = () => {
             </div>
 
             <div>
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight lg:whitespace-nowrap">
+              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-primary leading-tight">
                 Meet your Coach <em ref={nameRef} className="emphasize-name italic font-bold text-highlight-yellow">Aastha Tatia</em>
               </h2>
 
@@ -775,7 +777,7 @@ const Index = () => {
                 </blockquote>
               </figure>
 
-              <Button variant="cta" size="xl" className="mt-8" onClick={openRegistration}>
+              <Button variant="cta" size="xl" className={`mt-8 ${responsiveCtaClass}`} onClick={openRegistration}>
                 Learn from Aastha, Register Now <ArrowRight />
               </Button>
             </div>
@@ -840,7 +842,7 @@ const Index = () => {
                 </div>
                 <div className="p-6 sm:p-8 text-left">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-primary leading-snug lg:whitespace-nowrap">
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-primary leading-snug">
                       {b.title}
                     </h3>
                     <span className="shrink-0 text-xs font-medium text-muted-foreground line-through pt-1">
@@ -928,7 +930,7 @@ const Index = () => {
             <p className="font-serif text-xl italic text-primary">
               Still have doubts? Join in to get the answers.
             </p>
-            <Button variant="cta" size="xl" className="mt-6" onClick={openRegistration}>
+            <Button variant="cta" size="xl" className={`mt-6 ${responsiveCtaClass}`} onClick={openRegistration}>
               Register Now <ArrowRight />
             </Button>
           </div>
@@ -960,7 +962,7 @@ const Index = () => {
 
           <div className="mt-12 flex flex-col items-center gap-6">
             <Countdown target={webinarDate} variant="dark" />
-            <Button variant="cta" size="xl" onClick={openRegistration}>
+            <Button variant="cta" size="xl" className={responsiveCtaClass} onClick={openRegistration}>
               Don't miss out — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
               {registrationPrice} Only <ArrowRight />
             </Button>
@@ -976,7 +978,7 @@ const Index = () => {
       <footer className="py-10 border-t border-border bg-background">
         <div className="container flex flex-col items-center gap-6 text-sm text-muted-foreground sm:flex-row sm:justify-between">
           <div className="flex items-center gap-3">
-            <img src={logo.src} alt="AASTHA" className="h-9 w-9 object-contain" />
+            <img src={logo.src} alt="AASTHA" className="h-12 w-auto sm:h-14 object-contain" />
           </div>
           <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             <a href="/privacy-policy" className="hover:text-primary transition-smooth">
