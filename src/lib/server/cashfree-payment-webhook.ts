@@ -61,7 +61,7 @@ export async function handleCashfreePaymentWebhook({
   const paymentStatus = normalizeText(payment?.payment_status);
   const orderStatus = normalizeText(order?.order_status);
   const status = mapPaymentStatus(eventType, orderStatus, paymentStatus);
-  const registration = await db.recordPaymentWebhook({
+  const { registration, duplicatePaidWebhook } = await db.recordPaymentWebhook({
     orderId,
     eventType,
     orderStatus,
@@ -74,6 +74,10 @@ export async function handleCashfreePaymentWebhook({
 
   if (!registration) {
     return { status: 200, body: { ok: true, ignored: true, reason: "unknown_order" } };
+  }
+
+  if (duplicatePaidWebhook) {
+    return { status: 200, body: { ok: true, duplicate: true, paid: true } };
   }
 
   if (status !== "paid") {

@@ -106,9 +106,55 @@ describe("handleCashfreePaymentWebhook", () => {
       "one_hour_before",
     ]);
   });
+
+  it("does not send duplicate confirmations when a paid webhook is replayed", async () => {
+    const db = createFakeDb({
+      registration: {
+        ...registration,
+        status: "paid",
+        paid_at: "2026-06-12T10:01:00+05:30",
+        cashfree_payment_status: "SUCCESS",
+        cf_payment_id: "1453002795",
+        reminders_scheduled_at: "2026-06-12T10:02:00+05:30",
+      },
+    });
+    const payload = {
+      type: "PAYMENT_SUCCESS_WEBHOOK",
+      event_time: "2026-06-12T10:00:00+05:30",
+      data: {
+        order: {
+          order_id: "alc_test_1",
+          order_amount: 99,
+          order_currency: "INR",
+        },
+        payment: {
+          cf_payment_id: "1453002795",
+          payment_status: "SUCCESS",
+          payment_time: "2026-06-12T10:01:00+05:30",
+        },
+      },
+    };
+
+    const result = await handleCashfreePaymentWebhook({
+      payload,
+      rawPayload: JSON.stringify(payload),
+      db,
+    });
+
+    expect(result).toEqual({
+      status: 200,
+      body: { ok: true, duplicate: true, paid: true },
+    });
+    expect(db.webhookStatus).toBe("paid");
+    expect(sendSeminarEmail).not.toHaveBeenCalled();
+    expect(sendWhatsappMessage).not.toHaveBeenCalled();
+    expect(db.logs).toHaveLength(0);
+    expect(db.queued).toHaveLength(0);
+  });
 });
 
-function createFakeDb() {
+function createFakeDb(options: { registration?: SeminarRegistration } = {}) {
+  const currentRegistration = options.registration || registration;
   const logs: NotificationLogInput[] = [];
   const queued: QueueScheduledNotificationInput[] = [];
   let webhookStatus = "";
@@ -124,26 +170,32 @@ function createFakeDb() {
       return webhookStatus;
     },
     async createPendingRegistration() {
-      return registration;
+      return currentRegistration;
     },
     async recordInitiatedCashfreeOrder() {
-      return registration;
+      return currentRegistration;
     },
     async recordOrderCreated() {
-      return registration;
+      return currentRegistration;
     },
     async markOrderCreationFailed() {},
     async getRegistrationByOrderId() {
-      return registration;
+      return currentRegistration;
     },
     async recordPaymentWebhook(input) {
       webhookStatus = input.status;
-      return {
-        ...registration,
+      const updatedRegistration = {
+        ...currentRegistration,
         status: input.status,
-        cashfree_payment_status: input.paymentStatus || null,
-        cf_payment_id: input.cfPaymentId || null,
-        paid_at: input.paidAt || null,
+        cashfree_payment_status:
+          input.paymentStatus || currentRegistration.cashfree_payment_status,
+        cf_payment_id: input.cfPaymentId || currentRegistration.cf_payment_id,
+        paid_at: input.paidAt || currentRegistration.paid_at,
+      };
+      return {
+        registration: updatedRegistration,
+        duplicatePaidWebhook:
+          input.status === "paid" && currentRegistration.status === "paid",
       };
     },
     async hasSentNotification() {
@@ -159,7 +211,7 @@ function createFakeDb() {
       return [] satisfies ScheduledNotification[];
     },
     async getRegistrationById() {
-      return registration;
+      return currentRegistration;
     },
     async markScheduledNotificationSent() {},
     async markScheduledNotificationFailed() {},

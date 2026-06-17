@@ -85,6 +85,11 @@ export type RecordPaymentWebhookInput = {
   rawPayload: unknown;
 };
 
+export type RecordPaymentWebhookResult = {
+  registration: SeminarRegistration | null;
+  duplicatePaidWebhook: boolean;
+};
+
 export type NotificationLogInput = {
   registrationId?: string | null;
   orderId: string;
@@ -115,7 +120,7 @@ export type RegistrationDatabase = {
   recordOrderCreated(input: RecordOrderCreatedInput): Promise<SeminarRegistration>;
   markOrderCreationFailed(orderId: string, error: string): Promise<void>;
   getRegistrationByOrderId(orderId: string): Promise<SeminarRegistration | null>;
-  recordPaymentWebhook(input: RecordPaymentWebhookInput): Promise<SeminarRegistration | null>;
+  recordPaymentWebhook(input: RecordPaymentWebhookInput): Promise<RecordPaymentWebhookResult>;
   hasSentNotification(
     orderId: string,
     channel: NotificationChannel,
@@ -259,10 +264,10 @@ export function createRegistrationDatabase(
       }
 
       if (!registration) {
-        return null;
+        return { registration: null, duplicatePaidWebhook: false };
       }
 
-      const { data, error } = await supabase
+      let query = supabase
         .from("seminar_registrations")
         .update({
           status: input.status,
@@ -273,15 +278,26 @@ export function createRegistrationDatabase(
           raw_latest_webhook: input.rawPayload,
           last_error: null,
         })
-        .eq("order_id", input.orderId)
-        .select("*")
-        .single();
+        .eq("order_id", input.orderId);
+
+      if (input.status === "paid") {
+        query = query.neq("status", "paid");
+      }
+
+      const { data, error } = await query.select("*").maybeSingle();
 
       if (error) {
         throw new Error(error.message);
       }
 
-      return normalizeRegistration(data);
+      if (!data && input.status === "paid") {
+        return { registration, duplicatePaidWebhook: true };
+      }
+
+      return {
+        registration: data ? normalizeRegistration(data) : null,
+        duplicatePaidWebhook: false,
+      };
     },
 
     async hasSentNotification(orderId, channel, templateKey) {
