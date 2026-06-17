@@ -10,7 +10,7 @@ const RefundPolicy = () => {
       <header className="border-b border-border bg-background">
         <div className="container flex items-center justify-between py-4">
           <Link href="/" className="flex items-center gap-3">
-            <img src={logo.src} alt="AASTHA" className="h-10 w-10 object-contain" />
+            <img src={logo.src} alt="AASTHA" className="h-14 w-auto sm:h-16 object-contain" />
           </Link>
           <Link
             href="/"
