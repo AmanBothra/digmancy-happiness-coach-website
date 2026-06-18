@@ -47,7 +47,7 @@ export type ScheduledNotification = {
   template_key: MessageTemplateKey;
   recipient: string | null;
   scheduled_for: string;
-  status: "queued" | "sent" | "failed" | "cancelled";
+  status: "queued" | "processing" | "sent" | "failed" | "cancelled";
   attempts: number;
   last_error: string | null;
 };
@@ -253,59 +253,22 @@ export function createRegistrationDatabase(
     },
 
     async recordPaymentWebhook(input) {
-      const registration = await this.getRegistrationByOrderId(input.orderId);
-
-      const { error: eventError } = await supabase
-        .from("cashfree_payment_events")
-        .insert({
-          registration_id: registration?.id || null,
-          order_id: input.orderId,
-          event_type: input.eventType,
-          order_status: input.orderStatus || null,
-          payment_status: input.paymentStatus || null,
-          cf_payment_id: input.cfPaymentId || null,
-          raw_payload: input.rawPayload,
-        });
-
-      if (eventError) {
-        throw new Error(eventError.message);
-      }
-
-      if (!registration) {
-        return { registration: null, duplicatePaidWebhook: false };
-      }
-
-      let query = supabase
-        .from("seminar_registrations")
-        .update({
-          status: input.status,
-          cashfree_order_status: input.orderStatus || registration.cashfree_order_status,
-          cashfree_payment_status: input.paymentStatus || registration.cashfree_payment_status,
-          cf_payment_id: input.cfPaymentId || registration.cf_payment_id,
-          paid_at: input.paidAt || registration.paid_at,
-          raw_latest_webhook: input.rawPayload,
-          last_error: null,
-        })
-        .eq("order_id", input.orderId);
-
-      if (input.status === "paid") {
-        query = query.neq("status", "paid");
-      }
-
-      const { data, error } = await query.select("*").maybeSingle();
+      const { data, error } = await supabase.rpc("record_cashfree_payment_webhook_atomic", {
+        p_order_id: input.orderId,
+        p_event_type: input.eventType,
+        p_order_status: input.orderStatus || null,
+        p_payment_status: input.paymentStatus || null,
+        p_cf_payment_id: input.cfPaymentId || null,
+        p_status: input.status,
+        p_paid_at: input.paidAt || null,
+        p_raw_payload: input.rawPayload,
+      });
 
       if (error) {
         throw new Error(error.message);
       }
 
-      if (!data && input.status === "paid") {
-        return { registration, duplicatePaidWebhook: true };
-      }
-
-      return {
-        registration: data ? normalizeRegistration(data) : null,
-        duplicatePaidWebhook: false,
-      };
+      return normalizeRecordPaymentWebhookResult(data);
     },
 
     async hasSentNotification(orderId, channel, templateKey) {
@@ -377,13 +340,9 @@ export function createRegistrationDatabase(
     },
 
     async listDueScheduledNotifications(limit = 50) {
-      const { data, error } = await supabase
-        .from("scheduled_notifications")
-        .select("*")
-        .eq("status", "queued")
-        .lte("scheduled_for", new Date().toISOString())
-        .order("scheduled_for", { ascending: true })
-        .limit(limit);
+      const { data, error } = await supabase.rpc("claim_due_scheduled_notifications", {
+        p_limit: limit,
+      });
 
       if (error) {
         throw new Error(error.message);
@@ -473,6 +432,23 @@ function normalizeRegistration(value: unknown): SeminarRegistration {
 
 function normalizeScheduledNotification(value: unknown): ScheduledNotification {
   return value as ScheduledNotification;
+}
+
+function normalizeRecordPaymentWebhookResult(value: unknown): RecordPaymentWebhookResult {
+  if (!value || typeof value !== "object") {
+    return { registration: null, duplicatePaidWebhook: false };
+  }
+
+  const record = value as Record<string, unknown>;
+  const registration =
+    record.registration && typeof record.registration === "object"
+      ? normalizeRegistration(record.registration)
+      : null;
+
+  return {
+    registration,
+    duplicatePaidWebhook: Boolean(record.duplicatePaidWebhook),
+  };
 }
 
 function toIsoOrNull(value?: Date | string | null) {

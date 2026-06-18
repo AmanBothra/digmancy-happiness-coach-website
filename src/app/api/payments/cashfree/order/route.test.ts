@@ -4,7 +4,9 @@ const mocks = vi.hoisted(() => ({
   createCashfreeOrder: vi.fn(),
   createLocalOrderId: vi.fn(() => "alc_test_atomic_1"),
   getCashfreeMode: vi.fn(() => "sandbox"),
-  recordInitiatedCashfreeOrder: vi.fn(),
+  createPendingRegistration: vi.fn(),
+  recordOrderCreated: vi.fn(),
+  markOrderCreationFailed: vi.fn(),
 }));
 
 vi.mock("@/lib/server/cashfree-order", () => ({
@@ -15,7 +17,9 @@ vi.mock("@/lib/server/cashfree-order", () => ({
 
 vi.mock("@/lib/server/registration-db", () => ({
   createRegistrationDatabase: () => ({
-    recordInitiatedCashfreeOrder: mocks.recordInitiatedCashfreeOrder,
+    createPendingRegistration: mocks.createPendingRegistration,
+    recordOrderCreated: mocks.recordOrderCreated,
+    markOrderCreationFailed: mocks.markOrderCreationFailed,
   }),
 }));
 
@@ -38,6 +42,9 @@ describe("POST /api/payments/cashfree/order", () => {
       order_status: "ACTIVE",
       payment_session_id: "payment_session_atomic_1",
     });
+    mocks.createPendingRegistration.mockResolvedValue({});
+    mocks.recordOrderCreated.mockResolvedValue({});
+    mocks.markOrderCreationFailed.mockResolvedValue(undefined);
   });
 
   afterEach(() => {
@@ -51,7 +58,7 @@ describe("POST /api/payments/cashfree/order", () => {
     delete process.env.WEBINAR_JOINING_LINK;
   });
 
-  it("creates the gateway order before atomically persisting initiated registration state", async () => {
+  it("persists a local pending registration before creating the gateway order", async () => {
     const request = new Request("https://authenticleadershipcircle.com/api/payments/cashfree/order", {
       method: "POST",
       body: JSON.stringify({
@@ -86,7 +93,7 @@ describe("POST /api/payments/cashfree/order", () => {
         notifyUrl: "https://authenticleadershipcircle.com/api/webhooks/cashfree/payments",
       }),
     );
-    expect(mocks.recordInitiatedCashfreeOrder).toHaveBeenCalledWith(
+    expect(mocks.createPendingRegistration).toHaveBeenCalledWith(
       expect.objectContaining({
         orderId: "alc_test_atomic_1",
         name: "Aman Bothra",
@@ -95,14 +102,22 @@ describe("POST /api/payments/cashfree/order", () => {
         city: "Kolkata",
         profession: "Founder",
         amount: 149,
-        paymentSessionId: "payment_session_atomic_1",
-        cfOrderId: "cf_order_atomic_1",
-        orderStatus: "ACTIVE",
         webinarDateLabel: "Sunday 28 June",
         webinarTimeLabel: "11:00 AM IST",
       }),
     );
-    expect(mocks.recordInitiatedCashfreeOrder.mock.invocationCallOrder[0]).toBeGreaterThan(
+    expect(mocks.recordOrderCreated).toHaveBeenCalledWith(
+      expect.objectContaining({
+        orderId: "alc_test_atomic_1",
+        paymentSessionId: "payment_session_atomic_1",
+        cfOrderId: "cf_order_atomic_1",
+        orderStatus: "ACTIVE",
+      }),
+    );
+    expect(mocks.createCashfreeOrder.mock.invocationCallOrder[0]).toBeGreaterThan(
+      mocks.createPendingRegistration.mock.invocationCallOrder[0],
+    );
+    expect(mocks.recordOrderCreated.mock.invocationCallOrder[0]).toBeGreaterThan(
       mocks.createCashfreeOrder.mock.invocationCallOrder[0],
     );
   });
@@ -129,7 +144,12 @@ describe("POST /api/payments/cashfree/order", () => {
       error: "cashfree_order_failed",
       message: "cashfree unavailable",
     });
-    expect(mocks.recordInitiatedCashfreeOrder).not.toHaveBeenCalled();
+    expect(mocks.createPendingRegistration).toHaveBeenCalledTimes(1);
+    expect(mocks.recordOrderCreated).not.toHaveBeenCalled();
+    expect(mocks.markOrderCreationFailed).toHaveBeenCalledWith(
+      "alc_test_atomic_1",
+      "cashfree unavailable",
+    );
   });
 
   it("rejects missing city and profession before creating a Cashfree order", async () => {
@@ -155,6 +175,7 @@ describe("POST /api/payments/cashfree/order", () => {
       },
     });
     expect(mocks.createCashfreeOrder).not.toHaveBeenCalled();
-    expect(mocks.recordInitiatedCashfreeOrder).not.toHaveBeenCalled();
+    expect(mocks.createPendingRegistration).not.toHaveBeenCalled();
+    expect(mocks.recordOrderCreated).not.toHaveBeenCalled();
   });
 });

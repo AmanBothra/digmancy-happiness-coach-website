@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getApiBasePath } from "@/lib/api-base-path";
 import {
   getRegistrationCompareAtPriceLabel,
   getRegistrationPriceLabel,
@@ -253,17 +254,4 @@ function loadScript(src: string) {
     script.onerror = () => reject(new Error("Cashfree checkout script failed to load."));
     document.head.appendChild(script);
   });
-}
-
-function getApiBasePath() {
-  const configured = process.env.NEXT_PUBLIC_API_BASE_PATH?.trim().replace(/\/$/, "");
-  if (configured && configured !== "/") {
-    return configured;
-  }
-
-  if (typeof window !== "undefined") {
-    return "";
-  }
-
-  return "";
 }

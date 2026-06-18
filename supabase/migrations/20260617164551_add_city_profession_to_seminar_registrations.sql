@@ -11,3 +11,5 @@ alter table public.seminar_registrations
   drop constraint if exists seminar_registrations_profession_required,
   add constraint seminar_registrations_profession_required
     check (profession is null or length(btrim(profession)) > 0);
+
+notify pgrst, 'reload schema';

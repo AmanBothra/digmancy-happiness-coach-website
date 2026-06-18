@@ -76,13 +76,11 @@ export async function handleCashfreePaymentWebhook({
     return { status: 200, body: { ok: true, ignored: true, reason: "unknown_order" } };
   }
 
-  if (duplicatePaidWebhook) {
-    return { status: 200, body: { ok: true, duplicate: true, paid: true } };
-  }
-
   if (status !== "paid") {
     return { status: 200, body: { ok: true, paid: false } };
   }
+
+  const notificationFailures: string[] = [];
 
   try {
     await sendAndRecordNotification({
@@ -92,7 +90,7 @@ export async function handleCashfreePaymentWebhook({
       templateKey: "payment_confirmation",
     });
   } catch {
-    return { status: 500, body: { ok: false, error: "email_send_failed" } };
+    notificationFailures.push("email");
   }
 
   try {
@@ -103,13 +101,28 @@ export async function handleCashfreePaymentWebhook({
       templateKey: "payment_confirmation",
     });
   } catch {
-    // WhatsApp provider details are intentionally configurable and should not
-    // make Cashfree retry a successfully paid order forever.
+    notificationFailures.push("whatsapp");
   }
 
   await scheduleReminderNotifications(db, registration);
 
-  return { status: 200, body: { ok: true, paid: true } };
+  if (notificationFailures.length) {
+    return {
+      status: 500,
+      body: {
+        ok: false,
+        paid: true,
+        ...(duplicatePaidWebhook ? { duplicate: true } : {}),
+        error: "notification_send_failed",
+        notificationFailures,
+      },
+    };
+  }
+
+  return {
+    status: 200,
+    body: { ok: true, ...(duplicatePaidWebhook ? { duplicate: true } : {}), paid: true },
+  };
 }
 
 function mapPaymentStatus(

@@ -38,6 +38,28 @@ export async function POST(request: Request) {
   const db = createRegistrationDatabase();
   const amount = getRegistrationPrice().amount;
 
+  try {
+    await db.createPendingRegistration({
+      orderId,
+      name: validation.value.name,
+      email: validation.value.email,
+      mobile: validation.value.mobile,
+      city: validation.value.city,
+      profession: validation.value.profession,
+      amount,
+      currency: REGISTRATION_CURRENCY,
+      webinarStartAt: webinar.startAt,
+      webinarDateLabel: webinar.dateLabel,
+      webinarTimeLabel: webinar.timeLabel,
+      joiningLink: webinar.joiningLink,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { ok: false, error: "registration_storage_failed", message: errorMessage(error) },
+      { status: 500 },
+    );
+  }
+
   let cashfreeOrder: Awaited<ReturnType<typeof createCashfreeOrder>>;
   try {
     cashfreeOrder = await createCashfreeOrder({
@@ -57,6 +79,7 @@ export async function POST(request: Request) {
       throw new Error("Cashfree did not return a payment_session_id");
     }
   } catch (error) {
+    await markOrderCreationFailedSafely(db, orderId, errorMessage(error));
     return NextResponse.json(
       { ok: false, error: "cashfree_order_failed", message: errorMessage(error) },
       { status: 502 },
@@ -64,19 +87,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    await db.recordInitiatedCashfreeOrder({
+    await db.recordOrderCreated({
       orderId,
-      name: validation.value.name,
-      email: validation.value.email,
-      mobile: validation.value.mobile,
-      city: validation.value.city,
-      profession: validation.value.profession,
-      amount,
-      currency: REGISTRATION_CURRENCY,
-      webinarStartAt: webinar.startAt,
-      webinarDateLabel: webinar.dateLabel,
-      webinarTimeLabel: webinar.timeLabel,
-      joiningLink: webinar.joiningLink,
       cfOrderId: cashfreeOrder.cf_order_id,
       paymentSessionId: cashfreeOrder.payment_session_id,
       orderStatus: cashfreeOrder.order_status,
@@ -90,6 +102,7 @@ export async function POST(request: Request) {
       cashfreeMode: getCashfreeMode(),
     });
   } catch (error) {
+    await markOrderCreationFailedSafely(db, orderId, errorMessage(error));
     return NextResponse.json(
       { ok: false, error: "registration_storage_failed", message: errorMessage(error) },
       { status: 500 },
@@ -164,4 +177,16 @@ function normalizePhone(value: unknown) {
 
 function errorMessage(error: unknown) {
   return error instanceof Error ? error.message : "Unknown Cashfree error";
+}
+
+async function markOrderCreationFailedSafely(
+  db: ReturnType<typeof createRegistrationDatabase>,
+  orderId: string,
+  message: string,
+) {
+  try {
+    await db.markOrderCreationFailed(orderId, message);
+  } catch {
+    // Keep the customer-facing error tied to the original failure.
+  }
 }

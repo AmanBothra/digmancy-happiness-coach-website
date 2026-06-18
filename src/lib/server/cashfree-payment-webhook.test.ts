@@ -107,7 +107,55 @@ describe("handleCashfreePaymentWebhook", () => {
     ]);
   });
 
-  it("does not send duplicate confirmations when a paid webhook is replayed", async () => {
+  it("continues WhatsApp and reminder work when email confirmation fails", async () => {
+    vi.mocked(sendSeminarEmail).mockRejectedValueOnce(new Error("smtp failed"));
+    const db = createFakeDb();
+    const payload = {
+      type: "PAYMENT_SUCCESS_WEBHOOK",
+      event_time: "2026-06-12T10:00:00+05:30",
+      data: {
+        order: {
+          order_id: "alc_test_1",
+          order_amount: 99,
+          order_currency: "INR",
+        },
+        payment: {
+          cf_payment_id: "1453002795",
+          payment_status: "SUCCESS",
+          payment_time: "2026-06-12T10:01:00+05:30",
+        },
+      },
+    };
+
+    const result = await handleCashfreePaymentWebhook({
+      payload,
+      rawPayload: JSON.stringify(payload),
+      db,
+    });
+
+    expect(result).toEqual({
+      status: 500,
+      body: {
+        ok: false,
+        paid: true,
+        error: "notification_send_failed",
+        notificationFailures: ["email"],
+      },
+    });
+    expect(sendWhatsappMessage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "9999999999",
+        templateKey: "payment_confirmation",
+      }),
+    );
+    expect(db.logs.map((log) => [log.channel, log.status])).toEqual([
+      ["email", "failed"],
+      ["whatsapp", "sent"],
+    ]);
+    expect(db.queued).toHaveLength(6);
+  });
+
+  it("retries missing confirmations and queues reminders when a paid webhook is replayed", async () => {
     const db = createFakeDb({
       registration: {
         ...registration,
@@ -115,7 +163,7 @@ describe("handleCashfreePaymentWebhook", () => {
         paid_at: "2026-06-12T10:01:00+05:30",
         cashfree_payment_status: "SUCCESS",
         cf_payment_id: "1453002795",
-        reminders_scheduled_at: "2026-06-12T10:02:00+05:30",
+        reminders_scheduled_at: null,
       },
     });
     const payload = {
@@ -146,6 +194,64 @@ describe("handleCashfreePaymentWebhook", () => {
       body: { ok: true, duplicate: true, paid: true },
     });
     expect(db.webhookStatus).toBe("paid");
+    expect(sendSeminarEmail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "john@example.com",
+        templateKey: "payment_confirmation",
+      }),
+    );
+    expect(sendWhatsappMessage).toHaveBeenCalledWith(
+      expect.objectContaining({
+        to: "9999999999",
+        templateKey: "payment_confirmation",
+      }),
+    );
+    expect(db.logs).toHaveLength(2);
+    expect(db.queued).toHaveLength(6);
+  });
+
+  it("does not send duplicate confirmations when a paid webhook is replayed after successful sends", async () => {
+    const db = createFakeDb({
+      registration: {
+        ...registration,
+        status: "paid",
+        paid_at: "2026-06-12T10:01:00+05:30",
+        cashfree_payment_status: "SUCCESS",
+        cf_payment_id: "1453002795",
+        reminders_scheduled_at: "2026-06-12T10:02:00+05:30",
+      },
+      sentNotifications: [
+        ["email", "payment_confirmation"],
+        ["whatsapp", "payment_confirmation"],
+      ],
+    });
+    const payload = {
+      type: "PAYMENT_SUCCESS_WEBHOOK",
+      event_time: "2026-06-12T10:00:00+05:30",
+      data: {
+        order: {
+          order_id: "alc_test_1",
+          order_amount: 99,
+          order_currency: "INR",
+        },
+        payment: {
+          cf_payment_id: "1453002795",
+          payment_status: "SUCCESS",
+          payment_time: "2026-06-12T10:01:00+05:30",
+        },
+      },
+    };
+
+    const result = await handleCashfreePaymentWebhook({
+      payload,
+      rawPayload: JSON.stringify(payload),
+      db,
+    });
+
+    expect(result).toEqual({
+      status: 200,
+      body: { ok: true, duplicate: true, paid: true },
+    });
     expect(sendSeminarEmail).not.toHaveBeenCalled();
     expect(sendWhatsappMessage).not.toHaveBeenCalled();
     expect(db.logs).toHaveLength(0);
@@ -153,10 +259,18 @@ describe("handleCashfreePaymentWebhook", () => {
   });
 });
 
-function createFakeDb(options: { registration?: SeminarRegistration } = {}) {
+function createFakeDb(
+  options: {
+    registration?: SeminarRegistration;
+    sentNotifications?: Array<["email" | "whatsapp", string]>;
+  } = {},
+) {
   const currentRegistration = options.registration || registration;
   const logs: NotificationLogInput[] = [];
   const queued: QueueScheduledNotificationInput[] = [];
+  const sentNotifications = new Set(
+    (options.sentNotifications || []).map(([channel, templateKey]) => `${channel}:${templateKey}`),
+  );
   let webhookStatus = "";
 
   const db: RegistrationDatabase & {
@@ -198,8 +312,8 @@ function createFakeDb(options: { registration?: SeminarRegistration } = {}) {
           input.status === "paid" && currentRegistration.status === "paid",
       };
     },
-    async hasSentNotification() {
-      return false;
+    async hasSentNotification(_orderId, channel, templateKey) {
+      return sentNotifications.has(`${channel}:${templateKey}`);
     },
     async recordNotificationLog(input) {
       logs.push(input);
