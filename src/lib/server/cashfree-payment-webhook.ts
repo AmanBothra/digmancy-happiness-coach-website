@@ -1,4 +1,4 @@
-import type { RegistrationDatabase, RegistrationStatus } from "./registration-db";
+import type { RegistrationDatabase, RegistrationStatus, SeminarRegistration } from "./registration-db";
 import { scheduleReminderNotifications, sendAndRecordNotification } from "./notifications";
 
 export type CashfreePaymentWebhookPayload = {
@@ -41,6 +41,19 @@ type HandlerResult = {
   body: Record<string, unknown>;
 };
 
+type CashfreeOrderStatus = {
+  order_status?: string | null;
+  cf_payment_id?: string | number | null;
+  payment_status?: string | null;
+  payment_time?: string | null;
+  order_id?: string | null;
+  cf_order_id?: string | null;
+};
+
+type PaidNotificationResult = {
+  notificationFailures: string[];
+};
+
 export async function handleCashfreePaymentWebhook({
   payload,
   rawPayload,
@@ -80,6 +93,82 @@ export async function handleCashfreePaymentWebhook({
     return { status: 200, body: { ok: true, paid: false } };
   }
 
+  const { notificationFailures } = await dispatchPaidRegistrationNotifications(db, registration);
+
+  if (notificationFailures.length) {
+    return {
+      status: 500,
+      body: {
+        ok: false,
+        paid: true,
+        ...(duplicatePaidWebhook ? { duplicate: true } : {}),
+        error: "notification_send_failed",
+        notificationFailures,
+      },
+    };
+  }
+
+  return {
+    status: 200,
+    body: { ok: true, ...(duplicatePaidWebhook ? { duplicate: true } : {}), paid: true },
+  };
+}
+
+export async function reconcileCashfreeOrderPayment({
+  orderId,
+  cashfreeOrder,
+  db,
+}: {
+  orderId: string;
+  cashfreeOrder: CashfreeOrderStatus;
+  db: RegistrationDatabase;
+}): Promise<
+  PaidNotificationResult & {
+    registration: SeminarRegistration | null;
+    duplicatePaidWebhook: boolean;
+  }
+> {
+  const orderStatus = normalizeText(cashfreeOrder.order_status);
+  if (orderStatus !== "PAID") {
+    return {
+      registration: null,
+      duplicatePaidWebhook: false,
+      notificationFailures: [],
+    };
+  }
+
+  const { registration, duplicatePaidWebhook } = await db.recordPaymentWebhook({
+    orderId,
+    eventType: "PAYMENT_STATUS_RECONCILIATION",
+    orderStatus,
+    paymentStatus: normalizeText(cashfreeOrder.payment_status) || "SUCCESS",
+    cfPaymentId: normalizeText(cashfreeOrder.cf_payment_id),
+    status: "paid",
+    paidAt: cashfreeOrder.payment_time || new Date().toISOString(),
+    rawPayload: cashfreeOrder,
+  });
+
+  if (!registration) {
+    return {
+      registration: null,
+      duplicatePaidWebhook,
+      notificationFailures: [],
+    };
+  }
+
+  const { notificationFailures } = await dispatchPaidRegistrationNotifications(db, registration);
+
+  return {
+    registration,
+    duplicatePaidWebhook,
+    notificationFailures,
+  };
+}
+
+async function dispatchPaidRegistrationNotifications(
+  db: RegistrationDatabase,
+  registration: SeminarRegistration,
+): Promise<PaidNotificationResult> {
   const notificationFailures: string[] = [];
 
   try {
@@ -106,23 +195,7 @@ export async function handleCashfreePaymentWebhook({
 
   await scheduleReminderNotifications(db, registration);
 
-  if (notificationFailures.length) {
-    return {
-      status: 500,
-      body: {
-        ok: false,
-        paid: true,
-        ...(duplicatePaidWebhook ? { duplicate: true } : {}),
-        error: "notification_send_failed",
-        notificationFailures,
-      },
-    };
-  }
-
-  return {
-    status: 200,
-    body: { ok: true, ...(duplicatePaidWebhook ? { duplicate: true } : {}), paid: true },
-  };
+  return { notificationFailures };
 }
 
 function mapPaymentStatus(
