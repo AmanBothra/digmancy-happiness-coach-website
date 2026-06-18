@@ -107,4 +107,31 @@ describe("sendWhatsappMessage", () => {
 
     expect(result).toEqual({ messageId: "3EB01B72E1A154E57EBEAE" });
   });
+
+  it("fails when the provider returns an unsuccessful JSON body with HTTP 200", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(
+        new Response(
+          JSON.stringify({
+            status: false,
+            statuscode: 200,
+            operation: "Instance is not connected",
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        ),
+      ),
+    );
+
+    await expect(
+      sendWhatsappMessage({
+        to: "917976744549",
+        message: "Hello from the API!",
+        templateKey: "payment_confirmation",
+      }),
+    ).rejects.toThrow("Instance is not connected");
+  });
 });

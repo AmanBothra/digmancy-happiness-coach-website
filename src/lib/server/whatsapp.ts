@@ -70,9 +70,23 @@ export async function sendWhatsappMessage({
     parsed = undefined;
   }
 
+  assertProviderAccepted(parsed, responseText);
+
   return {
     messageId: readProviderMessageId(parsed),
   };
+}
+
+function assertProviderAccepted(value: unknown, fallback: string) {
+  if (!value || typeof value !== "object") {
+    return;
+  }
+
+  const record = value as Record<string, unknown>;
+  if (record.status === false || record.success === false || record.ok === false) {
+    const message = record.operation || record.message || record.error || fallback;
+    throw new Error(typeof message === "string" && message ? message : "WhatsApp provider rejected the message");
+  }
 }
 
 function readProviderMessageId(value: unknown) {
