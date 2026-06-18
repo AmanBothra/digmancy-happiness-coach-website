@@ -303,7 +303,7 @@ const Index = () => {
             </h2>
           </div>
 
-          <div id="register" className="relative mt-14 mx-auto w-full max-w-4xl">
+          <div className="relative mt-14 mx-auto w-full max-w-4xl">
             {/* Video */}
             <div className="relative group">
               <div
@@ -352,10 +352,10 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="mt-10 flex flex-col items-center gap-3">
+            <div id="register" className="scroll-mt-24 mt-10 flex flex-col items-center gap-3">
               <RegistrationForm variant="panel" ctaLabel={`Reserve My Spot — Pay ${registrationPrice}`} />
               <p className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
-                Limited Seats · Live Masterclass
+                Masterclass: Successful on the outside. Suffocated on the inside.
               </p>
             </div>
           </div>
