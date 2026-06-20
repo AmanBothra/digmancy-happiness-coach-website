@@ -8,6 +8,7 @@ import {
   getRegistrationCompareAtPriceLabel,
   getRegistrationPriceLabel,
 } from "@/lib/registration-price";
+import { trackRegisterButtonClick, trackRegistrationLead } from "@/lib/meta-pixel";
 import {
   AlertCircle,
   ArrowRight,
@@ -70,6 +71,7 @@ const RegistrationForm = ({
         throw new Error("Payment session was not returned by the server.");
       }
 
+      trackRegistrationLead();
       const cashfree = await loadCashfree(payload.cashfreeMode);
       await cashfree.checkout({
         paymentSessionId: payload.paymentSessionId,
@@ -189,6 +191,7 @@ const RegistrationForm = ({
         size="xl"
         className="mt-5 w-full shadow-cta hover:shadow-[0_18px_40px_-10px_hsl(var(--cta)/0.7)] transition-smooth"
         disabled={submitting}
+        onClick={trackRegisterButtonClick}
       >
         {submitting ? "Opening secure payment..." : submitLabel}
         <ArrowRight className="ml-1 h-5 w-5" />

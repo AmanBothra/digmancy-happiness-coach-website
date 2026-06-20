@@ -62,6 +62,7 @@ import {
   getRegistrationCompareAtPriceLabel,
   getRegistrationPriceLabel,
 } from "@/lib/registration-price";
+import { trackRegisterButtonClick } from "@/lib/meta-pixel";
 
 const Index = () => {
   const autoplayPlugin = useRef(Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true }));
@@ -77,6 +78,7 @@ const Index = () => {
   const compareAtPrice = getRegistrationCompareAtPriceLabel();
 
   const openRegistration = () => {
+    trackRegisterButtonClick();
     document.getElementById("register")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
