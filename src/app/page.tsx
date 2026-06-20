@@ -49,6 +49,7 @@ import heroPortrait from "@/assets/aastha-hero.jpg";
 import videoPreview from "@/assets/video-preview-new.jpg";
 
 import Countdown from "@/components/aastha/Countdown";
+import { PriceCtaContent } from "@/components/aastha/PriceCtaContent";
 import RegistrationForm from "@/components/aastha/RegistrationForm";
 import SectionDivider from "@/components/aastha/SectionDivider";
 import bonusProductive from "@/assets/bonus-productive-day.jpg";
@@ -69,7 +70,7 @@ const Index = () => {
   const [webinarDetails] = useState<WebinarDateDetails>(() => getWebinarDateDetails());
   const [footerYear] = useState(() => getCurrentYearInIst());
   const responsiveCtaClass =
-    "w-full max-w-full whitespace-normal h-auto min-h-14 px-5 py-4 text-center leading-snug sm:w-auto sm:whitespace-nowrap sm:px-8";
+    "h-14 w-full max-w-full whitespace-nowrap px-3 py-3 text-center text-[clamp(0.875rem,3.65vw,1rem)] leading-none sm:w-auto sm:px-8 sm:text-base";
 
   const webinarDate = webinarDetails.startAt;
   const dateLabel = webinarDetails.dateLabel;
@@ -271,8 +272,11 @@ const Index = () => {
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <Button variant="cta" size="xl" className={responsiveCtaClass} onClick={openRegistration}>
-                  Save My Seat — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
-                  {registrationPrice} Only <ArrowRight />
+                  <PriceCtaContent
+                    label="Save My Seat"
+                    compareAtPrice={compareAtPrice}
+                    registrationPrice={registrationPrice}
+                  />
                 </Button>
               </div>
             </div>
@@ -443,8 +447,11 @@ const Index = () => {
             <p className="font-serif text-2xl italic text-primary">Sounds familiar?</p>
             <p className="mt-2 text-muted-foreground">This masterclass will be your turning point.</p>
             <Button variant="cta" size="xl" className={`mt-6 ${responsiveCtaClass}`} onClick={openRegistration}>
-              Reserve Your Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
-              {registrationPrice} Only <ArrowRight />
+              <PriceCtaContent
+                label="Reserve Your Spot"
+                compareAtPrice={compareAtPrice}
+                registrationPrice={registrationPrice}
+              />
             </Button>
           </div>
         </div>
@@ -701,8 +708,11 @@ const Index = () => {
               If something in you resonated, don't ignore it.
             </p>
             <Button variant="cta" size="xl" className={`mt-6 ${responsiveCtaClass}`} onClick={openRegistration}>
-              Reserve My Spot — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
-              {registrationPrice} Only <ArrowRight />
+              <PriceCtaContent
+                label="Reserve My Spot"
+                compareAtPrice={compareAtPrice}
+                registrationPrice={registrationPrice}
+              />
             </Button>
           </div>
         </div>
@@ -965,8 +975,11 @@ const Index = () => {
           <div className="mt-12 flex flex-col items-center gap-6">
             <Countdown target={webinarDate} variant="dark" />
             <Button variant="cta" size="xl" className={responsiveCtaClass} onClick={openRegistration}>
-              Don't miss out — <s className="opacity-60 mr-1 font-normal">{compareAtPrice}</s>{" "}
-              {registrationPrice} Only <ArrowRight />
+              <PriceCtaContent
+                label="Don't miss out"
+                compareAtPrice={compareAtPrice}
+                registrationPrice={registrationPrice}
+              />
             </Button>
             <p className="flex items-center gap-2 text-xs text-white/50">
               <ShieldCheck className="h-3.5 w-3.5" />
