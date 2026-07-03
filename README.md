@@ -112,23 +112,25 @@ before recording payment status or sending notifications.
 Paid Cashfree webhooks queue reminder rows in Supabase. The cron job only sends
 rows whose `scheduled_for` time is due, so it is safe to run every few minutes.
 
-Call this route from cPanel cron every 5 minutes:
+Call this route from cPanel cron every 5 minutes. LiteSpeed should use
+HTTP/1.1 or an explicit zero-length body for this POST route:
 
 ```bash
-*/5 * * * * /usr/bin/curl -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>" >/dev/null 2>&1
+*/5 * * * * /bin/date -Is >> "$HOME/digmancy-cron.log"; /usr/bin/curl --http1.1 -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>" -H "Content-Length: 0" >> "$HOME/digmancy-cron.log" 2>&1; /bin/echo >> "$HOME/digmancy-cron.log"
 ```
 
-For `WEBINAR_START_AT_ISO=2026-06-28T05:30:00.000Z`, the app queues email and
-WhatsApp reminders for:
+For `WEBINAR_START_AT_ISO=2026-06-28T05:30:00.000Z`, the app sends payment
+confirmation immediately after payment, then queues email and WhatsApp reminders for:
 
 - 2026-06-26 11:00 AM IST: two days before
 - 2026-06-27 10:00 AM IST: one day before
 - 2026-06-28 10:00 AM IST: one hour before
+- 2026-06-28 10:45 AM IST: fifteen minutes before
 
 Manual test:
 
 ```bash
-curl -i -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>"
+curl --http1.1 -i -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>" -H "Content-Length: 0"
 ```
 
 It sends due reminders through email and WhatsApp when Supabase tables and

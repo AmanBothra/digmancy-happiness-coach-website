@@ -35,7 +35,11 @@ export type WebinarDetails = {
 };
 
 export type ReminderSchedule = {
-  templateKey: "two_days_before" | "one_day_before" | "one_hour_before";
+  templateKey:
+    | "two_days_before"
+    | "one_day_before"
+    | "one_hour_before"
+    | "fifteen_minutes_before";
   scheduledFor: Date;
 };
 
@@ -67,6 +71,10 @@ export function getReminderSchedule(startAt: Date): ReminderSchedule[] {
     {
       templateKey: "one_hour_before",
       scheduledFor: new Date(startAt.getTime() - 60 * 60 * 1000),
+    },
+    {
+      templateKey: "fifteen_minutes_before",
+      scheduledFor: new Date(startAt.getTime() - 15 * 60 * 1000),
     },
   ];
 }

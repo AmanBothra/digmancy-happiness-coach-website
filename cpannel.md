@@ -126,7 +126,7 @@ cPanel -> Cron Jobs
 Add this cron command:
 
 ```bash
-*/5 * * * * /usr/bin/curl -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer YOUR_CRON_SECRET" >/dev/null 2>&1
+*/5 * * * * /bin/date -Is >> "$HOME/digmancy-cron.log"; /usr/bin/curl --http1.1 -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer YOUR_CRON_SECRET" -H "Content-Length: 0" >> "$HOME/digmancy-cron.log" 2>&1; /bin/echo >> "$HOME/digmancy-cron.log"
 ```
 
 Replace `YOUR_CRON_SECRET` with the same value used in the Node.js environment

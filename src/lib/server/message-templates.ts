@@ -6,7 +6,8 @@ export type MessageTemplateKey =
   | "payment_confirmation"
   | "two_days_before"
   | "one_day_before"
-  | "one_hour_before";
+  | "one_hour_before"
+  | "fifteen_minutes_before";
 
 export type RenderSeminarMessageInput = WebinarDetails & {
   name?: string | null;
@@ -105,6 +106,21 @@ Join here:
 ${joiningLink}
 
 Cheers,
+Aastha Tatia`,
+    },
+    fifteen_minutes_before: {
+      subject: "We begin in 15 minutes",
+      text: `${displayName}, we begin in 15 minutes.
+
+This is your final reminder for:
+Successful on the Outside, Suffocated on the Inside
+
+Keep a notebook close, find a quiet space, and join from the link below.
+
+Join here:
+${joiningLink}
+
+See you inside,
 Aastha Tatia`,
     },
   };

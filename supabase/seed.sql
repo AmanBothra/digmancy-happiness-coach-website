@@ -119,7 +119,9 @@ cross join (
     ('email', 'one_day_before', '2026-06-27T04:30:00.000Z'::timestamptz),
     ('whatsapp', 'one_day_before', '2026-06-27T04:30:00.000Z'::timestamptz),
     ('email', 'one_hour_before', '2026-06-28T04:30:00.000Z'::timestamptz),
-    ('whatsapp', 'one_hour_before', '2026-06-28T04:30:00.000Z'::timestamptz)
+    ('whatsapp', 'one_hour_before', '2026-06-28T04:30:00.000Z'::timestamptz),
+    ('email', 'fifteen_minutes_before', '2026-06-28T05:15:00.000Z'::timestamptz),
+    ('whatsapp', 'fifteen_minutes_before', '2026-06-28T05:15:00.000Z'::timestamptz)
 ) as reminder(channel, template_key, scheduled_for)
 where registration.order_id = 'seed_order_demo_001'
 on conflict (registration_id, channel, template_key) do update set

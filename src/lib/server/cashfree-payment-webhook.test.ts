@@ -96,7 +96,7 @@ describe("handleCashfreePaymentWebhook", () => {
       }),
     );
     expect(db.logs).toHaveLength(2);
-    expect(db.queued).toHaveLength(6);
+    expect(db.queued).toHaveLength(8);
     expect(db.queued.map((item) => item.templateKey)).toEqual([
       "two_days_before",
       "two_days_before",
@@ -104,6 +104,8 @@ describe("handleCashfreePaymentWebhook", () => {
       "one_day_before",
       "one_hour_before",
       "one_hour_before",
+      "fifteen_minutes_before",
+      "fifteen_minutes_before",
     ]);
   });
 
@@ -152,7 +154,7 @@ describe("handleCashfreePaymentWebhook", () => {
       ["email", "failed"],
       ["whatsapp", "sent"],
     ]);
-    expect(db.queued).toHaveLength(6);
+    expect(db.queued).toHaveLength(8);
   });
 
   it("retries missing confirmations and queues reminders when a paid webhook is replayed", async () => {
@@ -207,7 +209,7 @@ describe("handleCashfreePaymentWebhook", () => {
       }),
     );
     expect(db.logs).toHaveLength(2);
-    expect(db.queued).toHaveLength(6);
+    expect(db.queued).toHaveLength(8);
   });
 
   it("does not send duplicate confirmations when a paid webhook is replayed after successful sends", async () => {
