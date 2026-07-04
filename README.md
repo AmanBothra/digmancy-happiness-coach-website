@@ -119,13 +119,14 @@ HTTP/1.1 or an explicit zero-length body for this POST route:
 */5 * * * * /bin/date -Is >> "$HOME/digmancy-cron.log"; /usr/bin/curl --http1.1 -fsS -X POST "https://authenticleadershipcircle.com/api/notifications/process-reminders" -H "Authorization: Bearer <CRON_SECRET>" -H "Content-Length: 0" >> "$HOME/digmancy-cron.log" 2>&1; /bin/echo >> "$HOME/digmancy-cron.log"
 ```
 
-For `WEBINAR_START_AT_ISO=2026-06-28T05:30:00.000Z`, the app sends payment
-confirmation immediately after payment, then queues email and WhatsApp reminders for:
+The app derives the visible webinar date/time and reminder schedule from
+`WEBINAR_START_AT_ISO`. After payment it sends confirmation immediately, then
+queues email and WhatsApp reminders for:
 
-- 2026-06-26 11:00 AM IST: two days before
-- 2026-06-27 10:00 AM IST: one day before
-- 2026-06-28 10:00 AM IST: one hour before
-- 2026-06-28 10:45 AM IST: fifteen minutes before
+- two days before at 11:00 AM IST
+- one day before at 10:00 AM IST
+- one hour before the webinar
+- fifteen minutes before the webinar
 
 Manual test:
 

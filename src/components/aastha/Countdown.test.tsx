@@ -10,12 +10,12 @@ describe("Countdown", () => {
 
   it("renders countdown numbers on the first render when a target is available", () => {
     vi.useFakeTimers();
-    vi.setSystemTime(new Date("2026-06-15T06:00:00.000Z"));
+    vi.setSystemTime(new Date("2030-01-01T06:00:00.000Z"));
 
-    render(<Countdown target={new Date("2026-06-28T05:30:00.000Z")} variant="hero" />);
+    render(<Countdown target={new Date("2030-01-06T05:30:00.000Z")} variant="hero" />);
 
     expect(screen.queryByText("--")).not.toBeInTheDocument();
-    expect(screen.getByText("12")).toBeInTheDocument();
+    expect(screen.getByText("04")).toBeInTheDocument();
     expect(screen.getByText("23")).toBeInTheDocument();
     expect(screen.getByText("30")).toBeInTheDocument();
     expect(screen.getByText("00")).toBeInTheDocument();

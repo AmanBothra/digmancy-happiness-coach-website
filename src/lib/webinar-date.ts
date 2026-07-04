@@ -52,8 +52,8 @@ export const getWebinarDateDetails = (from = new Date()): WebinarDateDetails => 
 
   return {
     startAt,
-    dateLabel: process.env.WEBINAR_DISPLAY_DATE || formatWebinarDateLabel(startAt),
-    timeLabel: process.env.WEBINAR_DISPLAY_TIME || formatWebinarTimeLabel(startAt),
+    dateLabel: formatWebinarDateLabel(startAt),
+    timeLabel: formatWebinarTimeLabel(startAt),
   };
 };
 

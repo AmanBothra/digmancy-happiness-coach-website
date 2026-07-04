@@ -48,10 +48,8 @@ export function getWebinarDetails(from = new Date()): WebinarDetails {
 
   return {
     startAt,
-    dateLabel: process.env.WEBINAR_DISPLAY_DATE || formatIstDate(startAt),
-    timeLabel:
-      process.env.WEBINAR_DISPLAY_TIME ||
-      formatIstTime(DEFAULT_WEBINAR_HOUR_IST, DEFAULT_WEBINAR_MINUTE_IST),
+    dateLabel: formatIstDate(startAt),
+    timeLabel: formatIstTime(startAt),
     joiningLink: process.env.WEBINAR_JOINING_LINK || "Joining link will be shared soon.",
   };
 }
@@ -144,7 +142,8 @@ function formatIstDate(date: Date) {
   return `${WEEKDAYS[weekday]} ${day} ${MONTHS[month]}`;
 }
 
-function formatIstTime(hour: number, minute: number) {
+function formatIstTime(date: Date) {
+  const { hour, minute } = getIstParts(date);
   const suffix = hour >= 12 ? "PM" : "AM";
   const hour12 = hour % 12 || 12;
   const minuteText = String(minute).padStart(2, "0");

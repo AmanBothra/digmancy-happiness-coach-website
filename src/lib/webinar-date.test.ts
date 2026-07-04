@@ -9,19 +9,15 @@ import {
 describe("webinar date helpers", () => {
   afterEach(() => {
     delete process.env.WEBINAR_START_AT_ISO;
-    delete process.env.WEBINAR_DISPLAY_DATE;
-    delete process.env.WEBINAR_DISPLAY_TIME;
   });
 
-  it("uses configured webinar date and display labels from the environment", () => {
-    process.env.WEBINAR_START_AT_ISO = "2026-06-28T05:30:00.000Z";
-    process.env.WEBINAR_DISPLAY_DATE = "Sunday 28 June";
-    process.env.WEBINAR_DISPLAY_TIME = "11:00 AM IST";
+  it("derives display labels from the configured webinar start time", () => {
+    process.env.WEBINAR_START_AT_ISO = "2030-01-06T05:30:00.000Z";
 
     const webinar = getWebinarDateDetails(new Date("2026-06-15T12:00:00.000Z"));
 
-    expect(webinar.startAt.toISOString()).toBe("2026-06-28T05:30:00.000Z");
-    expect(webinar.dateLabel).toBe("Sunday 28 June");
+    expect(webinar.startAt.toISOString()).toBe("2030-01-06T05:30:00.000Z");
+    expect(webinar.dateLabel).toBe("Sunday 6 January");
     expect(webinar.timeLabel).toBe("11:00 AM IST");
   });
 

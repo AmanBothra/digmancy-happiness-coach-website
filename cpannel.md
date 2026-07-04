@@ -59,9 +59,7 @@ NEXT_PUBLIC_API_BASE_PATH=
 Add the required business values and secrets:
 
 ```env
-WEBINAR_START_AT_ISO=2026-06-28T05:30:00.000Z
-WEBINAR_DISPLAY_DATE=Sunday 28 June
-WEBINAR_DISPLAY_TIME=11:00 AM IST
+WEBINAR_START_AT_ISO=
 WEBINAR_JOINING_LINK=
 
 REGISTRATION_AMOUNT=99
@@ -77,6 +75,10 @@ SMTP_PASS=
 WHATSAPP_API_KEY=
 CRON_SECRET=
 ```
+
+Set `WEBINAR_START_AT_ISO` to the webinar start time in UTC ISO format. For
+example, 11:00 AM IST is `05:30:00.000Z` on the same calendar date. The visible
+date and time are generated automatically from that one value.
 
 Do not commit real secret values to GitHub.
 

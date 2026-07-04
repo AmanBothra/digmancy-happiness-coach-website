@@ -34,8 +34,8 @@ values (
   'SUCCESS',
   'pay_seed_demo_001',
   now(),
-  '2026-06-28T05:30:00.000Z',
-  'Sunday 28 June',
+  '2030-01-06T05:30:00.000Z',
+  'Sunday 6 January',
   '11:00 AM IST',
   'Joining link will be shared soon.',
   '{"seed": true, "source": "supabase/seed.sql"}'::jsonb,
@@ -114,14 +114,14 @@ select
 from public.seminar_registrations registration
 cross join (
   values
-    ('email', 'two_days_before', '2026-06-26T05:30:00.000Z'::timestamptz),
-    ('whatsapp', 'two_days_before', '2026-06-26T05:30:00.000Z'::timestamptz),
-    ('email', 'one_day_before', '2026-06-27T04:30:00.000Z'::timestamptz),
-    ('whatsapp', 'one_day_before', '2026-06-27T04:30:00.000Z'::timestamptz),
-    ('email', 'one_hour_before', '2026-06-28T04:30:00.000Z'::timestamptz),
-    ('whatsapp', 'one_hour_before', '2026-06-28T04:30:00.000Z'::timestamptz),
-    ('email', 'fifteen_minutes_before', '2026-06-28T05:15:00.000Z'::timestamptz),
-    ('whatsapp', 'fifteen_minutes_before', '2026-06-28T05:15:00.000Z'::timestamptz)
+    ('email', 'two_days_before', '2030-01-04T05:30:00.000Z'::timestamptz),
+    ('whatsapp', 'two_days_before', '2030-01-04T05:30:00.000Z'::timestamptz),
+    ('email', 'one_day_before', '2030-01-05T04:30:00.000Z'::timestamptz),
+    ('whatsapp', 'one_day_before', '2030-01-05T04:30:00.000Z'::timestamptz),
+    ('email', 'one_hour_before', '2030-01-06T04:30:00.000Z'::timestamptz),
+    ('whatsapp', 'one_hour_before', '2030-01-06T04:30:00.000Z'::timestamptz),
+    ('email', 'fifteen_minutes_before', '2030-01-06T05:15:00.000Z'::timestamptz),
+    ('whatsapp', 'fifteen_minutes_before', '2030-01-06T05:15:00.000Z'::timestamptz)
 ) as reminder(channel, template_key, scheduled_for)
 where registration.order_id = 'seed_order_demo_001'
 on conflict (registration_id, channel, template_key) do update set

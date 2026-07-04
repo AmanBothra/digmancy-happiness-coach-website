@@ -32,9 +32,7 @@ describe("POST /api/payments/cashfree/order", () => {
     process.env.APP_FRONTEND_BASE_URL_PRODUCTION = "https://authenticleadershipcircle.com";
     process.env.APP_BACKEND_BASE_URL_PRODUCTION = "https://authenticleadershipcircle.com";
     process.env.REGISTRATION_AMOUNT = "149";
-    process.env.WEBINAR_START_AT_ISO = "2026-06-28T05:30:00.000Z";
-    process.env.WEBINAR_DISPLAY_DATE = "Sunday 28 June";
-    process.env.WEBINAR_DISPLAY_TIME = "11:00 AM IST";
+    process.env.WEBINAR_START_AT_ISO = "2030-01-06T05:30:00.000Z";
     process.env.WEBINAR_JOINING_LINK = "https://zoom.example.com/join";
 
     mocks.createCashfreeOrder.mockResolvedValue({
@@ -53,8 +51,6 @@ describe("POST /api/payments/cashfree/order", () => {
     delete process.env.APP_BACKEND_BASE_URL_PRODUCTION;
     delete process.env.REGISTRATION_AMOUNT;
     delete process.env.WEBINAR_START_AT_ISO;
-    delete process.env.WEBINAR_DISPLAY_DATE;
-    delete process.env.WEBINAR_DISPLAY_TIME;
     delete process.env.WEBINAR_JOINING_LINK;
   });
 
@@ -102,7 +98,7 @@ describe("POST /api/payments/cashfree/order", () => {
         city: "Kolkata",
         profession: "Founder",
         amount: 149,
-        webinarDateLabel: "Sunday 28 June",
+        webinarDateLabel: "Sunday 6 January",
         webinarTimeLabel: "11:00 AM IST",
       }),
     );
