@@ -7,8 +7,8 @@ import {
 import { createRegistrationDatabase } from "@/lib/server/registration-db";
 import { getBackendBaseUrl, getFrontendBaseUrl } from "@/lib/server/url";
 import { getWebinarDetails } from "@/lib/server/webinar";
-import { normalizeIndianMobile } from "@/lib/server/phone";
 import { getRegistrationPrice } from "@/lib/registration-price";
+import { validateRegistrationInput } from "@/lib/server/registration-input";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -108,71 +108,6 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
-}
-
-type RegistrationInput = {
-  name: string;
-  email: string;
-  mobile: string;
-  city: string;
-  profession: string;
-};
-
-type ValidationResult =
-  | { ok: true; value: RegistrationInput }
-  | { ok: false; fields: Partial<Record<keyof RegistrationInput, string>> };
-
-function validateRegistrationInput(value: unknown): ValidationResult {
-  if (!value || typeof value !== "object") {
-    return {
-      ok: false,
-      fields: {
-        name: "Name is required",
-        email: "Email is required",
-        mobile: "Mobile number is required",
-        city: "City is required",
-        profession: "Profession is required",
-      },
-    };
-  }
-
-  const record = value as Record<string, unknown>;
-  const name = normalizeText(record.name);
-  const email = normalizeText(record.email).toLowerCase();
-  const mobile = normalizePhone(record.mobile);
-  const city = normalizeText(record.city);
-  const profession = normalizeText(record.profession);
-  const fields: Partial<Record<keyof RegistrationInput, string>> = {};
-
-  if (!name) {
-    fields.name = "Name is required";
-  }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    fields.email = "Enter a valid email";
-  }
-  if (!mobile) {
-    fields.mobile = "Enter a valid WhatsApp number";
-  }
-  if (!city) {
-    fields.city = "City is required";
-  }
-  if (!profession) {
-    fields.profession = "Profession is required";
-  }
-
-  if (Object.keys(fields).length) {
-    return { ok: false, fields };
-  }
-
-  return { ok: true, value: { name, email, mobile, city, profession } };
-}
-
-function normalizeText(value: unknown) {
-  return typeof value === "string" ? value.trim() : "";
-}
-
-function normalizePhone(value: unknown) {
-  return normalizeIndianMobile(value);
 }
 
 function errorMessage(error: unknown) {

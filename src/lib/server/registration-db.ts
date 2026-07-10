@@ -118,6 +118,7 @@ export type QueueScheduledNotificationInput = {
 
 export type RegistrationDatabase = {
   createPendingRegistration(input: CreatePendingRegistrationInput): Promise<SeminarRegistration>;
+  createFreeRegistration(input: CreatePendingRegistrationInput): Promise<SeminarRegistration>;
   recordInitiatedCashfreeOrder(
     input: RecordInitiatedCashfreeOrderInput,
   ): Promise<SeminarRegistration>;
@@ -159,6 +160,45 @@ export function createRegistrationDatabase(
           webinar_date_label: input.webinarDateLabel,
           webinar_time_label: input.webinarTimeLabel,
           joining_link: input.joiningLink,
+        })
+        .select("*")
+        .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return normalizeRegistration(data);
+    },
+
+    async createFreeRegistration(input) {
+      const now = new Date().toISOString();
+      const { data, error } = await supabase
+        .from("seminar_registrations")
+        .insert({
+          order_id: input.orderId,
+          name: input.name,
+          email: input.email,
+          mobile: normalizeRegistrationMobile(input.mobile),
+          city: input.city,
+          profession: input.profession,
+          amount: input.amount,
+          currency: input.currency,
+          status: "paid",
+          cashfree_order_status: "FREE",
+          cashfree_payment_status: "SUCCESS",
+          paid_at: now,
+          webinar_start_at: input.webinarStartAt.toISOString(),
+          webinar_date_label: input.webinarDateLabel,
+          webinar_time_label: input.webinarTimeLabel,
+          joining_link: input.joiningLink,
+          raw_create_order_response: {
+            source: "free_registration",
+            amount: input.amount,
+            currency: input.currency,
+            created_at: now,
+          },
+          last_error: null,
         })
         .select("*")
         .single();

@@ -23,11 +23,13 @@ import {
 interface RegistrationFormProps {
   variant?: "hero" | "panel";
   ctaLabel?: string;
+  mode?: "paid" | "free";
 }
 
 const RegistrationForm = ({
   variant = "hero",
   ctaLabel,
+  mode = "paid",
 }: RegistrationFormProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +47,7 @@ const RegistrationForm = ({
     setSubmitting(true);
 
     try {
-      const response = await fetch(`${getApiBasePath()}/api/payments/cashfree/order`, {
+      const response = await fetch(`${getApiBasePath()}${getRegistrationEndpoint(mode)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,27 +60,44 @@ const RegistrationForm = ({
           profession: form.profession,
         }),
       });
-      const payload = (await response.json()) as CashfreeOrderResponse;
+      const payload = (await response.json()) as RegistrationResponse;
 
       if (!response.ok || !payload.ok) {
         throw new Error(
           payload.message ||
             payload.error ||
-            "We could not start the payment. Please try again.",
+            (mode === "free"
+              ? "We could not complete your registration. Please try again."
+              : "We could not start the payment. Please try again."),
         );
-      }
-      if (!payload.paymentSessionId || !payload.cashfreeMode) {
-        throw new Error("Payment session was not returned by the server.");
       }
 
       trackRegistrationLead();
-      const cashfree = await loadCashfree(payload.cashfreeMode);
+
+      if (mode === "free") {
+        const orderId = payload.orderId ? `?order_id=${encodeURIComponent(payload.orderId)}` : "";
+        window.location.assign(`/free/thank-you${orderId}`);
+        return;
+      }
+
+      const cashfreePayload = payload as CashfreeOrderResponse;
+      if (!cashfreePayload.paymentSessionId || !cashfreePayload.cashfreeMode) {
+        throw new Error("Payment session was not returned by the server.");
+      }
+
+      const cashfree = await loadCashfree(cashfreePayload.cashfreeMode);
       await cashfree.checkout({
-        paymentSessionId: payload.paymentSessionId,
+        paymentSessionId: cashfreePayload.paymentSessionId,
         redirectTarget: "_self",
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Payment could not be started.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : mode === "free"
+            ? "Registration could not be completed."
+            : "Payment could not be started.",
+      );
       setSubmitting(false);
     }
   };
@@ -86,7 +105,17 @@ const RegistrationForm = ({
   const isHero = variant === "hero";
   const registrationPrice = getRegistrationPriceLabel();
   const compareAtPrice = getRegistrationCompareAtPriceLabel();
-  const submitLabel = ctaLabel || `Continue to ${registrationPrice} Payment`;
+  const submitLabel =
+    ctaLabel || (mode === "free" ? "Register Free" : `Continue to ${registrationPrice} Payment`);
+  const title =
+    mode === "free" ? (
+      <>Save your seat for the masterclass</>
+    ) : (
+      <>
+        Save your seat for <s className="opacity-60 font-normal">{compareAtPrice}</s>{" "}
+        {registrationPrice} only
+      </>
+    );
 
   return (
     <form
@@ -107,8 +136,7 @@ const RegistrationForm = ({
           Live · Limited Seats
         </span>
         <h3 className="mt-3 font-serif text-2xl sm:text-[26px] font-bold text-primary leading-tight">
-          Save your seat for <s className="opacity-60 font-normal">{compareAtPrice}</s>{" "}
-          {registrationPrice} only
+          {title}
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">Honest. Transformational.</p>
       </div>
@@ -193,8 +221,12 @@ const RegistrationForm = ({
         disabled={submitting}
         onClick={trackRegisterButtonClick}
       >
-        {submitting ? "Opening secure payment..." : submitLabel}
-        <ArrowRight className="ml-1 h-5 w-5" />
+        {submitting
+          ? mode === "free"
+            ? "Registering..."
+            : "Opening secure payment..."
+          : submitLabel}
+        {mode === "paid" && <ArrowRight className="ml-1 h-5 w-5" />}
       </Button>
 
       <p className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
@@ -216,6 +248,20 @@ type CashfreeOrderResponse =
     error?: string;
     message?: string;
   };
+
+type FreeRegistrationResponse = {
+  ok: boolean;
+  registered?: boolean;
+  orderId?: string;
+  error?: string;
+  message?: string;
+};
+
+type RegistrationResponse = CashfreeOrderResponse | FreeRegistrationResponse;
+
+function getRegistrationEndpoint(mode: "paid" | "free") {
+  return mode === "free" ? "/api/registrations/free" : "/api/payments/cashfree/order";
+}
 
 type CashfreeCheckout = {
   checkout: (options: {

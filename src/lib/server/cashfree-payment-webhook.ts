@@ -165,7 +165,7 @@ export async function reconcileCashfreeOrderPayment({
   };
 }
 
-async function dispatchPaidRegistrationNotifications(
+export async function dispatchPaidRegistrationNotifications(
   db: RegistrationDatabase,
   registration: SeminarRegistration,
 ): Promise<PaidNotificationResult> {
