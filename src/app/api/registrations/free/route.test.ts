@@ -118,7 +118,7 @@ describe("POST /api/registrations/free", () => {
     expect(mocks.dispatchPaidRegistrationNotifications).not.toHaveBeenCalled();
   });
 
-  it("returns notification failures after the registration is stored", async () => {
+  it("keeps the registration successful when immediate notification sending fails", async () => {
     mocks.dispatchPaidRegistrationNotifications.mockResolvedValue({
       notificationFailures: ["email"],
     });
@@ -137,13 +137,47 @@ describe("POST /api/registrations/free", () => {
     const response = await POST(request);
     const body = await response.json();
 
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(200);
     expect(body).toEqual({
-      ok: false,
+      ok: true,
       registered: true,
       orderId: "alc_test_free_1",
-      error: "notification_send_failed",
       notificationFailures: ["email"],
     });
+  });
+
+  it("keeps the registration successful when notification automation throws", async () => {
+    const consoleError = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    mocks.dispatchPaidRegistrationNotifications.mockRejectedValue(new Error("smtp failed"));
+
+    try {
+      const request = new Request("https://authenticleadershipcircle.com/api/registrations/free", {
+        method: "POST",
+        body: JSON.stringify({
+          name: "Aman Bothra",
+          email: "aman@example.com",
+          mobile: "9999999999",
+          city: "Kolkata",
+          profession: "Founder",
+        }),
+      });
+
+      const response = await POST(request);
+      const body = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(body).toEqual({
+        ok: true,
+        registered: true,
+        orderId: "alc_test_free_1",
+        notificationFailures: ["automation"],
+      });
+      expect(consoleError).toHaveBeenCalledWith(
+        "Free registration notification automation failed",
+        expect.any(Error),
+      );
+    } finally {
+      consoleError.mockRestore();
+    }
   });
 });

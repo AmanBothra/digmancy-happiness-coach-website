@@ -47,27 +47,32 @@ export async function POST(request: Request) {
       joiningLink: webinar.joiningLink,
     });
 
-    const { notificationFailures } = await dispatchPaidRegistrationNotifications(db, registration);
+    const notificationFailures = await dispatchNotificationsSafely(db, registration);
 
-    if (notificationFailures.length) {
-      return NextResponse.json(
-        {
-          ok: false,
-          registered: true,
-          orderId,
-          error: "notification_send_failed",
-          notificationFailures,
-        },
-        { status: 500 },
-      );
-    }
-
-    return NextResponse.json({ ok: true, registered: true, orderId });
+    return NextResponse.json({
+      ok: true,
+      registered: true,
+      orderId,
+      ...(notificationFailures.length ? { notificationFailures } : {}),
+    });
   } catch (error) {
     return NextResponse.json(
       { ok: false, error: "free_registration_failed", message: errorMessage(error) },
       { status: 500 },
     );
+  }
+}
+
+async function dispatchNotificationsSafely(
+  db: ReturnType<typeof createRegistrationDatabase>,
+  registration: Awaited<ReturnType<ReturnType<typeof createRegistrationDatabase>["createFreeRegistration"]>>,
+) {
+  try {
+    const { notificationFailures } = await dispatchPaidRegistrationNotifications(db, registration);
+    return notificationFailures;
+  } catch (error) {
+    console.error("Free registration notification automation failed", error);
+    return ["automation"];
   }
 }
 
