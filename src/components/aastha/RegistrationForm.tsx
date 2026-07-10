@@ -76,7 +76,7 @@ const RegistrationForm = ({
 
       if (mode === "free") {
         const orderId = payload.orderId ? `?order_id=${encodeURIComponent(payload.orderId)}` : "";
-        window.location.assign(`/free/thank-you${orderId}`);
+        window.location.assign(`/masterclass/thank-you${orderId}`);
         return;
       }
 

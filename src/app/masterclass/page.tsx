@@ -2,6 +2,6 @@
 
 import LandingPage from "@/components/aastha/LandingPage";
 
-export default function FreePage() {
+export default function MasterclassPage() {
   return <LandingPage registrationMode="free" />;
 }

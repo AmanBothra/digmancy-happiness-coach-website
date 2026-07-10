@@ -18,7 +18,7 @@ export default function FreeThankYouPage() {
           Check your registered WhatsApp number and Email for further details.
         </p>
         <Button asChild variant="cta" size="lg" className="mt-8">
-          <Link href="/free">Back to masterclass page</Link>
+          <Link href="/masterclass">Back to masterclass page</Link>
         </Button>
       </section>
     </main>
